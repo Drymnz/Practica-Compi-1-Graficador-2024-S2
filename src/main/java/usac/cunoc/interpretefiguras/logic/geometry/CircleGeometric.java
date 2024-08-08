@@ -12,7 +12,7 @@ public class CircleGeometric extends BasicGeometricObject{
     
     private double radio; 
     
-    public CircleGeometric(int posx, int poxy, String id, ListColor color, double radio) {
+    public CircleGeometric(double posx, double poxy, String id, ListColor color, double radio) {
         super(posx, poxy, id, color);
         this.radio = radio;
     }

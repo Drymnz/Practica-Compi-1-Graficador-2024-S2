@@ -11,7 +11,7 @@ package usac.cunoc.interpretefiguras.logic.geometry;
 public class SquareGeometric extends BasicGeometricObject{
     private double square;
 
-    public SquareGeometric(int posx, int poxy, String id, ListColor color, double square) {
+    public SquareGeometric(double posx, double poxy, String id, ListColor color, double square) {
         super(posx, poxy, id, color);
         this.square = square;
     }

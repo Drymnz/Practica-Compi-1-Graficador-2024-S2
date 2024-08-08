@@ -11,12 +11,12 @@ package usac.cunoc.interpretefiguras.logic.objectAnalysis;
 public class Token {
     private int line;
     private int columna;
-    private String lexe;
+    private String lexeme;
 
-    public Token(int line, int columna, String lexe) {
+    public Token(int line, int columna, String lexeme) {
         this.line = line;
         this.columna = columna;
-        this.lexe = lexe;
+        this.lexeme = lexeme;
     }
 
     public int getLine() {
@@ -27,8 +27,8 @@ public class Token {
         return columna;
     }
 
-    public String getLexe() {
-        return lexe;
+    public String getLexeme() {
+        return lexeme;
     }
     
 }

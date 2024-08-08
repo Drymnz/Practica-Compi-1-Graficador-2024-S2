@@ -12,7 +12,7 @@ public class RectangleGeometric extends BasicGeometricObject{
     private double high;
     private double width;
 
-    public RectangleGeometric(int posx, int poxy, String id, ListColor color,double high
+    public RectangleGeometric(double posx, double poxy, String id, ListColor color,double high
     , double width) {
         super(posx, poxy, id, color);
         this.high = high;
