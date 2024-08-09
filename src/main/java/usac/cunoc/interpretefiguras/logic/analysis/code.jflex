@@ -16,16 +16,18 @@ import java_cup.runtime.Symbol;
 %{
     /*CODE*/
         public void print() {
-            //System.out.println("\n<" + yytext() + "><Linea\"" + (yyline + 1) + "\">" + "<Columna\"" + yycolumn + "\">");
+            //System.out.println("\n<" + yytext() + "><Linea\"" + (yyline + 1) + "\">" + "<Columna\"" + (yycolumn+1) + "\">");
         }
     /*CODE*/
 %}
+DIGIT = [0-9]
+WHOLE = {DIGIT}+
+DECIMAL = {WHOLE}[.]{WHOLE}
+REAL_NUMEBERS = {DECIMAL} | {WHOLE}
+ALPHABET = [a-zA-Z]
+ID = ({ALPHABET}|{REAL}|[_])+ 
 
-ENTERO =[0-9]+
-DECIMAL = {ENTERO}[.]{ENTERO}
-NOMBRE = [a-zA-Z0-9_]+
 espacio =[\r|\t|\f|\n|\s| ]+
-no_pertenece = ("~"|"`"|"&"|"!"|"@"|"#"|"$"|"%"|"_"|"\\"|"<"|">"|"\?"|"."|"^")+
 %%
 
 /*tercer seccion: reglase lexicas*/
@@ -62,6 +64,7 @@ no_pertenece = ("~"|"`"|"&"|"!"|"@"|"#"|"$"|"%"|"_"|"\\"|"<"|">"|"\?"|"."|"^")+
 ")"                 {
                    print(); return new Symbol(sym.PARENTESIS_C,yyline,yycolumn);
                     }
+                    
 /*ERROR LEXICO*/
 .                   {
                    print(); System.out.println("¡¡¡¡¡¡NO PERTENECE AL ALFABETO -> ERROR LEXICO!!!!!!!!!"+(yytext()));
