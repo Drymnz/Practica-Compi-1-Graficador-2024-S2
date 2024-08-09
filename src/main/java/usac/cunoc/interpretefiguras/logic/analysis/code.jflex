@@ -1,71 +1,146 @@
 /*primer seccion: codigo de usuario*/
 
 package usac.cunoc.interpretefiguras.logic.analysis;
-import java_cup.runtime.Symbol;
 
+import java.util.ArrayList;
+import java_cup.runtime.Symbol;
+import usac.cunoc.interpretefiguras.logic.objectAnalysis.Token;
+import usac.cunoc.interpretefiguras.logic.reports.ReportErrorInterpreter;
+import usac.cunoc.interpretefiguras.logic.reports.TypeIntreprete;
 %%
 /*segunda seccion: configuracion*/
-
-%public
 %class Lexema
-%unicode
 %line
 %column
 %cup
+%public
+%unicode
 
 %{
-    /*CODE*/
-        public void print() {
-            //System.out.println("\n<" + yytext() + "><Linea\"" + (yyline + 1) + "\">" + "<Columna\"" + (yycolumn+1) + "\">");
-        }
-    /*CODE*/
+/*CODE*/
+    private ArrayList<ReportErrorInterpreter> listError = new ArrayList();
+  
+    public void print() {
+        System.out.println("\n<" + yytext() + "><Linea\"" + (yyline + 1) + "\">" + "<Columna\"" + (yycolumn+1) + "\">");
+    }
+    public ArrayList<ReportErrorInterpreter> getListError() {
+        return this.listError;
+    }
+/*CODE*/
 %}
+
+ALPHABET = [a-zA-Z]
 DIGIT = [0-9]
 WHOLE = {DIGIT}+
 DECIMAL = {WHOLE}[.]{WHOLE}
 REAL_NUMEBERS = {DECIMAL} | {WHOLE}
-ALPHABET = [a-zA-Z]
-ID = ({ALPHABET}|{REAL}|[_])+ 
+ID = ({ALPHABET}|{REAL_NUMEBERS}|[_])+ 
 
-espacio =[\r|\t|\f|\n|\s| ]+
+espacio =[\n|\r|\t|\f|\b|\s| ]+
+
 %%
 
 /*tercer seccion: reglase lexicas*/
 /*INGNORAR*/
-//Comentarios de linea
-[//].*[\n]?         {
-                        //System.out.println("Comentarios de linea ->"+this.yytext());
+{espacio}           {print();}
+","                 {
+                   print(); return new Symbol(sym.COMA,yyline,yycolumn, (yytext()));
                     }
-//Comentarios multilinea / otro comentario multilinea
-"/*" ~"*/"          {
-                        //System.out.println("Comentarios multilinea / otro comentario multilinea ->"+this.yytext() +" <-- Termino");
-                    }
-{espacio}           {/*nada*/}
 /*SIMBOLOS ARIMETICOS*/
 "+"                 {
-                   print(); return new Symbol(sym.SUMAR,yyline,yycolumn,yytext());
+                   print(); return new Symbol(sym.SUMAR,yyline,yycolumn, (yytext()));
                     }
 "-"                 {
-                   print(); return new Symbol(sym.RESTAR,yyline,yycolumn);
+                   print(); return new Symbol(sym.RESTAR,yyline,yycolumn, (yytext()));
                     }
 "/"                 {
-                   print(); return new Symbol(sym.DIVIDIR,yyline,yycolumn);
+                   print(); return new Symbol(sym.DIVIDIR,yyline,yycolumn, (yytext()));
                     }
 "*"                 {
-                   print(); return new Symbol(sym.MULTIPLICAR,yyline,yycolumn);
-                    }
-"="                 {
-                   print(); return new Symbol(sym.IGUAL,yyline,yycolumn);
+                   print(); return new Symbol(sym.MULTIPLICAR,yyline,yycolumn, (yytext()));
                     }
 /*SIMBOLOS DE AGRUPACION*/
 "("                 {
-                   print(); return new Symbol(sym.PARENTESIS_A,yyline,yycolumn);
+                   print(); return new Symbol(sym.PARENTESIS_A,yyline,yycolumn,yytext());
                     }
 ")"                 {
-                   print(); return new Symbol(sym.PARENTESIS_C,yyline,yycolumn);
+                   print(); return new Symbol(sym.PARENTESIS_C,yyline,yycolumn,yytext());
                     }
-                    
+/*PALABRAS CLAVES*/
+//COLOR
+"azul"              {
+                   print(); return new Symbol(sym.BLUE ,yyline,yycolumn,yytext());                    
+                    }
+"rojo"              {
+                   print(); return new Symbol( sym.RED ,yyline,yycolumn,yytext());                    
+                    }
+"amarillo"          {
+                   print(); return new Symbol( sym.YELLOW ,yyline,yycolumn,yytext());                    
+                    }
+"verde"             {
+                   print(); return new Symbol( sym.GREEN ,yyline,yycolumn,yytext());                    
+                    }
+"negro"             {
+                   print(); return new Symbol( sym.BLACK ,yyline,yycolumn,yytext());                    
+                    }
+"celeste"           {
+                   print(); return new Symbol( sym.CYAN ,yyline,yycolumn,yytext());                    
+                    }
+"fucsia"           {
+                   print(); return new Symbol( sym.FUCHSIA ,yyline,yycolumn,yytext());                    
+                    }
+"lavanda"           {
+                   print(); return new Symbol( sym.LAVENDER ,yyline,yycolumn,yytext());                    
+                    }
+"corinto"           {
+                   print(); return new Symbol( sym.MAROON ,yyline,yycolumn,yytext());                    
+                    }
+//FIGURAS BASICAS
+"circulo"           {
+                   print(); return new Symbol( sym.CIRCLE ,yyline,yycolumn,yytext());                    
+                    }
+"linea"             {
+                   print(); return new Symbol( sym.LINE ,yyline,yycolumn,yytext());                    
+                    }
+"poligono"          {
+                   print(); return new Symbol( sym.POLYGON ,yyline,yycolumn,yytext());                    
+                    }
+"rectangulo"        {
+                   print(); return new Symbol( sym.RECTANGLE ,yyline,yycolumn,yytext());                    
+                    }
+"cuadrado"          {
+                   print(); return new Symbol( sym.SQUARE ,yyline,yycolumn,yytext());                    
+                    }
+//OTRAS
+"graficar"          {
+                   print(); return new Symbol( sym.GRAFICAR ,yyline,yycolumn,yytext());                    
+                    }
+"animar"            {
+                   print(); return new Symbol( sym.ANIMATION ,yyline,yycolumn,yytext());                    
+                    }
+"anterior"          {
+                   print(); return new Symbol( sym.LAST ,yyline,yycolumn,yytext());                    
+                    }
+"objeto"            {
+                   print(); return new Symbol( sym.OBJECT ,yyline,yycolumn,yytext());                    
+                    }
+"curva"            {
+                   print(); return new Symbol( sym.CURVE ,yyline,yycolumn,yytext());                    
+                    }
+{REAL_NUMEBERS}     {
+                   print(); return new Symbol( sym.REAL_NUMEBERS ,yyline,yycolumn,yytext());                    
+                    }
+{ID}                {
+                   print(); return new Symbol( sym.ID ,yyline,yycolumn,yytext());                    
+                    }
+
 /*ERROR LEXICO*/
-.                   {
-                   print(); System.out.println("¡¡¡¡¡¡NO PERTENECE AL ALFABETO -> ERROR LEXICO!!!!!!!!!"+(yytext()));
+[^]                   {
+                    //MANEJAR EL ERROR LEXICO
+                        print();
+                        TypeIntreprete type = TypeIntreprete.LEXICON;
+                        Token toke = new Token(yyline + 1, yycolumn + 1, yytext());
+                        String description = ListErrorAnalyzer.LEXEMA_ONE.getDescription();
+                        this.listError.add(new ReportErrorInterpreter(type, toke, description));
                     }
+

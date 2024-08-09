@@ -11,7 +11,6 @@ import usac.cunoc.interpretefiguras.logic.objectAnalysis.Token;
  * @author drymnz
  */
 public class ReportErrorInterpreter {
-      private enum TypeIntreprete { LEXICON, SYNTACTIC, SEMANTIC }
       private TypeIntreprete type;
       private Token toke;
       private String description;
