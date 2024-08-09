@@ -1,6 +1,11 @@
 package usac.cunoc.interpretefiguras.logic.analysis;
 
+import java.util.ArrayList;
 import java_cup.runtime.*;
+import usac.cunoc.interpretefiguras.logic.objectAnalysis.Token;
+import usac.cunoc.interpretefiguras.logic.reports.ReportErrorInterpreter;
+import usac.cunoc.interpretefiguras.logic.reports.TypeIntreprete;
+
 
 //////////////////////////
 
@@ -12,8 +17,24 @@ import java_cup.runtime.*;
         super(lexer);
     }
 
-    public void printlnInter(String a){
+    private void printlnInter(String a){
          System.out.println(a);
+    }
+
+    private ArrayList<ReportErrorInterpreter> listError = new ArrayList();
+  
+    private void addError(){
+        TypeIntreprete type = TypeIntreprete.LEXICON;
+        System.out.println("\n"+" - Clase<"+"> en simbolo<" + sym.terminalNames[cur_token.sym]+String.format(">posicion: <%d>, <%d>", (cur_token.left+1), (cur_token.right+1)));
+        Token toke = new Token((cur_token.left+1), (cur_token.right+1), sym.terminalNames[cur_token.sym]);
+        String description = ListErrorAnalyzer.LEXEMA_ONE.getDescription();
+        this.listError.add(new ReportErrorInterpreter(type, toke, description));
+    }
+    public void syntax_error(Symbol cur_token) {
+        addError();
+    }
+    public ArrayList<ReportErrorInterpreter> getListError() {
+        return this.listError;
     }
     /**
      * ***END CODE*******

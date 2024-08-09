@@ -12,6 +12,8 @@ import usac.cunoc.interpretefiguras.logic.objectAnalysis.Token;
 import usac.cunoc.interpretefiguras.logic.reports.ReportErrorInterpreter;
 import usac.cunoc.interpretefiguras.logic.reports.TypeIntreprete;
 
+
+
 @SuppressWarnings("fallthrough")
 public class Lexema implements java_cup.runtime.Scanner {
 
@@ -375,8 +377,14 @@ public class Lexema implements java_cup.runtime.Scanner {
 /*CODE*/
     private ArrayList<ReportErrorInterpreter> listError = new ArrayList();
   
-    public void print() {
+    private void print() {
         System.out.println("\n<" + yytext() + "><Linea\"" + (yyline + 1) + "\">" + "<Columna\"" + (yycolumn+1) + "\">");
+    }
+    private void addError(){
+        TypeIntreprete type = TypeIntreprete.LEXICON;
+        Token toke = new Token(yyline + 1, yycolumn + 1, yytext());
+        String description = ListErrorAnalyzer.LEXEMA_ONE.getDescription();
+        this.listError.add(new ReportErrorInterpreter(type, toke, description));
     }
     public ArrayList<ReportErrorInterpreter> getListError() {
         return this.listError;
@@ -810,10 +818,7 @@ public class Lexema implements java_cup.runtime.Scanner {
           case 1:
             { //MANEJAR EL ERROR LEXICO
                         print();
-                        TypeIntreprete type = TypeIntreprete.LEXICON;
-                        Token toke = new Token(yyline + 1, yycolumn + 1, yytext());
-                        String description = ListErrorAnalyzer.LEXEMA_ONE.getDescription();
-                        this.listError.add(new ReportErrorInterpreter(type, toke, description));
+                        addError();
             }
           // fall through
           case 31: break;

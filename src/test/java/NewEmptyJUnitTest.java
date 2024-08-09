@@ -36,7 +36,7 @@ public class NewEmptyJUnitTest {
     
 
     @Test
-    public void testOne() {
+    public void TestOne() {
         System.out.println(textosdepureva);
         Reader reader = new StringReader(textosdepureva);
         this.lexeman = new Lexema(reader);
@@ -51,7 +51,7 @@ public class NewEmptyJUnitTest {
     }
     
     @Test
-    public void testTwo() {
+    public void TestTwo() {
         String pruva = "&";
         Reader reader = new StringReader(pruva);
         this.lexeman = new Lexema(reader);
@@ -62,6 +62,19 @@ public class NewEmptyJUnitTest {
             Assertions.assertTrue(this.lexeman.getListError().size() == 0);
         }
         Assertions.assertTrue(this.lexeman.getListError().size() == 1);
+    }
+    
+    @Test
+    public void TestTree() {
+        Reader reader = new StringReader(this.textosdepureva + "ESTEESELERROR");
+        this.lexeman = new Lexema(reader);
+        this.parse = new parser(this.lexeman);
+        try {
+            this.parse.parse();
+        } catch (Exception e) {
+            Assertions.assertTrue(this.parse.getListError().size() == 1);
+        }
+        Assertions.assertTrue(this.parse.getListError().size() ==1);
     }
     
 

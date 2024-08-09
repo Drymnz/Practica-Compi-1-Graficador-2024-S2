@@ -7,6 +7,8 @@ import java_cup.runtime.Symbol;
 import usac.cunoc.interpretefiguras.logic.objectAnalysis.Token;
 import usac.cunoc.interpretefiguras.logic.reports.ReportErrorInterpreter;
 import usac.cunoc.interpretefiguras.logic.reports.TypeIntreprete;
+
+
 %%
 /*segunda seccion: configuracion*/
 %class Lexema
@@ -20,8 +22,14 @@ import usac.cunoc.interpretefiguras.logic.reports.TypeIntreprete;
 /*CODE*/
     private ArrayList<ReportErrorInterpreter> listError = new ArrayList();
   
-    public void print() {
+    private void print() {
         System.out.println("\n<" + yytext() + "><Linea\"" + (yyline + 1) + "\">" + "<Columna\"" + (yycolumn+1) + "\">");
+    }
+    private void addError(){
+        TypeIntreprete type = TypeIntreprete.LEXICON;
+        Token toke = new Token(yyline + 1, yycolumn + 1, yytext());
+        String description = ListErrorAnalyzer.LEXEMA_ONE.getDescription();
+        this.listError.add(new ReportErrorInterpreter(type, toke, description));
     }
     public ArrayList<ReportErrorInterpreter> getListError() {
         return this.listError;
@@ -138,9 +146,6 @@ espacio =[\n|\r|\t|\f|\b|\s| ]+
 [^]                   {
                     //MANEJAR EL ERROR LEXICO
                         print();
-                        TypeIntreprete type = TypeIntreprete.LEXICON;
-                        Token toke = new Token(yyline + 1, yycolumn + 1, yytext());
-                        String description = ListErrorAnalyzer.LEXEMA_ONE.getDescription();
-                        this.listError.add(new ReportErrorInterpreter(type, toke, description));
+                        addError();
                     }
 
