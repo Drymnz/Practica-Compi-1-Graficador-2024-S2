@@ -27,5 +27,8 @@ public class MathOperation {
         return type;
     }
     
-    
+    @Override
+    public String toString() {
+        return this.token.toString() + "-ListMathOperation:" + this.type.toString();
+    }
 }

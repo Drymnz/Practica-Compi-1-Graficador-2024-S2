@@ -31,4 +31,8 @@ public class Token {
         return lexeme;
     }
     
+    @Override
+    public String toString() {
+        return "-line:"+this.line+"-columna:"+this.columna+"-lexeme:"+this.lexeme;
+    }
 }

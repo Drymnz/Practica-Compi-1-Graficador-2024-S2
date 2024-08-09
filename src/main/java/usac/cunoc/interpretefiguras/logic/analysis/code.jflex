@@ -23,7 +23,7 @@ import usac.cunoc.interpretefiguras.logic.reports.TypeIntreprete;
     private ArrayList<ReportErrorInterpreter> listError = new ArrayList();
   
     private void print() {
-        System.out.println("\n<" + yytext() + "><Linea\"" + (yyline + 1) + "\">" + "<Columna\"" + (yycolumn+1) + "\">");
+        //System.out.println("\n<" + yytext() + "><Linea\"" + (yyline + 1) + "\">" + "<Columna\"" + (yycolumn+1) + "\">");
     }
     private void addError(){
         TypeIntreprete type = TypeIntreprete.LEXICON;

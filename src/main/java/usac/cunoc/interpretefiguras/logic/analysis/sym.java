@@ -14,14 +14,14 @@ public class sym {
   public static final int SQUARE = 24;
   public static final int CURVE = 29;
   public static final int BLACK = 15;
-  public static final int REAL_NUMEBERS = 6;
+  public static final int REAL_NUMEBERS = 8;
   public static final int CIRCLE = 20;
   public static final int BLUE = 11;
   public static final int RED = 12;
   public static final int ID = 7;
   public static final int GRAFICAR = 25;
   public static final int OBJECT = 28;
-  public static final int COMA = 8;
+  public static final int COMA = 6;
   public static final int POLYGON = 22;
   public static final int MAROON = 19;
   public static final int ANIMATION = 26;
@@ -45,9 +45,9 @@ public class sym {
   "RESTAR",
   "DIVIDIR",
   "MULTIPLICAR",
-  "REAL_NUMEBERS",
-  "ID",
   "COMA",
+  "ID",
+  "REAL_NUMEBERS",
   "PARENTESIS_A",
   "PARENTESIS_C",
   "BLUE",
