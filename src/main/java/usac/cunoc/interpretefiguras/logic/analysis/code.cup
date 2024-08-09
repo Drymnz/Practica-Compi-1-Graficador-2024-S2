@@ -1,25 +1,15 @@
 package usac.cunoc.interpretefiguras.logic.analysis;
+
 import java_cup.runtime.*;
 
 //////////////////////////
 
+/**
+     * ***STAR CODE*******
+     */
     parser code {:
 	public parser(Lexema lexer) {
         super(lexer);
-    }
-    private int contador;
-    private int errorCounter;
-    
-// si lo manda
-    public void syntax_error(Symbol cur_token) {
-        errorCounter++;
-        System.out.println("\n Error "+errorCounter+" - Clase<"+"> en simbolo<" + sym.terminalNames[cur_token.sym]+String.format(">posicion: <%d>, <%d>", (cur_token.left+1), (cur_token.right+1)));
-    }
-
-    public void unrecovered_syntax_error(Symbol cur_token) {
-        if (cur_token.sym == sym.EOF) {
-            System.out.println("public void unrecoveredsyntax_error!!!!!!!!!!!!!!");
-        }
     }
 
     public void printlnInter(String a){
@@ -30,14 +20,30 @@ import java_cup.runtime.*;
      */
 :}
 /*************************************TERMINALES******************************************************/
-terminal PUNTOYCOMA; /*PUNTUACION*/
-terminal SUMAR,RESTAR,DIVIDIR,MULTIPLICAR,IGUAL;/*SIMBOLOS DE OPERACION*/
-terminal PARENTESIS_A,PARENTESIS_C;/*AGRUPACION*/
 
-terminal t_const,t_let,DOUBLEPUNTO;
-terminal t_number,t_bigint;
+/*SIMBOLOS DE OPERACION*/
+terminal SUMAR,RESTAR,DIVIDIR,MULTIPLICAR,REAL_NUMEBERS;
+terminal ID,COMA;
+/*AGRUPACION*/
+terminal PARENTESIS_A,PARENTESIS_C;
+
+/*COLOR*/
+terminal BLUE,RED,YELLOW,GREEN,BLACK;
+terminal CYAN,FUCHSIA,LAVENDER,MAROON;
+
+/*TIPO DE GRAFICO*/
+terminal CIRCLE,LINE,POLYGON,RECTANGLE,SQUARE;
+
+/*OTRAS*/
+terminal GRAFICAR,ANIMATION,LAST,OBJECT,CURVE;
+
 /*************************************NO TERMINALES******************************************************/
-nonterminal o,j,inicio,acciones,sematico;/*para el uso de operaciones aritmeticas*/
+nonterminal inicio;
+nonterminal operacion;
+/*para el uso de operaciones aritmeticas*/
+nonterminal inico_opereacion;
+nonterminal acciones,animtion;
+nonterminal grafica,tipo_grafica,tipo_color,tipo_animation;
 /*************************************PRECEDENCIA******************************************************/
 precedence left SUMAR, RESTAR;
 precedence left MULTIPLICAR, DIVIDIR;
@@ -45,30 +51,64 @@ precedence left MULTIPLICAR, DIVIDIR;
 start with inicio;
 /******operaciones matematicas*****/
 inicio ::= acciones 
-    {:	
-    :}
     |
     ;
 
 acciones
-    ::= acciones sematico
-    |sematico
+    ::= acciones grafica
+    |grafica
     ;
 
-sematico
-    ::= 
-    j
+grafica
+    ::=GRAFICAR tipo_grafica
+    |animtion
     ;
+
+tipo_grafica
+    //  circulo (        <nombre>, <posx>,                  <posy>,              <radio>,                   <color>           )
+    ::= CIRCLE PARENTESIS_A ID COMA inico_opereacion:px COMA inico_opereacion:py COMA inico_opereacion:r COMA tipo_color PARENTESIS_C
+    //cuadrado (        <nombre>,           <posx>,               <posy>,              <tamaño lado>,    <color>      )
+    |SQUARE PARENTESIS_A ID COMA inico_opereacion:px COMA inico_opereacion:py COMA inico_opereacion:l COMA tipo_color PARENTESIS_C
+    //rectangulo (        <nombre>,              <posx>,                <posy>,             <ancho>,          <alto>,                   <color>      )
+    |RECTANGLE PARENTESIS_A ID COMA inico_opereacion:px COMA inico_opereacion:py COMA inico_opereacion:w COMA inico_opereacion:h COMA tipo_color PARENTESIS_C
+    //linea (         <nombre>,            <posx1>,               <posy1>,                 <posx2>,                 <posy2>,    <color>      )
+    |LINE PARENTESIS_A ID COMA inico_opereacion:px COMA inico_opereacion:py COMA inico_opereacion:px2 COMA inico_opereacion:py2 COMA tipo_color PARENTESIS_C
+    // poligono (        <nombre>,             <posx>,                 <posy>,        <cantidad lados>,              <ancho>,             <alto>,          <color>      )
+    |POLYGON PARENTESIS_A ID COMA inico_opereacion:px COMA inico_opereacion:py COMA inico_opereacion:l COMA inico_opereacion:w COMA inico_opereacion:h COMA tipo_color PARENTESIS_C
+    ;
+
+animtion
+    //  animar objeto anterior (        <tipoanimacion>,           <destinox>,              <destinoy>,             <orden>              )
+    ::= ANIMATION OBJECT LAST PARENTESIS_A tipo_animation COMA inico_opereacion:dx COMA inico_opereacion:dy COMA inico_opereacion:o COMA PARENTESIS_C
+    ;
+
+tipo_animation
+    ::= LINE
+    |CURVE
+    ;
+
+tipo_color
+    ::=
+    BLUE
+    |RED
+    |YELLOW
+    |GREEN
+    |BLACK
+    |CYAN
+    |FUCHSIA
+    |LAVENDER
+    |MAROON
+    ;
+    
 /******operaciones matematicas*****/
-j ::= o:a 
+inico_opereacion ::= operacion:a 
     {:RESULT = a;:} /*A QUI ESTA EL TOTAL DE LA OPERACION*/
-    | error
-    {::}
     ;
-o ::= o:a SUMAR o:b 
-|  o:a RESTAR o:b 
-|  o:a DIVIDIR o:b 
-|  o:a MULTIPLICAR o:b 
-| PARENTESIS_A o:a PARENTESIS_C
-{:RESULT = a;:}
+
+operacion ::= operacion:a SUMAR operacion:b 
+|  operacion:a RESTAR operacion:b 
+|  operacion:a DIVIDIR operacion:b 
+|  operacion:a MULTIPLICAR operacion:b 
+| PARENTESIS_A operacion:a PARENTESIS_C 
+| REAL_NUMEBERS
 ;
