@@ -35,7 +35,6 @@ public class NewEmptyJUnitTest {
 
     @Test
     public void TestOne() {
-        System.out.println(textosdepureva);
         Reader reader = new StringReader(textosdepureva);
         this.lexeman = new Lexema(reader);
         this.parse = new parser(this.lexeman);

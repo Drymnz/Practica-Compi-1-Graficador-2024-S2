@@ -94,10 +94,10 @@ espacio =[\n|\r|\t|\f|\b|\s| ]+
 "celeste"           {
                    print(); return new Symbol( sym.CYAN ,yyline,yycolumn,yytext());                    
                     }
-"fucsia"           {
+"fusia"           {
                    print(); return new Symbol( sym.FUCHSIA ,yyline,yycolumn,yytext());                    
                     }
-"lavanda"           {
+"lila"           {
                    print(); return new Symbol( sym.LAVENDER ,yyline,yycolumn,yytext());                    
                     }
 "corinto"           {

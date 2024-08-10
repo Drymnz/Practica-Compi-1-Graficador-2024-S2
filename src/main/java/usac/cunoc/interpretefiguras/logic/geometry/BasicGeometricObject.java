@@ -4,7 +4,6 @@
  */
 package usac.cunoc.interpretefiguras.logic.geometry;
 
-import java.awt.Color;
 
 /**
  *
