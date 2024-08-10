@@ -13,7 +13,7 @@ public class PolygonGeometric extends BasicGeometricObject{
     private double high;
     private double width;
 
-    public PolygonGeometric(double posx, double poxy, String id, ListColor color,int numberSides,double high,double width) {
+    public PolygonGeometric(int posx, int poxy, String id, ListColor color,int numberSides,double high,double width) {
         super(posx, poxy, id, color);
         this.numberSides = numberSides;
         this.high = high;

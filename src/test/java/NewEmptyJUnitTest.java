@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 import usac.cunoc.interpretefiguras.logic.analysis.Lexema;
 import usac.cunoc.interpretefiguras.logic.analysis.parser;
 
@@ -33,7 +32,6 @@ public class NewEmptyJUnitTest {
     public void TestEmpty() {
         Assertions.assertTrue(true);
     }
-    
 
     @Test
     public void TestOne() {
@@ -84,10 +82,27 @@ public class NewEmptyJUnitTest {
         this.parse = new parser(this.lexeman);
         try {
             this.parse.parse();
-            for (int i = 0; i < this.parse.getlistMathOperation().size(); i++) {
-                System.out.println(this.parse.getlistMathOperation().get(i).toString());
+            for (int i = 0; i < this.parse.getListMathOperation().size(); i++) {
+                System.out.println(this.parse.getListMathOperation().get(i).toString());
             }
         } catch (Exception e) {
+            Assertions.assertTrue(false);
+        }
+        Assertions.assertTrue(true);
+    }
+
+    @Test
+    public void TestFive() {
+        Reader reader = new StringReader(this.textosdepureva);
+        this.lexeman = new Lexema(reader);
+        this.parse = new parser(this.lexeman);
+        try {
+            this.parse.parse();
+            for (int i = 0; i < this.parse.getLisGeometricObject().size(); i++) {
+                System.out.println(this.parse.getLisGeometricObject().get(i).toString());
+            }
+        } catch (Exception e) {
+            System.out.println(e);
             Assertions.assertTrue(false);
         }
         Assertions.assertTrue(true);

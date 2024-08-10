@@ -10,8 +10,7 @@ import java.util.ArrayList;
 import usac.cunoc.interpretefiguras.logic.objectAnalysis.Token;
 import usac.cunoc.interpretefiguras.logic.reports.*;
 import usac.cunoc.interpretefiguras.logic.animition.ListAnimation;
-import usac.cunoc.interpretefiguras.logic.geometry.ListColor;
-import usac.cunoc.interpretefiguras.logic.geometry.ListObjectGeometric;
+import usac.cunoc.interpretefiguras.logic.geometry.*;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -223,6 +222,7 @@ public class parser extends java_cup.runtime.lr_parser {
 
 private ArrayList<ReportErrorInterpreter> listError = new ArrayList();
 private ArrayList<MathOperation> listMathOperation = new ArrayList();
+private ArrayList<BasicGeometricObject>  listGeometricObject = new ArrayList();
 private ReportUserObjectGeometry reportUser = new ReportUserObjectGeometry();
 
 
@@ -232,6 +232,7 @@ private ReportUserObjectGeometry reportUser = new ReportUserObjectGeometry();
     // Agregar el error de elctura
     private void addError(){
         this.getInfoPrint();
+        System.out.println("ERORR");
         TypeIntreprete type = TypeIntreprete.SYNTACTIC;
         String description = ListErrorAnalyzer.LEXEMA_ONE.getDescription();
         this.listError.add(new ReportErrorInterpreter(type, this.getTokePresent(), description));
@@ -257,13 +258,36 @@ private ReportUserObjectGeometry reportUser = new ReportUserObjectGeometry();
         return this.listError;
     }
     //Returnar el listado de errores
-    public ArrayList<MathOperation> getlistMathOperation() {
+    public ArrayList<MathOperation> getListMathOperation() {
         return this.listMathOperation;
+    }
+    //Returnar el listado de ArrayList<BasicGeometricObject>  listGeometricObject
+    public ArrayList<BasicGeometricObject> getLisGeometricObject() {
+        return this.listGeometricObject;
     }
     //agregar reprote de mathoperation
     private void addReportMathOperation(ListMathOperation type){
-        this.getInfoPrint();
         this.listMathOperation.add(new MathOperation(this.getTokePresent(), type));
+    }
+    //agregar circulo
+    private void addCircle(String id, String px, String py, String r){
+        this.listGeometricObject.add(new CircleGeometric( Integer.parseInt(px), Integer.parseInt(py),id, reportUser.getTypeColor(), Double.valueOf(r)));
+    }
+    //agregar cuadrado
+    private void addSquare(String id, String px, String py, String l){
+        this.listGeometricObject.add(new SquareGeometric( Integer.parseInt(px), Integer.parseInt(py),id, reportUser.getTypeColor(), Double.valueOf(l)));
+    }
+    //agregar rectangulo
+    private void addRectangle(String id, String px, String py, String w, String h){
+        this.listGeometricObject.add(new RectangleGeometric( Integer.parseInt(px), Integer.parseInt(py),id, reportUser.getTypeColor(), Double.valueOf(w), Double.valueOf(h)));
+    }
+    //agregar linea
+    private void addLine(String id, String px, String py, String px2, String py2){
+        this.listGeometricObject.add(new LineGeometric( Integer.parseInt(px), Integer.parseInt(py),id, reportUser.getTypeColor(), Double.valueOf(px2),Double.valueOf(py2)));
+    }
+    //agregar poligono
+    private void addPolygon(String id, String px, String py, String l, String w, String h){
+        this.listGeometricObject.add(new PolygonGeometric( Integer.parseInt(px), Integer.parseInt(py),id, reportUser.getTypeColor(),Integer.parseInt(l),Double.valueOf(w),Double.valueOf(h)));
     }
     /**
      * ***END CODE*******
@@ -380,6 +404,7 @@ class CUP$parser$actions {
 		Object r = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-3)).value;
 		
     reportUser.incrementObjectCounter(ListObjectGeometric.CIRCLE);
+    addCircle(id.toString(),px.toString(),py.toString(),r.toString());
     
               CUP$parser$result = parser.getSymbolFactory().newSymbol("tipo_grafica",6, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-11)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -389,6 +414,9 @@ class CUP$parser$actions {
           case 8: // tipo_grafica ::= SQUARE PARENTESIS_A ID COMA inico_opereacion COMA inico_opereacion COMA inico_opereacion COMA tipo_color PARENTESIS_C 
             {
               Object RESULT =null;
+		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-9)).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-9)).right;
+		String id = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-9)).value;
 		int pxleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-7)).left;
 		int pxright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-7)).right;
 		Object px = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-7)).value;
@@ -400,6 +428,7 @@ class CUP$parser$actions {
 		Object l = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-3)).value;
 		
     reportUser.incrementObjectCounter(ListObjectGeometric.SQUARE);
+    addSquare(id.toString(),px.toString(),py.toString(),l.toString());
     
               CUP$parser$result = parser.getSymbolFactory().newSymbol("tipo_grafica",6, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-11)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -409,6 +438,9 @@ class CUP$parser$actions {
           case 9: // tipo_grafica ::= RECTANGLE PARENTESIS_A ID COMA inico_opereacion COMA inico_opereacion COMA inico_opereacion COMA inico_opereacion COMA tipo_color PARENTESIS_C 
             {
               Object RESULT =null;
+		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-11)).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-11)).right;
+		String id = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-11)).value;
 		int pxleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-9)).left;
 		int pxright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-9)).right;
 		Object px = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-9)).value;
@@ -423,6 +455,7 @@ class CUP$parser$actions {
 		Object h = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-3)).value;
 		
     reportUser.incrementObjectCounter(ListObjectGeometric.RECTANGLE);
+    addRectangle(id.toString(),px.toString(),py.toString(),w.toString(),h.toString());
     
               CUP$parser$result = parser.getSymbolFactory().newSymbol("tipo_grafica",6, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-13)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -432,6 +465,9 @@ class CUP$parser$actions {
           case 10: // tipo_grafica ::= LINE PARENTESIS_A ID COMA inico_opereacion COMA inico_opereacion COMA inico_opereacion COMA inico_opereacion COMA tipo_color PARENTESIS_C 
             {
               Object RESULT =null;
+		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-11)).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-11)).right;
+		String id = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-11)).value;
 		int pxleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-9)).left;
 		int pxright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-9)).right;
 		Object px = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-9)).value;
@@ -446,6 +482,7 @@ class CUP$parser$actions {
 		Object py2 = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-3)).value;
 		
     reportUser.incrementObjectCounter(ListObjectGeometric.LINE);
+    addLine(id.toString(),px.toString(),py.toString(),px2.toString(),py2.toString());
     
               CUP$parser$result = parser.getSymbolFactory().newSymbol("tipo_grafica",6, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-13)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -455,6 +492,9 @@ class CUP$parser$actions {
           case 11: // tipo_grafica ::= POLYGON PARENTESIS_A ID COMA inico_opereacion COMA inico_opereacion COMA inico_opereacion COMA inico_opereacion COMA inico_opereacion COMA tipo_color PARENTESIS_C 
             {
               Object RESULT =null;
+		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-13)).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-13)).right;
+		String id = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-13)).value;
 		int pxleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-11)).left;
 		int pxright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-11)).right;
 		Object px = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-11)).value;
@@ -472,6 +512,7 @@ class CUP$parser$actions {
 		Object h = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-3)).value;
 		
     reportUser.incrementObjectCounter(ListObjectGeometric.POLYGON);
+    addPolygon(id.toString(),px.toString(),py.toString(),l.toString(),w.toString(),h.toString());
     
               CUP$parser$result = parser.getSymbolFactory().newSymbol("tipo_grafica",6, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-15)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -619,7 +660,7 @@ class CUP$parser$actions {
 		
 setTextToken(a +" + "+ b);
 addReportMathOperation(ListMathOperation.ADDITION);
-RESULT = Double.valueOf(a.toString()) + Double.valueOf(b.toString());
+RESULT = Integer.valueOf(a.toString()) + Integer.valueOf(b.toString());
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("operacion",1, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -638,7 +679,7 @@ RESULT = Double.valueOf(a.toString()) + Double.valueOf(b.toString());
 		
 setTextToken(a +" - "+ b);
 addReportMathOperation(ListMathOperation.SUBTRACTION);
-RESULT = Double.valueOf(a.toString()) - Double.valueOf(b.toString());
+RESULT = Integer.valueOf(a.toString()) - Integer.valueOf(b.toString());
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("operacion",1, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -659,7 +700,8 @@ setTextToken(a +" / "+ b);
 addReportMathOperation(ListMathOperation.DIVISION);
 Double bDouble =   Double.valueOf(b.toString());
 if (bDouble>0) {
-  RESULT = Double.valueOf(a.toString()) / bDouble;
+  Double result = Double.valueOf(a.toString()) / bDouble;
+   RESULT = result.intValue();
 }
 /// manejar un error de sintasis
 RESULT = b;
@@ -681,7 +723,8 @@ RESULT = b;
 		
 setTextToken(a +" * "+ b);
 addReportMathOperation(ListMathOperation.MULTIPLICATION);
-RESULT = Double.valueOf(a.toString()) * Double.valueOf(b.toString());
+Double result = Double.valueOf(a.toString()) * Double.valueOf(b.toString());
+RESULT = result.intValue();
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("operacion",1, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }

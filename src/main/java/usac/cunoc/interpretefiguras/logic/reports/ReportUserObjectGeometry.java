@@ -9,6 +9,7 @@ public class ReportUserObjectGeometry {
     private int blueCount, redCount, yellowCount, greenCount, blackCount, cyanCount, fuchsiaCount, lavenderCount,
             maroonCount;
     private int lineCountAnimation, curveCount;
+    private ListColor typeColor;
 
     public ReportUserObjectGeometry() {
     }
@@ -27,6 +28,7 @@ public class ReportUserObjectGeometry {
     }
 
     public void incrementColorCounter(ListColor type) {
+        this.typeColor = type;
         switch (type) {
             case BLUE:
                 this.blueCount++;
@@ -78,4 +80,10 @@ public class ReportUserObjectGeometry {
 
         }
     }
+
+    public ListColor getTypeColor() {
+        return typeColor;
+    }
+
+    
 }

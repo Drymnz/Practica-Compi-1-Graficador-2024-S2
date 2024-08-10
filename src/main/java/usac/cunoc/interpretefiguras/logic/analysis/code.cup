@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import usac.cunoc.interpretefiguras.logic.objectAnalysis.Token;
 import usac.cunoc.interpretefiguras.logic.reports.*;
 import usac.cunoc.interpretefiguras.logic.animition.ListAnimation;
-import usac.cunoc.interpretefiguras.logic.geometry.ListColor;
-import usac.cunoc.interpretefiguras.logic.geometry.ListObjectGeometric;
-
-
+import usac.cunoc.interpretefiguras.logic.geometry.*;
 
 //////////////////////////
 
@@ -19,6 +16,7 @@ import usac.cunoc.interpretefiguras.logic.geometry.ListObjectGeometric;
 
 private ArrayList<ReportErrorInterpreter> listError = new ArrayList();
 private ArrayList<MathOperation> listMathOperation = new ArrayList();
+private ArrayList<BasicGeometricObject>  listGeometricObject = new ArrayList();
 private ReportUserObjectGeometry reportUser = new ReportUserObjectGeometry();
 
 
@@ -28,6 +26,7 @@ private ReportUserObjectGeometry reportUser = new ReportUserObjectGeometry();
     // Agregar el error de elctura
     private void addError(){
         this.getInfoPrint();
+        System.out.println("ERORR");
         TypeIntreprete type = TypeIntreprete.SYNTACTIC;
         String description = ListErrorAnalyzer.LEXEMA_ONE.getDescription();
         this.listError.add(new ReportErrorInterpreter(type, this.getTokePresent(), description));
@@ -53,13 +52,36 @@ private ReportUserObjectGeometry reportUser = new ReportUserObjectGeometry();
         return this.listError;
     }
     //Returnar el listado de errores
-    public ArrayList<MathOperation> getlistMathOperation() {
+    public ArrayList<MathOperation> getListMathOperation() {
         return this.listMathOperation;
+    }
+    //Returnar el listado de ArrayList<BasicGeometricObject>  listGeometricObject
+    public ArrayList<BasicGeometricObject> getLisGeometricObject() {
+        return this.listGeometricObject;
     }
     //agregar reprote de mathoperation
     private void addReportMathOperation(ListMathOperation type){
-        this.getInfoPrint();
         this.listMathOperation.add(new MathOperation(this.getTokePresent(), type));
+    }
+    //agregar circulo
+    private void addCircle(String id, String px, String py, String r){
+        this.listGeometricObject.add(new CircleGeometric( Integer.parseInt(px), Integer.parseInt(py),id, reportUser.getTypeColor(), Double.valueOf(r)));
+    }
+    //agregar cuadrado
+    private void addSquare(String id, String px, String py, String l){
+        this.listGeometricObject.add(new SquareGeometric( Integer.parseInt(px), Integer.parseInt(py),id, reportUser.getTypeColor(), Double.valueOf(l)));
+    }
+    //agregar rectangulo
+    private void addRectangle(String id, String px, String py, String w, String h){
+        this.listGeometricObject.add(new RectangleGeometric( Integer.parseInt(px), Integer.parseInt(py),id, reportUser.getTypeColor(), Double.valueOf(w), Double.valueOf(h)));
+    }
+    //agregar linea
+    private void addLine(String id, String px, String py, String px2, String py2){
+        this.listGeometricObject.add(new LineGeometric( Integer.parseInt(px), Integer.parseInt(py),id, reportUser.getTypeColor(), Double.valueOf(px2),Double.valueOf(py2)));
+    }
+    //agregar poligono
+    private void addPolygon(String id, String px, String py, String l, String w, String h){
+        this.listGeometricObject.add(new PolygonGeometric( Integer.parseInt(px), Integer.parseInt(py),id, reportUser.getTypeColor(),Integer.parseInt(l),Double.valueOf(w),Double.valueOf(h)));
     }
     /**
      * ***END CODE*******
@@ -115,26 +137,31 @@ tipo_grafica
     ::= CIRCLE  PARENTESIS_A ID:id  COMA inico_opereacion:px  COMA inico_opereacion:py  COMA inico_opereacion:r  COMA tipo_color PARENTESIS_C
     {:
     reportUser.incrementObjectCounter(ListObjectGeometric.CIRCLE);
+    addCircle(id.toString(),px.toString(),py.toString(),r.toString());
     :}
     //cuadrado (        <nombre>,           <posx>,               <posy>,              <tamaño lado>,    <color>      )
-    |SQUARE PARENTESIS_A ID COMA inico_opereacion:px COMA inico_opereacion:py COMA inico_opereacion:l COMA tipo_color PARENTESIS_C
+    |SQUARE PARENTESIS_A ID:id COMA inico_opereacion:px COMA inico_opereacion:py COMA inico_opereacion:l COMA tipo_color PARENTESIS_C
     {:
     reportUser.incrementObjectCounter(ListObjectGeometric.SQUARE);
+    addSquare(id.toString(),px.toString(),py.toString(),l.toString());
     :}
     //rectangulo (        <nombre>,              <posx>,                <posy>,             <ancho>,          <alto>,                   <color>      )
-    |RECTANGLE PARENTESIS_A ID COMA inico_opereacion:px COMA inico_opereacion:py COMA inico_opereacion:w COMA inico_opereacion:h COMA tipo_color PARENTESIS_C
+    |RECTANGLE PARENTESIS_A ID:id COMA inico_opereacion:px COMA inico_opereacion:py COMA inico_opereacion:w COMA inico_opereacion:h COMA tipo_color PARENTESIS_C
     {:
     reportUser.incrementObjectCounter(ListObjectGeometric.RECTANGLE);
+    addRectangle(id.toString(),px.toString(),py.toString(),w.toString(),h.toString());
     :}
     //linea (         <nombre>,            <posx1>,               <posy1>,                 <posx2>,                 <posy2>,    <color>      )
-    |LINE PARENTESIS_A ID COMA inico_opereacion:px COMA inico_opereacion:py COMA inico_opereacion:px2 COMA inico_opereacion:py2 COMA tipo_color PARENTESIS_C
+    |LINE PARENTESIS_A ID:id COMA inico_opereacion:px COMA inico_opereacion:py COMA inico_opereacion:px2 COMA inico_opereacion:py2 COMA tipo_color PARENTESIS_C
     {:
     reportUser.incrementObjectCounter(ListObjectGeometric.LINE);
+    addLine(id.toString(),px.toString(),py.toString(),px2.toString(),py2.toString());
     :}
     // poligono (        <nombre>,             <posx>,                 <posy>,        <cantidad lados>,              <ancho>,             <alto>,          <color>      )
-    |POLYGON PARENTESIS_A ID COMA inico_opereacion:px COMA inico_opereacion:py COMA inico_opereacion:l COMA inico_opereacion:w COMA inico_opereacion:h COMA tipo_color PARENTESIS_C
+    |POLYGON PARENTESIS_A ID:id COMA inico_opereacion:px COMA inico_opereacion:py COMA inico_opereacion:l COMA inico_opereacion:w COMA inico_opereacion:h COMA tipo_color PARENTESIS_C
     {:
     reportUser.incrementObjectCounter(ListObjectGeometric.POLYGON);
+    addPolygon(id.toString(),px.toString(),py.toString(),l.toString(),w.toString(),h.toString());
     :}
     ;
 
@@ -170,13 +197,13 @@ operacion
 {:
 setTextToken(a +" + "+ b);
 addReportMathOperation(ListMathOperation.ADDITION);
-RESULT = Double.valueOf(a.toString()) + Double.valueOf(b.toString());
+RESULT = Integer.valueOf(a.toString()) + Integer.valueOf(b.toString());
 :}
 |  operacion:a RESTAR operacion:b 
 {:
 setTextToken(a +" - "+ b);
 addReportMathOperation(ListMathOperation.SUBTRACTION);
-RESULT = Double.valueOf(a.toString()) - Double.valueOf(b.toString());
+RESULT = Integer.valueOf(a.toString()) - Integer.valueOf(b.toString());
 :}
 |  operacion:a DIVIDIR operacion:b 
 {:
@@ -184,7 +211,8 @@ setTextToken(a +" / "+ b);
 addReportMathOperation(ListMathOperation.DIVISION);
 Double bDouble =   Double.valueOf(b.toString());
 if (bDouble>0) {
-  RESULT = Double.valueOf(a.toString()) / bDouble;
+  Double result = Double.valueOf(a.toString()) / bDouble;
+   RESULT = result.intValue();
 }
 /// manejar un error de sintasis
 RESULT = b;
@@ -193,7 +221,8 @@ RESULT = b;
 {:
 setTextToken(a +" * "+ b);
 addReportMathOperation(ListMathOperation.MULTIPLICATION);
-RESULT = Double.valueOf(a.toString()) * Double.valueOf(b.toString());
+Double result = Double.valueOf(a.toString()) * Double.valueOf(b.toString());
+RESULT = result.intValue();
 :}
 | PARENTESIS_A operacion:a {:RESULT = a;:} PARENTESIS_C 
 | REAL_NUMEBERS:a {:RESULT = a;:}

@@ -13,7 +13,7 @@ public class LineGeometric extends BasicGeometricObject {
     private double posXF;
     private double posYF;
 
-    public LineGeometric(double posx, double poxy, String id, ListColor color, double posXF, double posYF) {
+    public LineGeometric(int posx, int poxy, String id, ListColor color, double posXF, double posYF) {
         super(posx, poxy, id, color);
         this.posXF = posXF;
         this.posYF = posYF;

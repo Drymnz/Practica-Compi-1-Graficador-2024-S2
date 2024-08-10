@@ -11,19 +11,19 @@ import java.awt.Color;
  * @author drymnz
  */
 public class BasicGeometricObject  {
-    private double posx;
-    private double poxy;
+    private int posx;
+    private int poxy;
     private String id;
     private ListColor color;
 
-    public BasicGeometricObject(double posx, double poxy, String id, ListColor color) {
+    public BasicGeometricObject(int posx, int poxy, String id, ListColor color) {
         this.posx = posx;
         this.poxy = poxy;
         this.id = id;
         this.color = color;
     }
 
-    public double getPosx() {
+    public int getPosx() {
         return posx;
     }
 
@@ -31,7 +31,7 @@ public class BasicGeometricObject  {
         this.posx = posx;
     }
 
-    public double getPoxy() {
+    public int getPoxy() {
         return poxy;
     }
 
@@ -55,5 +55,8 @@ public class BasicGeometricObject  {
         this.color = color;
     }
 
-
+    @Override
+    public String toString() {
+        return "-posx:"+posx+"-poxy:"+poxy+"-id:"+id+"-color:"+color.toString();
+    }
 }
