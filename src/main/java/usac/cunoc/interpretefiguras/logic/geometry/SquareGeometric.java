@@ -9,14 +9,14 @@ package usac.cunoc.interpretefiguras.logic.geometry;
  * @author drymnz
  */
 public class SquareGeometric extends BasicGeometricObject{
-    private double square;
+    private int square;
 
-    public SquareGeometric(int posx, int poxy, String id, ListColor color, double square) {
+    public SquareGeometric(int posx, int poxy, String id, ListColor color, int square) {
         super(posx, poxy, id, color);
         this.square = square;
     }
 
-    public double getSquare() {
+    public int getSquare() {
         return square;
     }
     

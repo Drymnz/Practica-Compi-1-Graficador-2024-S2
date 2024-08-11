@@ -10,14 +10,14 @@ package usac.cunoc.interpretefiguras.logic.geometry;
  */
 public class CircleGeometric extends BasicGeometricObject{
     
-    private double radio; 
+    private int radio; 
     
-    public CircleGeometric(int posx, int poxy, String id, ListColor color, double radio) {
+    public CircleGeometric(int posx, int poxy, String id, ListColor color, int radio) {
         super(posx, poxy, id, color);
         this.radio = radio;
     }
 
-    public double getRadio() {
+    public int getRadio() {
         return radio;
     }
 

@@ -9,21 +9,21 @@ package usac.cunoc.interpretefiguras.logic.geometry;
  * @author drymnz
  */
 public class RectangleGeometric extends BasicGeometricObject{
-    private double high;
-    private double width;
+    private int high;
+    private int width;
 
-    public RectangleGeometric(int posx, int poxy, String id, ListColor color,double high
-    , double width) {
+    public RectangleGeometric(int posx, int poxy, String id, ListColor color,int high
+    , int width) {
         super(posx, poxy, id, color);
         this.high = high;
         this.width = width;
     }
 
-    public double getHigh() {
+    public int getHigh() {
         return high;
     }
 
-    public double getWidth() {
+    public int getWidth() {
         return width;
     }
  

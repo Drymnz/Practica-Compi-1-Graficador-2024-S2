@@ -10,21 +10,21 @@ package usac.cunoc.interpretefiguras.logic.geometry;
  */
 public class LineGeometric extends BasicGeometricObject {
 
-    private double posXF;
-    private double posYF;
+    private int posXF;
+    private int posYF;
 
-    public LineGeometric(int posx, int poxy, String id, ListColor color, double posXF, double posYF) {
+    public LineGeometric(int posx, int poxy, String id, ListColor color, int posXF, int posYF) {
         super(posx, poxy, id, color);
         this.posXF = posXF;
         this.posYF = posYF;
     }
 
-    public double getPosXF() {
+    public int getPosXF() {
         return posXF;
     }
 
 
-    public double getPosYF() {
+    public int getPosYF() {
         return posYF;
     }
 

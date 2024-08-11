@@ -1,4 +1,6 @@
 usac/cunoc/interpretefiguras/logic/geometry/CircleGeometric.class
+usac/cunoc/interpretefiguras/view/ViewsMenu$2.class
+usac/cunoc/interpretefiguras/logic/reports/ReportUserObjectGeometry.class
 usac/cunoc/interpretefiguras/InterpreteFiguras$1.class
 usac/cunoc/interpretefiguras/logic/reports/TypeIntreprete.class
 usac/cunoc/interpretefiguras/logic/geometry/PolygonGeometric.class
@@ -7,10 +9,12 @@ usac/cunoc/interpretefiguras/logic/geometry/RectangleGeometric.class
 usac/cunoc/interpretefiguras/logic/analysis/parser$CUP$parser$actions.class
 usac/cunoc/interpretefiguras/logic/geometry/BasicGeometricObject.class
 usac/cunoc/interpretefiguras/view/Compiler.class
+usac/cunoc/interpretefiguras/logic/geometry/ListObjectGeometric.class
 usac/cunoc/interpretefiguras/InterpreteFiguras.class
 usac/cunoc/interpretefiguras/logic/objectAnalysis/Token.class
 usac/cunoc/interpretefiguras/logic/animition/ListAnimation.class
 usac/cunoc/interpretefiguras/logic/geometry/LineGeometric.class
+usac/cunoc/interpretefiguras/view/ViewsMenu$3.class
 usac/cunoc/interpretefiguras/logic/reports/ReportErrorInterpreter.class
 usac/cunoc/interpretefiguras/logic/geometry/ListGeometric.class
 usac/cunoc/interpretefiguras/logic/analysis/sym.class
@@ -20,10 +24,10 @@ usac/cunoc/interpretefiguras/logic/geometry/SquareGeometric.class
 usac/cunoc/interpretefiguras/logic/analysis/ListErrorAnalyzer.class
 usac/cunoc/interpretefiguras/logic/analysis/Lexema.class
 usac/cunoc/interpretefiguras/logic/reports/ListMathOperation.class
+usac/cunoc/interpretefiguras/view/ViewsMenu$1.class
 usac/cunoc/interpretefiguras/view/GrapherPanel.class
 usac/cunoc/interpretefiguras/view/ViewsMenu.class
 usac/cunoc/interpretefiguras/view/ReportPanel.class
 usac/cunoc/interpretefiguras/logic/animition/Animation.class
 usac/cunoc/interpretefiguras/logic/geometry/ListColor.class
 usac/cunoc/interpretefiguras/logic/reports/ReportUserObjectGeometry$1.class
-usac/cunoc/interpretefiguras/view/Compiler$1.class

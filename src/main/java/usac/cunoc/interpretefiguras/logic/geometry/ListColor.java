@@ -30,4 +30,5 @@ public enum ListColor {
         this.color = color;
     }
     
+    public Color getColor(){return this.color;}
 }

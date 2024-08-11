@@ -4,11 +4,22 @@
  */
 package usac.cunoc.interpretefiguras.view;
 
+import java.awt.Graphics;
+import java.util.ArrayList;
+import usac.cunoc.interpretefiguras.logic.geometry.BasicGeometricObject;
+import usac.cunoc.interpretefiguras.logic.geometry.CircleGeometric;
+import usac.cunoc.interpretefiguras.logic.geometry.LineGeometric;
+import usac.cunoc.interpretefiguras.logic.geometry.PolygonGeometric;
+import usac.cunoc.interpretefiguras.logic.geometry.RectangleGeometric;
+import usac.cunoc.interpretefiguras.logic.geometry.SquareGeometric;
+
 /**
  *
  * @author drymnz
  */
 public class GrapherPanel extends javax.swing.JPanel {
+
+    private ArrayList<BasicGeometricObject> lisGeometricObject;
 
     /**
      * Creates new form GrapherPanel
@@ -37,6 +48,39 @@ public class GrapherPanel extends javax.swing.JPanel {
             .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    public void Graficar(ArrayList<BasicGeometricObject> lisGeometricObject) {
+        this.lisGeometricObject = lisGeometricObject;
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        if (this.lisGeometricObject != null) {
+            for (BasicGeometricObject element : lisGeometricObject) {
+                g.setColor(element.getColor().getColor());
+                if (element instanceof CircleGeometric) {
+                    CircleGeometric elem = (CircleGeometric) element;
+                    g.fillOval(elem.getPosx(), elem.getPoxy(), elem.getRadio(), elem.getRadio());
+                }
+                if (element instanceof LineGeometric) {
+                    LineGeometric elem = (LineGeometric) element;
+                    g.drawLine(elem.getPosx(), elem.getPoxy(), elem.getPosXF(), elem.getPosYF());
+                }
+                if (element instanceof PolygonGeometric) {
+                    PolygonGeometric elem = (PolygonGeometric) element;
+                }
+                if (element instanceof RectangleGeometric) {
+                    RectangleGeometric elem = (RectangleGeometric) element;
+                    g.fillRect(elem.getPosx(), elem.getPoxy(), elem.getWidth(), elem.getHigh());
+                }
+                if (element instanceof SquareGeometric) {
+                    SquareGeometric elem = (SquareGeometric) element;
+                    g.fillRect(elem.getPosx(), elem.getPoxy(), elem.getSquare(), elem.getSquare());
+                }
+            }
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

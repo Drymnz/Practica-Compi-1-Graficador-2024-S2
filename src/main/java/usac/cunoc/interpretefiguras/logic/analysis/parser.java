@@ -272,23 +272,23 @@ private ReportUserObjectGeometry reportUser = new ReportUserObjectGeometry();
     }
     //agregar circulo
     private void addCircle(String id, String px, String py, String r){
-        this.listGeometricObject.add(new CircleGeometric( Integer.parseInt(px), Integer.parseInt(py),id, reportUser.getTypeColor(), Double.valueOf(r)));
+        this.listGeometricObject.add(new CircleGeometric( Integer.parseInt(px), Integer.parseInt(py),id, reportUser.getTypeColor(), Integer.parseInt(r)));
     }
     //agregar cuadrado
     private void addSquare(String id, String px, String py, String l){
-        this.listGeometricObject.add(new SquareGeometric( Integer.parseInt(px), Integer.parseInt(py),id, reportUser.getTypeColor(), Double.valueOf(l)));
+        this.listGeometricObject.add(new SquareGeometric( Integer.parseInt(px), Integer.parseInt(py),id, reportUser.getTypeColor(), Integer.parseInt(l)));
     }
     //agregar rectangulo
     private void addRectangle(String id, String px, String py, String w, String h){
-        this.listGeometricObject.add(new RectangleGeometric( Integer.parseInt(px), Integer.parseInt(py),id, reportUser.getTypeColor(), Double.valueOf(w), Double.valueOf(h)));
+        this.listGeometricObject.add(new RectangleGeometric( Integer.parseInt(px), Integer.parseInt(py),id, reportUser.getTypeColor(), Integer.parseInt(w), Integer.parseInt(h)));
     }
     //agregar linea
     private void addLine(String id, String px, String py, String px2, String py2){
-        this.listGeometricObject.add(new LineGeometric( Integer.parseInt(px), Integer.parseInt(py),id, reportUser.getTypeColor(), Double.valueOf(px2),Double.valueOf(py2)));
+        this.listGeometricObject.add(new LineGeometric( Integer.parseInt(px), Integer.parseInt(py),id, reportUser.getTypeColor(), Integer.parseInt(px2),Integer.parseInt(py2)));
     }
     //agregar poligono
     private void addPolygon(String id, String px, String py, String l, String w, String h){
-        this.listGeometricObject.add(new PolygonGeometric( Integer.parseInt(px), Integer.parseInt(py),id, reportUser.getTypeColor(),Integer.parseInt(l),Double.valueOf(w),Double.valueOf(h)));
+        this.listGeometricObject.add(new PolygonGeometric( Integer.parseInt(px), Integer.parseInt(py),id, reportUser.getTypeColor(),Integer.parseInt(l),Integer.parseInt(w),Integer.parseInt(h)));
     }
     /**
      * ***END CODE*******
