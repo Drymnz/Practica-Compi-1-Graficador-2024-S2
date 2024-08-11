@@ -27,7 +27,10 @@ usac/cunoc/interpretefiguras/logic/reports/ListMathOperation.class
 usac/cunoc/interpretefiguras/view/ViewsMenu$1.class
 usac/cunoc/interpretefiguras/view/GrapherPanel.class
 usac/cunoc/interpretefiguras/view/ViewsMenu.class
+usac/cunoc/interpretefiguras/logic/fileManager/FileInput.class
 usac/cunoc/interpretefiguras/view/ReportPanel.class
 usac/cunoc/interpretefiguras/logic/animition/Animation.class
+usac/cunoc/interpretefiguras/logic/fileManager/FileOutput.class
 usac/cunoc/interpretefiguras/logic/geometry/ListColor.class
 usac/cunoc/interpretefiguras/logic/reports/ReportUserObjectGeometry$1.class
+usac/cunoc/interpretefiguras/view/ViewsMenu$4.class

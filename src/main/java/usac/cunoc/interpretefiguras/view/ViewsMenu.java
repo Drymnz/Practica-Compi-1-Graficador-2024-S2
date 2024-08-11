@@ -4,14 +4,21 @@
  */
 package usac.cunoc.interpretefiguras.view;
 
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import usac.cunoc.interpretefiguras.InterpreteFiguras;
 import usac.cunoc.interpretefiguras.logic.analyzer.Analyzer;
+import usac.cunoc.interpretefiguras.logic.fileManager.FileInput;
+import usac.cunoc.interpretefiguras.logic.fileManager.FileOutput;
 
 /**
  *
  * @author drymnz
  */
 public class ViewsMenu extends javax.swing.JFrame {
+
+    private File userFile;
 
     /**
      * Creates new form ViewsMenu
@@ -90,8 +97,18 @@ public class ViewsMenu extends javax.swing.JFrame {
         });
 
         jButton3.setText("Nuevo Archivo");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Guardar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Animar");
 
@@ -157,13 +174,13 @@ public class ViewsMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        // Ejecutar el analisis
         if (this.compiler1.getTextArea().getText() != null) {
             Analyzer analyzer = new Analyzer(this.compiler1.getTextArea().getText());
             analyzer.Anilisar();
-            if (analyzer.isErrorsAnalyzing()) { 
+            if (analyzer.isErrorsAnalyzing()) {
                 //ERROR 
-            } else { 
+            } else {
                 //GRAFICAR 
                 this.grapherPanel1.Graficar(analyzer.getParse().getLisGeometricObject());
                 this.grapherPanel1.repaint();
@@ -172,43 +189,60 @@ public class ViewsMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        //Cargar archivo de texto
+        this.verify();
+        this.userFile = selectFile();
+        if (this.userFile != null) {
+            this.compiler1.getTextArea().setText(new FileInput().cargarArchivoTexto(userFile));
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        this.saven();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        this.verify();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void verify() {
+        if (userFile == null || this.compiler1.getTextArea().getText() != null) {
+            //Hay un archivo en ejecucion
+            String text = this.compiler1.getTextArea().getText().isBlank() ? "Tiene texto que puede perder" : "Hay modificaciones posibles para GUARDAR";
+            int respuesta = JOptionPane.showConfirmDialog(null, text + "¿Desea Guardar el archivo?", "Confirmación", JOptionPane.YES_NO_OPTION);
+            if (respuesta == JOptionPane.YES_OPTION) {
+                //Guardar
+                this.saven();
+            }
+        }
+        this.compiler1.getTextArea().setText("");
+    }
+
+    private void saven() {
+        if (this.userFile == null) {
+            this.userFile = selectFile();
+        } else {
+            if (new FileOutput().aguardarTexto(userFile, this.compiler1.getTextArea().getText())) {
+                JOptionPane.showMessageDialog(null, "Se guardo con exito");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al guardar");
+            }
+        }
+    }
+
+    private File selectFile() {
+        JFileChooser fileChooser = new JFileChooser();
+        int result = fileChooser.showOpenDialog(null); // Muestra el diálogo
+        if (result == JFileChooser.APPROVE_OPTION) {
+            // El usuario seleccionó un archivo
+            return fileChooser.getSelectedFile();
+        }
+        return null;
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewsMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewsMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewsMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewsMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ViewsMenu().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private usac.cunoc.interpretefiguras.view.Compiler compiler1;

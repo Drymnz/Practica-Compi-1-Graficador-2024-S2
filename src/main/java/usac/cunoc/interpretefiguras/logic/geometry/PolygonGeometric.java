@@ -10,10 +10,10 @@ package usac.cunoc.interpretefiguras.logic.geometry;
  */
 public class PolygonGeometric extends BasicGeometricObject{
     private int numberSides;
-    private double high;
-    private double width;
+    private int high;
+    private int width;
 
-    public PolygonGeometric(int posx, int poxy, String id, ListColor color,int numberSides,double high,double width) {
+    public PolygonGeometric(int posx, int poxy, String id, ListColor color,int numberSides,int high,int width) {
         super(posx, poxy, id, color);
         this.numberSides = numberSides;
         this.high = high;
@@ -24,11 +24,11 @@ public class PolygonGeometric extends BasicGeometricObject{
         return numberSides;
     }
 
-    public double getHigh() {
+    public int getHigh() {
         return high;
     }
 
-    public double getWidth() {
+    public int getWidth() {
         return width;
     }
     

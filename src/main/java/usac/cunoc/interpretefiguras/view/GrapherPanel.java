@@ -5,6 +5,7 @@
 package usac.cunoc.interpretefiguras.view;
 
 import java.awt.Graphics;
+import java.awt.Polygon;
 import java.util.ArrayList;
 import usac.cunoc.interpretefiguras.logic.geometry.BasicGeometricObject;
 import usac.cunoc.interpretefiguras.logic.geometry.CircleGeometric;
@@ -69,6 +70,22 @@ public class GrapherPanel extends javax.swing.JPanel {
                 }
                 if (element instanceof PolygonGeometric) {
                     PolygonGeometric elem = (PolygonGeometric) element;
+                    Polygon polygon = new Polygon();
+                    
+                    // calcula el angulo centra del poligono 
+                    double anguloCentral = 360.0 / elem.getNumberSides();
+
+                    for (int i = 0; i < elem.getNumberSides(); i++) {
+                        // convierte el angulo central en un radio segun el lado a encontrar
+                        double radianes = Math.toRadians(i * anguloCentral);
+                        //calcula las coordenadas de x y y de cada vertice usando funciones trigonmetricas 
+                        int xi = (int) (elem.getPosx() + elem.getWidth() * Math.cos(radianes));// calcula en el eje x
+                        int yi = (int) (elem.getPoxy()+ elem.getHigh() * Math.sin(radianes));// calcula en el eje y
+                        //agrega el punto
+                        polygon.addPoint(xi, yi);
+                    }
+                    
+                    g.fillPolygon(polygon);
                 }
                 if (element instanceof RectangleGeometric) {
                     RectangleGeometric elem = (RectangleGeometric) element;
