@@ -21,6 +21,15 @@ public class FileOutput implements Runnable {
     private File archivoHilo;
     private String contenidoHilo;
 
+    public FileOutput() {
+        
+    }
+
+    public FileOutput(File archivo, String contenido) {
+        this.archivoHilo = archivo;
+        this.contenidoHilo = contenido;
+    }
+
     public boolean aguardarTexto(File archivo, String contenido) {
         try {
             salida = new FileOutputStream(archivo);
@@ -38,7 +47,9 @@ public class FileOutput implements Runnable {
 
     @Override
     public void run() {
-        aguardarTexto(archivoHilo, contenidoHilo);
+        if (this.archivoHilo!=null && this.contenidoHilo!=null) {
+            aguardarTexto(this.archivoHilo, this.contenidoHilo);
+        }
     }
 
     public void setArchivoHilo(File archivoHilo) {

@@ -7,10 +7,13 @@ package usac.cunoc.interpretefiguras.view;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import usac.cunoc.interpretefiguras.InterpreteFiguras;
 import usac.cunoc.interpretefiguras.logic.analyzer.Analyzer;
 import usac.cunoc.interpretefiguras.logic.fileManager.FileInput;
 import usac.cunoc.interpretefiguras.logic.fileManager.FileOutput;
+import usac.cunoc.interpretefiguras.logic.fileManager.JPanelToPDF;
+import usac.cunoc.interpretefiguras.logic.fileManager.JPanelToPNG;
 
 /**
  *
@@ -19,6 +22,7 @@ import usac.cunoc.interpretefiguras.logic.fileManager.FileOutput;
 public class ViewsMenu extends javax.swing.JFrame {
 
     private File userFile;
+    //en un Graphics2D dispose();//liberar memoria
 
     /**
      * Creates new form ViewsMenu
@@ -26,6 +30,7 @@ public class ViewsMenu extends javax.swing.JFrame {
     public ViewsMenu() {
         initComponents();
         this.setSize(InterpreteFiguras.HIGH, InterpreteFiguras.WIDTH);
+        this.enableJButonLastGraphe(false);
     }
 
     /**
@@ -42,13 +47,13 @@ public class ViewsMenu extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         reportPanel1 = new usac.cunoc.interpretefiguras.view.ReportPanel();
         compiler1 = new usac.cunoc.interpretefiguras.view.Compiler();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        jButtonCopile = new javax.swing.JButton();
+        jButtonLoad = new javax.swing.JButton();
+        jButtonNewFile = new javax.swing.JButton();
+        jButtonSave = new javax.swing.JButton();
+        jButtonAnimation = new javax.swing.JButton();
+        jButtonExportPDF = new javax.swing.JButton();
+        jButtonExportPNG = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,39 +87,49 @@ public class ViewsMenu extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(reportPanel1);
 
-        jButton1.setText("Copilar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCopile.setText("Copilar");
+        jButtonCopile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonCopileActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cargar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonLoad.setText("Cargar");
+        jButtonLoad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonLoadActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Nuevo Archivo");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonNewFile.setText("Nuevo Archivo");
+        jButtonNewFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonNewFileActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Guardar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSave.setText("Guardar");
+        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonSaveActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Animar");
+        jButtonAnimation.setText("Animar");
 
-        jButton6.setText("Exportar PDF");
+        jButtonExportPDF.setText("Exportar PDF");
+        jButtonExportPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExportPDFActionPerformed(evt);
+            }
+        });
 
-        jButton7.setText("Exportar PNG");
+        jButtonExportPNG.setText("Exportar PNG");
+        jButtonExportPNG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExportPNGActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,13 +139,13 @@ public class ViewsMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(jButtonLoad)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)
+                        .addComponent(jButtonNewFile)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4)
+                        .addComponent(jButtonSave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
+                        .addComponent(jButtonCopile))
                     .addComponent(compiler1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,11 +154,11 @@ public class ViewsMenu extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonAnimation, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton6)
+                        .addComponent(jButtonExportPDF)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton7)
+                        .addComponent(jButtonExportPNG)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -152,13 +167,13 @@ public class ViewsMenu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton1)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7))
+                    .addComponent(jButtonLoad)
+                    .addComponent(jButtonNewFile)
+                    .addComponent(jButtonSave)
+                    .addComponent(jButtonCopile)
+                    .addComponent(jButtonAnimation)
+                    .addComponent(jButtonExportPDF)
+                    .addComponent(jButtonExportPNG))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -173,7 +188,7 @@ public class ViewsMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonCopileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCopileActionPerformed
         // Ejecutar el analisis
         if (this.compiler1.getTextArea().getText() != null) {
             Analyzer analyzer = new Analyzer(this.compiler1.getTextArea().getText());
@@ -184,33 +199,63 @@ public class ViewsMenu extends javax.swing.JFrame {
                 //GRAFICAR 
                 this.grapherPanel1.Graficar(analyzer.getParse().getLisGeometricObject());
                 this.grapherPanel1.repaint();
+                this.enableJButonLastGraphe(true);
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonCopileActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoadActionPerformed
         //Cargar archivo de texto
         this.verify();
-        this.userFile = selectFile();
+        this.userFile = selectFile("Abrier");
         if (this.userFile != null) {
             this.compiler1.getTextArea().setText(new FileInput().cargarArchivoTexto(userFile));
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonLoadActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         this.saven();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButtonSaveActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButtonNewFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewFileActionPerformed
         // TODO add your handling code here:
         this.verify();
-    }//GEN-LAST:event_jButton3ActionPerformed
+        this.userFile = null;
+    }//GEN-LAST:event_jButtonNewFileActionPerformed
 
+    private void jButtonExportPNGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportPNGActionPerformed
+        // TODO add your handling code here:
+        File filePNG = this.selectFile("Guardar");
+        JPanelToPNG converter = new JPanelToPNG();
+        JPanel uno =  this.grapherPanel1;
+        if (converter.savePNG(filePNG, uno)) {
+            JOptionPane.showMessageDialog(null, "Se guardo con exito");
+        }else{
+            JOptionPane.showMessageDialog(null, "no guardo con exito");
+        }
+    }//GEN-LAST:event_jButtonExportPNGActionPerformed
+
+    private void jButtonExportPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportPDFActionPerformed
+        // TODO add your handling code here:
+        File filePDF = this.selectFile("Guardar");
+        JPanelToPDF converter = new JPanelToPDF();
+        JPanel uno =  this.grapherPanel1;
+        if (converter.jPanelToPDF(uno, filePDF, "IMGEN")) {
+            JOptionPane.showMessageDialog(null, "Se guardo con exito");
+        }else{
+            JOptionPane.showMessageDialog(null, "no guardo con exito");
+        }
+    }//GEN-LAST:event_jButtonExportPDFActionPerformed
+
+    //verifica si hay un archivo cargado
     private void verify() {
-        if (userFile == null || this.compiler1.getTextArea().getText() != null) {
-            //Hay un archivo en ejecucion
-            String text = this.compiler1.getTextArea().getText().isBlank() ? "Tiene texto que puede perder" : "Hay modificaciones posibles para GUARDAR";
-            int respuesta = JOptionPane.showConfirmDialog(null, text + "¿Desea Guardar el archivo?", "Confirmación", JOptionPane.YES_NO_OPTION);
+        boolean fileLoad = (this.userFile != null);
+        //true tienes un archivo cargado
+        boolean areaTextIsBlank = this.compiler1.getTextArea().getText().isEmpty();
+        //true el texto esta vacio
+        String text = fileLoad ? "Tienes un archivo cargado" : areaTextIsBlank ? "" : "Tienes un texto que puedes perder";
+        if (fileLoad || !areaTextIsBlank) {
+            int respuesta = JOptionPane.showConfirmDialog(null, text + "¿Desea Guardar el texto que tiene?", "Confirmación", JOptionPane.YES_NO_OPTION);
             if (respuesta == JOptionPane.YES_OPTION) {
                 //Guardar
                 this.saven();
@@ -219,26 +264,36 @@ public class ViewsMenu extends javax.swing.JFrame {
         this.compiler1.getTextArea().setText("");
     }
 
+    // Guardar el texto en archivo
     private void saven() {
-        if (this.userFile == null) {
-            this.userFile = selectFile();
-        } else {
+        try {
+            if (this.userFile == null) {
+                this.userFile = selectFile("Guardar");
+            }
             if (new FileOutput().aguardarTexto(userFile, this.compiler1.getTextArea().getText())) {
                 JOptionPane.showMessageDialog(null, "Se guardo con exito");
             } else {
                 JOptionPane.showMessageDialog(null, "Error al guardar");
             }
+        } catch (Exception e) {
+            //System.out.println("Error en la funcion saven - view menu");
         }
     }
 
-    private File selectFile() {
+    private File selectFile(String botonText) {
         JFileChooser fileChooser = new JFileChooser();
-        int result = fileChooser.showOpenDialog(null); // Muestra el diálogo
+        int result = fileChooser.showDialog(null, botonText); // Muestra el diálogo
         if (result == JFileChooser.APPROVE_OPTION) {
             // El usuario seleccionó un archivo
             return fileChooser.getSelectedFile();
         }
         return null;
+    }
+
+    private void enableJButonLastGraphe(boolean station) {
+        this.jButtonAnimation.setEnabled(station);
+        this.jButtonExportPDF.setEnabled(station);
+        this.jButtonExportPNG.setEnabled(station);
     }
     /**
      * @param args the command line arguments
@@ -247,13 +302,13 @@ public class ViewsMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private usac.cunoc.interpretefiguras.view.Compiler compiler1;
     private usac.cunoc.interpretefiguras.view.GrapherPanel grapherPanel1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButtonAnimation;
+    private javax.swing.JButton jButtonCopile;
+    private javax.swing.JButton jButtonExportPDF;
+    private javax.swing.JButton jButtonExportPNG;
+    private javax.swing.JButton jButtonLoad;
+    private javax.swing.JButton jButtonNewFile;
+    private javax.swing.JButton jButtonSave;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private usac.cunoc.interpretefiguras.view.ReportPanel reportPanel1;

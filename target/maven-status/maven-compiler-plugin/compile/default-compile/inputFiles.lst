@@ -21,7 +21,9 @@
 /home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/view/GrapherPanel.java
 /home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/logic/geometry/ListGeometric.java
 /home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/InterpreteFiguras.java
+/home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/logic/fileManager/JPanelToPDF.java
 /home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/logic/geometry/CircleGeometric.java
+/home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/logic/fileManager/JPanelToPNG.java
 /home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/logic/geometry/LineGeometric.java
 /home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/logic/reports/MathOperation.java
 /home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/logic/geometry/ListObjectGeometric.java

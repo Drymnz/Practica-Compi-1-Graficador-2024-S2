@@ -240,7 +240,6 @@ private ReportUserObjectGeometry reportUser = new ReportUserObjectGeometry();
     // mostrar la infomacion actual que posee el analisador
     private void getInfoPrint(){
         System.out.println("\n"+" - Clase<"+"> en simbolo<" + sym.terminalNames[cur_token.sym]+String.format(">posicion: <%d>, <%d>", (cur_token.left+1), (cur_token.right+1)));
-        System.out.println(this.getTokePresent().toString());
     }
     // returnar el token actual
     private Token getTokePresent(){

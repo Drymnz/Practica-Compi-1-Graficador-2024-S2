@@ -1,8 +1,10 @@
 usac/cunoc/interpretefiguras/logic/geometry/CircleGeometric.class
 usac/cunoc/interpretefiguras/view/ViewsMenu$2.class
 usac/cunoc/interpretefiguras/logic/reports/ReportUserObjectGeometry.class
+usac/cunoc/interpretefiguras/view/ViewsMenu$6.class
 usac/cunoc/interpretefiguras/InterpreteFiguras$1.class
 usac/cunoc/interpretefiguras/logic/reports/TypeIntreprete.class
+usac/cunoc/interpretefiguras/logic/fileManager/JPanelToPNG.class
 usac/cunoc/interpretefiguras/logic/geometry/PolygonGeometric.class
 usac/cunoc/interpretefiguras/logic/analyzer/Analyzer.class
 usac/cunoc/interpretefiguras/logic/geometry/RectangleGeometric.class
@@ -16,6 +18,7 @@ usac/cunoc/interpretefiguras/logic/animition/ListAnimation.class
 usac/cunoc/interpretefiguras/logic/geometry/LineGeometric.class
 usac/cunoc/interpretefiguras/view/ViewsMenu$3.class
 usac/cunoc/interpretefiguras/logic/reports/ReportErrorInterpreter.class
+usac/cunoc/interpretefiguras/view/ViewsMenu$5.class
 usac/cunoc/interpretefiguras/logic/geometry/ListGeometric.class
 usac/cunoc/interpretefiguras/logic/analysis/sym.class
 usac/cunoc/interpretefiguras/logic/reports/MathOperation.class
@@ -32,5 +35,6 @@ usac/cunoc/interpretefiguras/view/ReportPanel.class
 usac/cunoc/interpretefiguras/logic/animition/Animation.class
 usac/cunoc/interpretefiguras/logic/fileManager/FileOutput.class
 usac/cunoc/interpretefiguras/logic/geometry/ListColor.class
+usac/cunoc/interpretefiguras/logic/fileManager/JPanelToPDF.class
 usac/cunoc/interpretefiguras/logic/reports/ReportUserObjectGeometry$1.class
 usac/cunoc/interpretefiguras/view/ViewsMenu$4.class

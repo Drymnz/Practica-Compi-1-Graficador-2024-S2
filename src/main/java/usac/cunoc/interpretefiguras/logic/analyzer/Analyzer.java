@@ -21,7 +21,6 @@ public class Analyzer {
     private parser parse;
 
     public Analyzer(String text) {
-        System.out.println(text);
         Reader reader = new StringReader(text);
         this.lexeman = new Lexema(reader);
         this.parse = new parser(this.lexeman);
