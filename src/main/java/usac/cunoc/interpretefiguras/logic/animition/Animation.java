@@ -10,7 +10,7 @@ import usac.cunoc.interpretefiguras.logic.geometry.BasicGeometricObject;
  *
  * @author drymnz
  */
-public class Animation {
+ public class Animation {
     private ListAnimation tipy;
     private int destinationPosX;
     private int destinationPosY;
@@ -29,18 +29,22 @@ public class Animation {
         return tipy;
     }
 
-    public double getDestinationPosX() {
+    public int getDestinationPosX() {
         return destinationPosX;
     }
 
-    public double getDestinationPosY() {
+    public int getDestinationPosY() {
         return destinationPosY;
     }
 
     public int getOrder() {
         return order;
     }
-    
+
+    public BasicGeometricObject getObjetToAnimate() {
+        return objetToAnimate;
+    }
+
     @Override
     public String toString() {
         return "-tipy:"+tipy.toString()+"-destinationPosX:"+this.destinationPosX+"-destinationPosY:"+destinationPosY+"-order:"+order+"-objetToAnimate:"+objetToAnimate.toString();

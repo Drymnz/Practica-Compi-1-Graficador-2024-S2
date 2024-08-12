@@ -4,12 +4,17 @@
  */
 package usac.cunoc.interpretefiguras.view;
 
+import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import usac.cunoc.interpretefiguras.InterpreteFiguras;
 import usac.cunoc.interpretefiguras.logic.analyzer.Analyzer;
+import usac.cunoc.interpretefiguras.logic.animition.AnimateObjectGeometry;
+import usac.cunoc.interpretefiguras.logic.animition.Animation;
 import usac.cunoc.interpretefiguras.logic.fileManager.FileInput;
 import usac.cunoc.interpretefiguras.logic.fileManager.FileOutput;
 import usac.cunoc.interpretefiguras.logic.fileManager.JPanelToPDF;
@@ -23,6 +28,7 @@ import usac.cunoc.interpretefiguras.logic.reports.ReprotsToView;
 public class ViewsMenu extends javax.swing.JFrame {
 
     private File userFile;
+    private ArrayList<Animation> listAnimation;
     //en un Graphics2D dispose();//liberar memoria
 
     /**
@@ -117,6 +123,11 @@ public class ViewsMenu extends javax.swing.JFrame {
         });
 
         jButtonAnimation.setText("Animar");
+        jButtonAnimation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAnimationActionPerformed(evt);
+            }
+        });
 
         jButtonExportPDF.setText("Exportar PDF");
         jButtonExportPDF.addActionListener(new java.awt.event.ActionListener() {
@@ -205,6 +216,7 @@ public class ViewsMenu extends javax.swing.JFrame {
 
     private void loadGraphAndReports(Analyzer analyzer, ReportPanel view) {
         this.grapherPanel1.Graficar(analyzer.getParse().getLisGeometricObject());
+        this.listAnimation = analyzer.getListAnimation();
         this.enableJButonLastGraphe(true);
         this.grapherPanel1.repaint();
 
@@ -216,7 +228,7 @@ public class ViewsMenu extends javax.swing.JFrame {
         loadReport.loadReportUserObject();
         this.reportPanel1.repaint();
 
-        this.pack();
+        //this.pack();
     }
 
     private void jButtonLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoadActionPerformed
@@ -262,6 +274,13 @@ public class ViewsMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonExportPDFActionPerformed
 
+    private void jButtonAnimationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnimationActionPerformed
+        //boton de animar
+        AnimateObjectGeometry a = new AnimateObjectGeometry( this.grapherPanel1, this.listAnimation, this.jButtonAnimation);
+        Thread thread = new Thread(a);
+        thread.start();
+    }//GEN-LAST:event_jButtonAnimationActionPerformed
+
     //verifica si hay un archivo cargado
     private void verify() {
         boolean fileLoad = (this.userFile != null);
@@ -291,7 +310,7 @@ public class ViewsMenu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Error al guardar");
             }
         } catch (Exception e) {
-            System.out.println("Error en la funcion saven - view menu ->"+e.getMessage());
+            System.out.println("Error en la funcion saven - view menu ->" + e.getMessage());
         }
     }
 
