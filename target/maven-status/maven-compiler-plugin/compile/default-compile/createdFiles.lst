@@ -14,7 +14,6 @@ usac/cunoc/interpretefiguras/logic/geometry/BasicGeometricObject.class
 usac/cunoc/interpretefiguras/view/Compiler.class
 usac/cunoc/interpretefiguras/logic/geometry/ListObjectGeometric.class
 usac/cunoc/interpretefiguras/InterpreteFiguras.class
-usac/cunoc/interpretefiguras/TabbedPaneExample.class
 usac/cunoc/interpretefiguras/logic/objectAnalysis/Token.class
 usac/cunoc/interpretefiguras/logic/animition/ListAnimation.class
 usac/cunoc/interpretefiguras/logic/geometry/LineGeometric.class

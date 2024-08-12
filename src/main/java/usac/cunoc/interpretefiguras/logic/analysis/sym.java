@@ -32,7 +32,7 @@ public class sym {
   public static final int FUCHSIA = 17;
   public static final int PARENTESIS_C = 10;
   public static final int error = 1;
-  public static final int LAST = 27;
+  public static final int PREVIOUS = 27;
   public static final int LAVENDER = 18;
   public static final int PARENTESIS_A = 9;
   public static final int LINE = 21;
@@ -66,7 +66,7 @@ public class sym {
   "SQUARE",
   "GRAFICAR",
   "ANIMATION",
-  "LAST",
+  "PREVIOUS",
   "OBJECT",
   "CURVE"
   };

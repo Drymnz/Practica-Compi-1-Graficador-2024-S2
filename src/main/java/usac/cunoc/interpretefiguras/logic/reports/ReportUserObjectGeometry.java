@@ -11,11 +11,13 @@ public class ReportUserObjectGeometry {
             maroonCount;
     private int lineCountAnimation, curveCount;
     private ListColor typeColor;
+    private ListAnimation typeAnimation;
 
     public ReportUserObjectGeometry() {
     }
 
     public void incrementAnimationCounter(ListAnimation type) {
+        this.typeAnimation = type;
         switch (type) {
             case CURVE:
                 this.curveCount++;
@@ -203,6 +205,10 @@ public class ReportUserObjectGeometry {
 
     public int getCurveCount() {
         return curveCount;
+    }
+
+    public ListAnimation getTypeAnimation() {
+        return typeAnimation;
     }
 
 }

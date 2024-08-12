@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import usac.cunoc.interpretefiguras.logic.analysis.Lexema;
 import usac.cunoc.interpretefiguras.logic.analysis.parser;
+import usac.cunoc.interpretefiguras.logic.animition.Animation;
 
 /**
  *
@@ -111,7 +112,65 @@ public class UnitTestTwo {
         }
         Assertions.assertTrue(true);
     }
+    @Test
+    public void TestAnimation() {
+        Reader reader = new StringReader("graficar poligono ( PoligA, (2.3-2)*12  + 2 -1/12, 15, 6, 50 / 2, 12, amarillo)\n" + //
+                        "graficar circulo ( cir_Uno,  15, 6, 5  * 2 -1/12-(1.5*3), azul)\n" + //
+                        "animar objeto anterior (curva, 50*3-4, 75+ 15/5, 2-1)\n" + //
+                        "\n" + //2 *(100) le falta ->* falta 16 / 4,
+                        "graficar rectangulo (RectAngulo_test_1, 12 * 3 + 2 *(100), 2*60.50, 16 / 4, 16 / 4,rojo)\n" + //
+                        "animar objeto anterior (linea, 300, 6+ 15/5+112, 2-1/2+1)\n" + //
+                        "graficar linea (linea_Amarillo, 1 * 3 + 2, 7.5+7.5, 4 / 4+100, 30/2, amarillo)\n" + //
+                        "animar objeto anterior (linea, 120, 15, 3)\n" + //
+                        "animar objeto anterior (linea, 150, 200, 0)\n" + //
+                        "graficar cuadrado ( figura_cuadrada, 12*3+200, 15+1+300, (15-3) / 4+1.8+0.2, verde)\n" + //
+                        "graficar poligono ( PoligB, 100, 400, 9, 25 / 2 + 100.5, 50*2-10, amarillo)\n" + //
+                        "\n" + //
+                        "");
+        this.lexeman = new Lexema(reader);
+        this.parse = new parser(this.lexeman);
+        try {
+            this.parse.parse();
+        } catch (Exception e) {
+            System.out.println("****************************");
+            System.out.println(e.getMessage());
+            System.out.println("****************************");
+            Assertions.assertTrue(false);
+        }
+        Assertions.assertTrue(true);
+    }
     
+    @Test
+    public void TestAnimationList() {
+        Reader reader = new StringReader("graficar poligono ( PoligA, (2.3-2)*12  + 2 -1/12, 15, 6, 50 / 2, 12, amarillo)\n" + //
+                        "graficar circulo ( cir_Uno,  15, 6, 5  * 2 -1/12-(1.5*3), azul)\n" + //
+                        "animar objeto anterior (curva, 50*3-4, 75+ 15/5, 2-1)\n" + //
+                        "\n" + //2 *(100) le falta ->* falta 16 / 4,
+                        "graficar rectangulo (RectAngulo_test_1, 12 * 3 + 2 *(100), 2*60.50, 16 / 4, 16 / 4,rojo)\n" + //
+                        "animar objeto anterior (linea, 300, 6+ 15/5+112, 2-1/2+1)\n" + //
+                        "graficar linea (linea_Amarillo, 1 * 3 + 2, 7.5+7.5, 4 / 4+100, 30/2, amarillo)\n" + //
+                        "animar objeto anterior (linea, 120, 15, 3)\n" + //
+                        "animar objeto anterior (linea, 150, 200, 0)\n" + //
+                        "graficar cuadrado ( figura_cuadrada, 12*3+200, 15+1+300, (15-3) / 4+1.8+0.2, verde)\n" + //
+                        "graficar poligono ( PoligB, 100, 400, 9, 25 / 2 + 100.5, 50*2-10, amarillo)\n" + //
+                        "\n" + //
+                        "");
+        this.lexeman = new Lexema(reader);
+        this.parse = new parser(this.lexeman);
+        try {
+            this.parse.parse();
+            for (Animation elemt :  this.parse.getListAnimation()) {
+                System.out.println(elemt.toString());
+            }
+
+        } catch (Exception e) {
+            System.out.println("****************************");
+            System.out.println(e.getMessage());
+            System.out.println("****************************");
+            Assertions.assertTrue(false);
+        }
+        Assertions.assertTrue(true);
+    }
     
     @BeforeAll
     public static void setUpClass() {

@@ -198,22 +198,25 @@ public class ViewsMenu extends javax.swing.JFrame {
                 //ERROR 
             } else {
                 //GRAFICAR 
-                this.reportPanel1.removeAll();
-                this.grapherPanel1.Graficar(analyzer.getParse().getLisGeometricObject());
-                this.enableJButonLastGraphe(true);
-                this.loadReports(analyzer, this.reportPanel1);
-                this.grapherPanel1.repaint();
-                this.reportPanel1.repaint();
-                this.pack();
+                this.loadGraphAndReports(analyzer, this.reportPanel1);
             }
         }
     }//GEN-LAST:event_jButtonCopileActionPerformed
 
-    private void loadReports(Analyzer analyzer, ReportPanel view) {
+    private void loadGraphAndReports(Analyzer analyzer, ReportPanel view) {
+        this.grapherPanel1.Graficar(analyzer.getParse().getLisGeometricObject());
+        this.enableJButonLastGraphe(true);
+        this.grapherPanel1.repaint();
+
+        this.reportPanel1.removeAll();
+
         ReprotsToView loadReport = new ReprotsToView(analyzer, view);
         loadReport.loadReportMathOperation();
         loadReport.loadReportUserColor();
         loadReport.loadReportUserObject();
+        this.reportPanel1.repaint();
+
+        this.pack();
     }
 
     private void jButtonLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoadActionPerformed
@@ -230,13 +233,13 @@ public class ViewsMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void jButtonNewFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewFileActionPerformed
-        // TODO add your handling code here:
+        //Nuevo archivo
         this.verify();
         this.userFile = null;
     }//GEN-LAST:event_jButtonNewFileActionPerformed
 
     private void jButtonExportPNGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportPNGActionPerformed
-        // TODO add your handling code here:
+        // Exportar en PNG
         File filePNG = this.selectFile("Guardar");
         JPanelToPNG converter = new JPanelToPNG();
         JPanel uno = this.grapherPanel1;
@@ -248,7 +251,7 @@ public class ViewsMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonExportPNGActionPerformed
 
     private void jButtonExportPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportPDFActionPerformed
-        // TODO add your handling code here:
+        // Exportar en PDF
         File filePDF = this.selectFile("Guardar");
         JPanelToPDF converter = new JPanelToPDF();
         JPanel uno = this.grapherPanel1;
@@ -288,10 +291,11 @@ public class ViewsMenu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Error al guardar");
             }
         } catch (Exception e) {
-            //System.out.println("Error en la funcion saven - view menu");
+            System.out.println("Error en la funcion saven - view menu ->"+e.getMessage());
         }
     }
 
+    //Selecion de un archivo
     private File selectFile(String botonText) {
         JFileChooser fileChooser = new JFileChooser();
         int result = fileChooser.showDialog(null, botonText); // Muestra el diálogo
@@ -302,6 +306,7 @@ public class ViewsMenu extends javax.swing.JFrame {
         return null;
     }
 
+    //desactivar y activar los bonotes que se pueden hacer con la grafica
     private void enableJButonLastGraphe(boolean station) {
         this.jButtonAnimation.setEnabled(station);
         this.jButtonExportPDF.setEnabled(station);

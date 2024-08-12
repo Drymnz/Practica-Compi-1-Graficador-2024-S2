@@ -4,21 +4,25 @@
  */
 package usac.cunoc.interpretefiguras.logic.animition;
 
+import usac.cunoc.interpretefiguras.logic.geometry.BasicGeometricObject;
+
 /**
  *
  * @author drymnz
  */
 public class Animation {
     private ListAnimation tipy;
-    private double destinationPosX;
-    private double destinationPosY;
+    private int destinationPosX;
+    private int destinationPosY;
     private int order;
+    private BasicGeometricObject objetToAnimate;
 
-    public Animation(ListAnimation tipy, double destinationPosX, double destinationPosY, int order) {
+    public Animation(ListAnimation tipy, int destinationPosX, int destinationPosY, int order,BasicGeometricObject objetToAnimate) {
         this.tipy = tipy;
         this.destinationPosX = destinationPosX;
         this.destinationPosY = destinationPosY;
         this.order = order;
+        this.objetToAnimate = objetToAnimate;
     }
 
     public ListAnimation getTipy() {
@@ -37,4 +41,8 @@ public class Animation {
         return order;
     }
     
+    @Override
+    public String toString() {
+        return "-tipy:"+tipy.toString()+"-destinationPosX:"+this.destinationPosX+"-destinationPosY:"+destinationPosY+"-order:"+order+"-objetToAnimate:"+objetToAnimate.toString();
+    }
 }

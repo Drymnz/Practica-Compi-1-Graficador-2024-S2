@@ -9,6 +9,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import usac.cunoc.interpretefiguras.logic.analysis.Lexema;
 import usac.cunoc.interpretefiguras.logic.analysis.parser;
+import usac.cunoc.interpretefiguras.logic.animition.Animation;
 import usac.cunoc.interpretefiguras.logic.reports.ReportErrorInterpreter;
 
 /**
@@ -48,6 +49,8 @@ public class Analyzer {
     public parser getParse() {
         return parse;
     }
-    
-    
+
+    public ArrayList<Animation> getListAnimation() {
+        return this.parse.getListAnimation();
+    }
 }
