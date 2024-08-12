@@ -14,6 +14,7 @@ import usac.cunoc.interpretefiguras.logic.fileManager.FileInput;
 import usac.cunoc.interpretefiguras.logic.fileManager.FileOutput;
 import usac.cunoc.interpretefiguras.logic.fileManager.JPanelToPDF;
 import usac.cunoc.interpretefiguras.logic.fileManager.JPanelToPNG;
+import usac.cunoc.interpretefiguras.logic.reports.ReprotsToView;
 
 /**
  *
@@ -190,19 +191,30 @@ public class ViewsMenu extends javax.swing.JFrame {
 
     private void jButtonCopileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCopileActionPerformed
         // Ejecutar el analisis
-        if (this.compiler1.getTextArea().getText() != null) {
+        if (this.compiler1.getTextArea().getText() != null && !(this.compiler1.getTextArea().getText().isBlank())) {
             Analyzer analyzer = new Analyzer(this.compiler1.getTextArea().getText());
             analyzer.Anilisar();
             if (analyzer.isErrorsAnalyzing()) {
                 //ERROR 
             } else {
                 //GRAFICAR 
+                this.reportPanel1.removeAll();
                 this.grapherPanel1.Graficar(analyzer.getParse().getLisGeometricObject());
-                this.grapherPanel1.repaint();
                 this.enableJButonLastGraphe(true);
+                this.loadReports(analyzer, this.reportPanel1);
+                this.grapherPanel1.repaint();
+                this.reportPanel1.repaint();
+                this.pack();
             }
         }
     }//GEN-LAST:event_jButtonCopileActionPerformed
+
+    private void loadReports(Analyzer analyzer, ReportPanel view) {
+        ReprotsToView loadReport = new ReprotsToView(analyzer, view);
+        loadReport.loadReportMathOperation();
+        loadReport.loadReportUserColor();
+        loadReport.loadReportUserObject();
+    }
 
     private void jButtonLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoadActionPerformed
         //Cargar archivo de texto
@@ -227,10 +239,10 @@ public class ViewsMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         File filePNG = this.selectFile("Guardar");
         JPanelToPNG converter = new JPanelToPNG();
-        JPanel uno =  this.grapherPanel1;
+        JPanel uno = this.grapherPanel1;
         if (converter.savePNG(filePNG, uno)) {
             JOptionPane.showMessageDialog(null, "Se guardo con exito");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "no guardo con exito");
         }
     }//GEN-LAST:event_jButtonExportPNGActionPerformed
@@ -239,10 +251,10 @@ public class ViewsMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         File filePDF = this.selectFile("Guardar");
         JPanelToPDF converter = new JPanelToPDF();
-        JPanel uno =  this.grapherPanel1;
+        JPanel uno = this.grapherPanel1;
         if (converter.jPanelToPDF(uno, filePDF, "IMGEN")) {
             JOptionPane.showMessageDialog(null, "Se guardo con exito");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "no guardo con exito");
         }
     }//GEN-LAST:event_jButtonExportPDFActionPerformed
