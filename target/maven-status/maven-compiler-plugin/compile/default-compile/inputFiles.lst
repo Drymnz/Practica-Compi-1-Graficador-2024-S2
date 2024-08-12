@@ -1,4 +1,5 @@
 /home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/view/ReportPanel.java
+/home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/logic/reports/ReprotsToView.java
 /home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/logic/animition/ListAnimation.java
 /home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/logic/fileManager/FileInput.java
 /home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/logic/analysis/sym.java
@@ -28,4 +29,5 @@
 /home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/logic/reports/MathOperation.java
 /home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/logic/geometry/ListObjectGeometric.java
 /home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/logic/geometry/BasicGeometricObject.java
+/home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/TabbedPaneExample.java
 /home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/logic/reports/ReportUserObjectGeometry.java
