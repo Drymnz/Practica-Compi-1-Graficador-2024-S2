@@ -57,12 +57,20 @@ public class AnimateObjectGeometry extends Thread {
         int posXStart = objet.getPosx();
         int posYStart = objet.getPoxy();
 
-        if (posXStart < dPosX) {
-            objet.setPosx(posXStart + 1);
-        }
+        objet.setPosx(increaseOrDecreaseBalance(posXStart, dPosX));
+        objet.setPoxy(increaseOrDecreaseBalance(posYStart, dPosY));
 
-        if (posYStart < dPosY) {
-            objet.setPoxy(posYStart + 1);
+    }
+
+    private int increaseOrDecreaseBalance(int intIncreaseOrDecrease, int intTwo) {
+        if (!(intIncreaseOrDecrease == intTwo)) {
+            if (intIncreaseOrDecrease > intTwo) {
+                return intIncreaseOrDecrease - 1;
+            } else {
+                return intIncreaseOrDecrease + 1;
+            }
+        } else {
+            return intIncreaseOrDecrease;
         }
     }
 
