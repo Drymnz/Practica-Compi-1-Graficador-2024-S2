@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import usac.cunoc.interpretefiguras.logic.geometry.BasicGeometricObject;
 import usac.cunoc.interpretefiguras.logic.geometry.CircleGeometric;
@@ -25,6 +26,9 @@ public class GrapherPanel extends javax.swing.JPanel {
     private ArrayList<BasicGeometricObject> lisGeometricObject;
     private int heightMax = 50;
     private int widthtMax = 50;
+    private AffineTransform affineTransform = new AffineTransform();
+    private AffineTransform affineTransformNormal = new AffineTransform();
+    private String nameAnimation = "";
 
     /**
      * Creates new form GrapherPanel
@@ -46,11 +50,11 @@ public class GrapherPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 1136, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 615, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -63,9 +67,15 @@ public class GrapherPanel extends javax.swing.JPanel {
         super.paintComponent(g); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
         //Mejoramiento en la graficacion
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); 
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         if (this.lisGeometricObject != null) {
             for (BasicGeometricObject element : lisGeometricObject) {
+                if (this.nameAnimation.equalsIgnoreCase(element.getId())) {
+                    g2d.setTransform(this.affineTransform);
+                } else {
+                    g2d.setTransform(this.affineTransformNormal);
+                }
+
                 g2d.setColor(element.getColor().getColor());
                 if (element instanceof CircleGeometric) {
                     CircleGeometric elem = (CircleGeometric) element;
@@ -91,7 +101,6 @@ public class GrapherPanel extends javax.swing.JPanel {
                         //agrega el punto
                         polygon.addPoint(xi, yi);
                     }
-
                     g2d.fillPolygon(polygon);
                 }
                 if (element instanceof RectangleGeometric) {
@@ -103,18 +112,25 @@ public class GrapherPanel extends javax.swing.JPanel {
                     g2d.fillRect(elem.getPosx(), elem.getPoxy(), elem.getSquare(), elem.getSquare());
                 }
                 // Tamaño de la pantalla
-                if (this.getHeight()< element.getPoxy()) {
+                if (this.getHeight() < element.getPoxy()) {
                     this.heightMax = element.getPoxy();
                 }
-                if (this.getWidth()< element.getPosx()) {
+                if (this.getWidth() < element.getPosx()) {
                     this.widthtMax = element.getPoxy();
                 }
-                if ((this.getWidth()< element.getPosx()) || (this.getHeight()< element.getPoxy())) {
+                if ((this.getWidth() < element.getPosx()) || (this.getHeight() < element.getPoxy())) {
                     this.setSize(this.widthtMax, this.heightMax);
                 }
             }
-            g2d.dispose();
         }
+    }
+
+    public void setAffineTransform(AffineTransform affineTransform) {
+        this.affineTransform = affineTransform;
+    }
+
+    public void setNameAnimation(String nameAnimation) {
+        this.nameAnimation = nameAnimation;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

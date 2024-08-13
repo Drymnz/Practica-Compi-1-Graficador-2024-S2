@@ -33,9 +33,9 @@ public class ReportUserObjectGeometry {
     public int countAnimation(ListAnimation type) {
         switch (type) {
             case CURVE:
-                return this.curveCount++;
+                return this.curveCount;
             case LINE:
-                return this.lineCountAnimation++;
+                return this.lineCountAnimation;
             default:
                 return 0;
         }

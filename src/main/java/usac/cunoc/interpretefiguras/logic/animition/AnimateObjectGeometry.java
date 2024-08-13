@@ -4,13 +4,18 @@
  */
 package usac.cunoc.interpretefiguras.logic.animition;
 
-import java.text.DecimalFormat;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import usac.cunoc.interpretefiguras.logic.geometry.BasicGeometricObject;
 import usac.cunoc.interpretefiguras.logic.geometry.LineGeometric;
+import usac.cunoc.interpretefiguras.logic.geometry.RectangleGeometric;
+import usac.cunoc.interpretefiguras.logic.geometry.SquareGeometric;
 import usac.cunoc.interpretefiguras.view.GrapherPanel;
 
 /**
@@ -23,15 +28,16 @@ public class AnimateObjectGeometry extends Thread {
     private JButton jButton;
     private JButton jButtonOne;
     private GrapherPanel grapherPanel;
+    private double angulo = 0;//para rota
 
     //calculations for the trajectory to be animated
     private double slope;
     private double xStar;
     private double yStar;
     private double b;
-    
+
     private final int FPS = 60;
-    private final int MS = 1000/ this.FPS;
+    private final int MS = 1000 / this.FPS;
 
     public AnimateObjectGeometry(GrapherPanel grapherPanel, ArrayList<Animation> listAnimation, JButton jButton, JButton jButtonOne) {
         this.listAnimation = listAnimation;
@@ -44,6 +50,8 @@ public class AnimateObjectGeometry extends Thread {
         //ordenar nesesario 
         for (Animation animation : listAnimation) {
             this.calculaAnimation(animation);
+            this.angulo = 0;
+            this.grapherPanel.setNameAnimation("");
         }
     }
 
@@ -51,13 +59,9 @@ public class AnimateObjectGeometry extends Thread {
     private void calculaAnimation(Animation animation) {
         double b2 = -1;
         int distanci = 0;
-        System.out.println("ENTRE");
         this.calculationsFistPositionLine(animation);
         while (animation.getObjetToAnimate().getPosx() != animation.getDestinationPosX()) {
             this.pause(this.MS);
-            if (animation.getTipy() == ListAnimation.CURVE) {
-                this.rotation(animation.getObjetToAnimate());
-            }
             //cambiar el punto inicial
             animation.getObjetToAnimate().setPosx(this.increaseOrDecreaseBalance(animation.getObjetToAnimate().getPosx(), animation.getDestinationPosX()));
             animation.getObjetToAnimate().setPoxy(this.incrementFormula(slope, animation.getObjetToAnimate().getPosx(), b));
@@ -70,10 +74,13 @@ public class AnimateObjectGeometry extends Thread {
                 }
                 lineGeometric.setPosXF(this.increaseOrDecreaseBalance(lineGeometric.getPosXF(), distanci));
                 lineGeometric.setPosYF(this.incrementFormula(slope, lineGeometric.getPosXF(), b2));
+            }// termina con los calculos de la nueva posicion
+            if (animation.getTipy() == ListAnimation.CURVE) {
+                this.rotation(animation.getObjetToAnimate());
             }
-            grapherPanel.repaint();
+            //grafica lo nuevo
+            this.grapherPanel.repaint();
         }
-        System.out.println("SALI"+this.MS);
     }
 
     //calcular la primera recta
@@ -121,7 +128,17 @@ public class AnimateObjectGeometry extends Thread {
     }
 
     private void rotation(BasicGeometricObject objet) {
-
+        this.angulo += 5;
+        AffineTransform affineTransform = new AffineTransform();
+        //rotacon para los rectangulos
+        if (objet instanceof RectangleGeometric) {
+            RectangleGeometric squar = (RectangleGeometric) objet;
+            double posX = objet.getPosx() + (squar.getWidth()/ 2);
+            double posY = objet.getPoxy() + (squar.getHigh()/ 2);
+            affineTransform.rotate(Math.toRadians(this.angulo), posX, posY);
+        }
+        this.grapherPanel.setNameAnimation(objet.getId());
+        this.grapherPanel.setAffineTransform(affineTransform);
     }
 
     @Override
