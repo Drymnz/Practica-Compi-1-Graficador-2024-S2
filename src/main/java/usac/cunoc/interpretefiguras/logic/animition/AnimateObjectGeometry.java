@@ -6,6 +6,7 @@ package usac.cunoc.interpretefiguras.logic.animition;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Polygon;
 import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
@@ -13,7 +14,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import usac.cunoc.interpretefiguras.logic.geometry.BasicGeometricObject;
+import usac.cunoc.interpretefiguras.logic.geometry.CircleGeometric;
 import usac.cunoc.interpretefiguras.logic.geometry.LineGeometric;
+import usac.cunoc.interpretefiguras.logic.geometry.PolygonGeometric;
 import usac.cunoc.interpretefiguras.logic.geometry.RectangleGeometric;
 import usac.cunoc.interpretefiguras.logic.geometry.SquareGeometric;
 import usac.cunoc.interpretefiguras.view.GrapherPanel;
@@ -130,13 +133,39 @@ public class AnimateObjectGeometry extends Thread {
     private void rotation(BasicGeometricObject objet) {
         this.angulo += 5;
         AffineTransform affineTransform = new AffineTransform();
+        double posX = 0;
+        double posY = 0;
         //rotacon para los rectangulos
         if (objet instanceof RectangleGeometric) {
             RectangleGeometric squar = (RectangleGeometric) objet;
-            double posX = objet.getPosx() + (squar.getWidth()/ 2);
-            double posY = objet.getPoxy() + (squar.getHigh()/ 2);
-            affineTransform.rotate(Math.toRadians(this.angulo), posX, posY);
+            posX = objet.getPosx() + (squar.getWidth() / 2);
+            posY = objet.getPoxy() + (squar.getHigh() / 2);
         }
+        //rotacon para los CircleGeometric
+        if (objet instanceof CircleGeometric) {
+            CircleGeometric elem = (CircleGeometric) objet;
+            posX = elem.getPosx() + (elem.getRadio() / 2);
+            posY = elem.getPoxy() + (elem.getRadio() / 2);
+        }
+        //rotacon para los LineGeometric
+        if (objet instanceof LineGeometric) {
+            LineGeometric elem = (LineGeometric) objet;
+            posX = objet.getPosx() + (elem.getPosXF()/ 2);
+            posY = objet.getPoxy() + (elem.getPosYF()/ 2);
+        }
+        //rotacon para los PolygonGeometric
+        if (objet instanceof PolygonGeometric) {
+            PolygonGeometric elem = (PolygonGeometric) objet;
+            posX = objet.getPosx() + (elem.getWidth()/ 2);
+            posY = objet.getPoxy() + (elem.getHigh() / 2);
+        }
+        //rotacon para los SquareGeometric
+        if (objet instanceof SquareGeometric) {
+            SquareGeometric elem = (SquareGeometric) objet;
+            posX = objet.getPosx() + (elem.getSquare()/ 2);
+            posY = objet.getPoxy() + (elem.getSquare() / 2);
+        }
+        affineTransform.rotate(Math.toRadians(this.angulo), posX, posY);
         this.grapherPanel.setNameAnimation(objet.getId());
         this.grapherPanel.setAffineTransform(affineTransform);
     }

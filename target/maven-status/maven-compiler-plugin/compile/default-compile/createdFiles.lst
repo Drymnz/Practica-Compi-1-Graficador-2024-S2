@@ -21,7 +21,6 @@ usac/cunoc/interpretefiguras/view/ViewsMenu$4.class
 usac/cunoc/interpretefiguras/logic/reports/ReportUserObjectGeometry.class
 usac/cunoc/interpretefiguras/InterpreteFiguras$1.class
 usac/cunoc/interpretefiguras/logic/reports/TypeIntreprete.class
-usac/cunoc/interpretefiguras/RotacionCuadrado.class
 usac/cunoc/interpretefiguras/logic/geometry/PolygonGeometric.class
 usac/cunoc/interpretefiguras/logic/analyzer/Analyzer.class
 usac/cunoc/interpretefiguras/logic/geometry/RectangleGeometric.class
