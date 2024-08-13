@@ -276,7 +276,7 @@ public class ViewsMenu extends javax.swing.JFrame {
 
     private void jButtonAnimationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnimationActionPerformed
         //boton de animar
-        AnimateObjectGeometry a = new AnimateObjectGeometry( this.grapherPanel1, this.listAnimation, this.jButtonAnimation);
+        AnimateObjectGeometry a = new AnimateObjectGeometry( this.grapherPanel1, this.listAnimation, this.jButtonAnimation,this.jButtonCopile);
         Thread thread = new Thread(a);
         thread.start();
     }//GEN-LAST:event_jButtonAnimationActionPerformed

@@ -4,6 +4,7 @@
  */
 package usac.cunoc.interpretefiguras.logic.animition;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import usac.cunoc.interpretefiguras.logic.geometry.BasicGeometricObject;
@@ -18,11 +19,13 @@ public class AnimateObjectGeometry extends Thread {
 
     private ArrayList<Animation> listAnimation;
     private JButton jButton;
+    private JButton jButtonOne;
     private GrapherPanel grapherPanel;
 
-    public AnimateObjectGeometry(GrapherPanel grapherPanel, ArrayList<Animation> listAnimation, JButton jButton) {
+    public AnimateObjectGeometry(GrapherPanel grapherPanel, ArrayList<Animation> listAnimation, JButton jButton, JButton jButtonOne) {
         this.listAnimation = listAnimation;
         this.jButton = jButton;
+        this.jButtonOne = jButtonOne;
         this.grapherPanel = grapherPanel;
     }
 
@@ -30,16 +33,18 @@ public class AnimateObjectGeometry extends Thread {
         try {
             //ordenar nesesario 
             for (Animation animation : listAnimation) {
-                boolean finish = false;
+                double slope = this.calculateSope(animation.getObjetToAnimate(), animation.getDestinationPosX(), animation.getDestinationPosY());;
+                double xStar = animation.getObjetToAnimate().getPosx();
+                double yStar = animation.getObjetToAnimate().getPoxy();
+                double b = -(slope * xStar) + yStar;
                 System.out.println("ENTRE");
-                while (!finish) {
-
+                while (animation.getObjetToAnimate().getPosx() != animation.getDestinationPosX()) {
                     if (animation.getTipy() == ListAnimation.CURVE) {
                         this.rotation(animation.getObjetToAnimate());
                     }
-                    this.translation(animation.getObjetToAnimate(), animation.getDestinationPosX(), animation.getDestinationPosY());
-                    finish = this.positionTheSame(animation.getObjetToAnimate(), animation.getDestinationPosX(), animation.getDestinationPosY());
                     Thread.sleep(10);
+                    animation.getObjetToAnimate().setPosx(this.increaseOrDecreaseBalance(animation.getObjetToAnimate().getPosx(), animation.getDestinationPosX()));
+                    animation.getObjetToAnimate().setPoxy(this.incrementFormula(slope, animation.getObjetToAnimate().getPosx(), b));
                     grapherPanel.repaint();
                 }
                 System.out.println("SALI");
@@ -47,6 +52,19 @@ public class AnimateObjectGeometry extends Thread {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private int incrementFormula(double m, int x, double b) {
+        double result = m * x + b;
+        return (int) Math.round(result);
+    }
+
+    private double calculateSope(BasicGeometricObject objet, int dPosX, int dPosY) {
+        double posXStart = objet.getPosx();
+        double posYStart = objet.getPoxy();
+        double dPosXD = dPosX;
+        double dPosYD = dPosY;
+        return (dPosYD - posYStart) / (dPosXD - posXStart);
     }
 
     private boolean positionTheSame(BasicGeometricObject objet, int dPosX, int dPosY) {
@@ -81,7 +99,9 @@ public class AnimateObjectGeometry extends Thread {
     @Override
     public void run() {
         this.jButton.setEnabled(false);
+        this.jButtonOne.setEnabled(false);
         this.animateObjects();
         this.jButton.setEnabled(true);
+        this.jButtonOne.setEnabled(true);
     }
 }
