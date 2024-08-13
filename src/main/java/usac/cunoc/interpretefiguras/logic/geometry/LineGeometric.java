@@ -28,5 +28,13 @@ public class LineGeometric extends BasicGeometricObject {
         return posYF;
     }
 
+    public void setPosXF(int posXF) {
+        this.posXF = posXF;
+    }
+
+    public void setPosYF(int posYF) {
+        this.posYF = posYF;
+    }
+
 
 }

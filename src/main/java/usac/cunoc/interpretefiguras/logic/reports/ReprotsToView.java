@@ -111,7 +111,7 @@ public class ReprotsToView {
         Vector<String> columnNames = new Vector<>();
         Vector<Vector<String>> data = new Vector<>();
         // definiendo la columnas 
-        columnNames.add("Object");
+        columnNames.add("Animacion");
         columnNames.add("Cantida de uso");
         List<ListAnimation> list = Arrays.asList(ListAnimation.values());
         for (ListAnimation typeAnimation : list) {

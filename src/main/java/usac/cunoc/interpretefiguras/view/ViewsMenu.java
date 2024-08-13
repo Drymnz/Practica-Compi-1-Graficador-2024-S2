@@ -226,6 +226,7 @@ public class ViewsMenu extends javax.swing.JFrame {
         loadReport.loadReportMathOperation();
         loadReport.loadReportUserColor();
         loadReport.loadReportUserObject();
+        loadReport.loadReportUserAnimation();
         this.reportPanel1.repaint();
 
         //this.pack();

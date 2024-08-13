@@ -5,7 +5,9 @@
 package usac.cunoc.interpretefiguras.view;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Polygon;
+import java.awt.RenderingHints;
 import java.util.ArrayList;
 import usac.cunoc.interpretefiguras.logic.geometry.BasicGeometricObject;
 import usac.cunoc.interpretefiguras.logic.geometry.CircleGeometric;
@@ -21,6 +23,8 @@ import usac.cunoc.interpretefiguras.logic.geometry.SquareGeometric;
 public class GrapherPanel extends javax.swing.JPanel {
 
     private ArrayList<BasicGeometricObject> lisGeometricObject;
+    private int heightMax = 50;
+    private int widthtMax = 50;
 
     /**
      * Creates new form GrapherPanel
@@ -57,21 +61,24 @@ public class GrapherPanel extends javax.swing.JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        //Mejoramiento en la graficacion
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); 
         if (this.lisGeometricObject != null) {
             for (BasicGeometricObject element : lisGeometricObject) {
-                g.setColor(element.getColor().getColor());
+                g2d.setColor(element.getColor().getColor());
                 if (element instanceof CircleGeometric) {
                     CircleGeometric elem = (CircleGeometric) element;
-                    g.fillOval(elem.getPosx(), elem.getPoxy(), elem.getRadio(), elem.getRadio());
+                    g2d.fillOval(elem.getPosx(), elem.getPoxy(), elem.getRadio(), elem.getRadio());
                 }
                 if (element instanceof LineGeometric) {
                     LineGeometric elem = (LineGeometric) element;
-                    g.drawLine(elem.getPosx(), elem.getPoxy(), elem.getPosXF(), elem.getPosYF());
+                    g2d.drawLine(elem.getPosx(), elem.getPoxy(), elem.getPosXF(), elem.getPosYF());
                 }
                 if (element instanceof PolygonGeometric) {
                     PolygonGeometric elem = (PolygonGeometric) element;
                     Polygon polygon = new Polygon();
-                    
+
                     // calcula el angulo centra del poligono 
                     double anguloCentral = 360.0 / elem.getNumberSides();
 
@@ -80,22 +87,33 @@ public class GrapherPanel extends javax.swing.JPanel {
                         double radianes = Math.toRadians(i * anguloCentral);
                         //calcula las coordenadas de x y y de cada vertice usando funciones trigonmetricas 
                         int xi = (int) (elem.getPosx() + elem.getWidth() * Math.cos(radianes));// calcula en el eje x
-                        int yi = (int) (elem.getPoxy()+ elem.getHigh() * Math.sin(radianes));// calcula en el eje y
+                        int yi = (int) (elem.getPoxy() + elem.getHigh() * Math.sin(radianes));// calcula en el eje y
                         //agrega el punto
                         polygon.addPoint(xi, yi);
                     }
-                    
-                    g.fillPolygon(polygon);
+
+                    g2d.fillPolygon(polygon);
                 }
                 if (element instanceof RectangleGeometric) {
                     RectangleGeometric elem = (RectangleGeometric) element;
-                    g.fillRect(elem.getPosx(), elem.getPoxy(), elem.getWidth(), elem.getHigh());
+                    g2d.fillRect(elem.getPosx(), elem.getPoxy(), elem.getWidth(), elem.getHigh());
                 }
                 if (element instanceof SquareGeometric) {
                     SquareGeometric elem = (SquareGeometric) element;
-                    g.fillRect(elem.getPosx(), elem.getPoxy(), elem.getSquare(), elem.getSquare());
+                    g2d.fillRect(elem.getPosx(), elem.getPoxy(), elem.getSquare(), elem.getSquare());
+                }
+                // Tamaño de la pantalla
+                if (this.getHeight()< element.getPoxy()) {
+                    this.heightMax = element.getPoxy();
+                }
+                if (this.getWidth()< element.getPosx()) {
+                    this.widthtMax = element.getPoxy();
+                }
+                if ((this.getWidth()< element.getPosx()) || (this.getHeight()< element.getPoxy())) {
+                    this.setSize(this.widthtMax, this.heightMax);
                 }
             }
+            g2d.dispose();
         }
     }
 
