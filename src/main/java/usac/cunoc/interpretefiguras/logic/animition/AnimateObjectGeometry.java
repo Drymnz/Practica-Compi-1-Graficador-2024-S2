@@ -6,6 +6,7 @@ package usac.cunoc.interpretefiguras.logic.animition;
 
 import java.util.ArrayList;
 import javax.swing.JButton;
+import usac.cunoc.interpretefiguras.logic.geometry.BasicGeometricObject;
 import usac.cunoc.interpretefiguras.view.GrapherPanel;
 import usac.cunoc.interpretefiguras.view.ViewsMenu;
 
@@ -19,26 +20,54 @@ public class AnimateObjectGeometry extends Thread {
     private JButton jButton;
     private GrapherPanel grapherPanel;
 
-    public AnimateObjectGeometry(GrapherPanel grapherPanel,ArrayList<Animation> listAnimation, JButton jButton) {
+    public AnimateObjectGeometry(GrapherPanel grapherPanel, ArrayList<Animation> listAnimation, JButton jButton) {
         this.listAnimation = listAnimation;
         this.jButton = jButton;
         this.grapherPanel = grapherPanel;
     }
-    
-    private void animateObjects(){
-        int i = 0;
-        do {
-            try {
-                for (Animation animation : listAnimation) {
-                    animation.getObjetToAnimate().setPosx(animation.getObjetToAnimate().getPosx() + 100);
+
+    private void animateObjects() {
+        try {
+            //ordenar nesesario 
+            for (Animation animation : listAnimation) {
+                boolean finish = false;
+                System.out.println("ENTRE");
+                while (!finish) {
+
+                    if (animation.getTipy() == ListAnimation.CURVE) {
+                        this.rotation(animation.getObjetToAnimate());
+                    }
+                    this.translation(animation.getObjetToAnimate(), animation.getDestinationPosX(), animation.getDestinationPosY());
+                    finish = this.positionTheSame(animation.getObjetToAnimate(), animation.getDestinationPosX(), animation.getDestinationPosY());
+                    Thread.sleep(10);
+                    grapherPanel.repaint();
                 }
-                grapherPanel.repaint();
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                System.out.println("SALI");
             }
-            i++;
-        } while (i < 100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean positionTheSame(BasicGeometricObject objet, int dPosX, int dPosY) {
+        return (objet.getPosx() == dPosX) && (objet.getPoxy() == dPosY);
+    }
+
+    private void translation(BasicGeometricObject objet, int dPosX, int dPosY) {
+        int posXStart = objet.getPosx();
+        int posYStart = objet.getPoxy();
+
+        if (posXStart < dPosX) {
+            objet.setPosx(posXStart + 1);
+        }
+
+        if (posYStart < dPosY) {
+            objet.setPoxy(posYStart + 1);
+        }
+    }
+
+    private void rotation(BasicGeometricObject objet) {
+
     }
 
     @Override
