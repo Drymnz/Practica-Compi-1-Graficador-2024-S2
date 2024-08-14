@@ -10,7 +10,7 @@ import usac.cunoc.interpretefiguras.logic.geometry.BasicGeometricObject;
  *
  * @author drymnz
  */
- public class Animation {
+ public class Animation implements Comparable<Animation>{
     private ListAnimation tipy;
     private int destinationPosX;
     private int destinationPosY;
@@ -48,5 +48,10 @@ import usac.cunoc.interpretefiguras.logic.geometry.BasicGeometricObject;
     @Override
     public String toString() {
         return "-tipy:"+tipy.toString()+"-destinationPosX:"+this.destinationPosX+"-destinationPosY:"+destinationPosY+"-order:"+order+"-objetToAnimate:"+objetToAnimate.toString();
+    }
+
+    @Override
+    public int compareTo(Animation otro) {
+          return Integer.compare(this.order, otro.getOrder());
     }
 }

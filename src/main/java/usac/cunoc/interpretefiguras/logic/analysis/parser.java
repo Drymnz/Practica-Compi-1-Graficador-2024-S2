@@ -242,6 +242,10 @@ private int scale = 1;
         String description = ListErrorAnalyzer.LEXEMA_ONE.getDescription();
         this.listError.add(new ReportErrorInterpreter(type, this.getTokePresent(), description));
     }
+    //erorr
+    public void syntax_error(Symbol cur_token) {
+        addError();
+    }
     // mostrar la infomacion actual que posee el analisador
     private void getInfoPrint(){
         System.out.println("\n"+" - Clase<"+"> en simbolo<" + sym.terminalNames[cur_token.sym]+String.format(">posicion: <%d>, <%d>", (cur_token.left+1), (cur_token.right+1)));
@@ -258,10 +262,7 @@ private int scale = 1;
     private void setTextToken(String modification){
         sym.terminalNames[cur_token.sym] = modification;
     }
-    //erorr
-    public void syntax_error(Symbol cur_token) {
-        addError();
-    }
+    
     //Returnar el listado de Animation
     public ArrayList<Animation> getListAnimation() {
         return this.listAnimation;
@@ -304,7 +305,9 @@ private int scale = 1;
     }
     //Agregapar la animacion
     private void addAnimation(String dx,String dy, String o ){
-        this.listAnimation.add(new Animation(reportUser.getTypeAnimation(), this.stringToIntCrew(dx), this.stringToIntCrew(dy), this.stringToIntCrew(o), this.listGeometricObject.get(this.listGeometricObject.size()-1)));
+        if (this.listGeometricObject.size() > 0) {
+          this.listAnimation.add(new Animation(reportUser.getTypeAnimation(), this.stringToIntCrew(dx), this.stringToIntCrew(dy), this.stringToIntCrew(o), this.listGeometricObject.get(this.listGeometricObject.size()-1)));
+        }
     }
     // converitir el string en un int
     private int stringToIntCrew(String tx){

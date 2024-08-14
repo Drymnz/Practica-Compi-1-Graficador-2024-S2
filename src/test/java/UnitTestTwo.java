@@ -112,6 +112,11 @@ public class UnitTestTwo {
         }
         Assertions.assertTrue(true);
     }
+
+
+
+
+    
     @Test
     public void TestAnimation() {
         Reader reader = new StringReader("graficar poligono ( PoligA, (2.3-2)*12  + 2 -1/12, 15, 6, 50 / 2, 12, amarillo)\n" + //
