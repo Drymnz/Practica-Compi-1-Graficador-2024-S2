@@ -224,10 +224,15 @@ private ArrayList<MathOperation> listMathOperation = new ArrayList();
 private ArrayList<BasicGeometricObject>  listGeometricObject = new ArrayList();
 private ArrayList<Animation>  listAnimation = new ArrayList();
 private ReportUserObjectGeometry reportUser = new ReportUserObjectGeometry();
+private int scale = 1;
 
 
 	public parser(Lexema lexer) {
         super(lexer);
+    }
+    // modificar scala
+    public void setScale(int scale){
+        this.scale = scale;
     }
     // Agregar el error de elctura
     private void addError(){
@@ -662,7 +667,11 @@ class CUP$parser$actions {
 		int aleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Object a = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		RESULT = a;
+		
+    Double aDouble =   Double.valueOf(a.toString());
+    double result = aDouble * scale;
+		 RESULT = result;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("inico_opereacion",2, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

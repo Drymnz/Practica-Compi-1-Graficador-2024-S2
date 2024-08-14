@@ -52,9 +52,11 @@ public class AnimateObjectGeometry extends Thread {
     private void animateObjects() {
         //ordenar nesesario 
         for (Animation animation : listAnimation) {
+            this.grapherPanel.repaint();
             this.calculaAnimation(animation);
             this.angulo = 0;
             this.grapherPanel.setNameAnimation("");
+            this.grapherPanel.getGraphics().dispose();
         }
     }
 

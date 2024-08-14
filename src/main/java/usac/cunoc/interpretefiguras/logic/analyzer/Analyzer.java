@@ -21,10 +21,11 @@ public class Analyzer {
     private Lexema lexeman;
     private parser parse;
 
-    public Analyzer(String text) {
+    public Analyzer(String text, int scale) {
         Reader reader = new StringReader(text);
         this.lexeman = new Lexema(reader);
         this.parse = new parser(this.lexeman);
+        this.parse.setScale(scale);
     }
 
     public void Anilisar() {

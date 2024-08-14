@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SpinnerNumberModel;
 import usac.cunoc.interpretefiguras.InterpreteFiguras;
 import usac.cunoc.interpretefiguras.logic.analyzer.Analyzer;
 import usac.cunoc.interpretefiguras.logic.animition.AnimateObjectGeometry;
@@ -47,8 +49,6 @@ public class ViewsMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        grapherPanel1 = new usac.cunoc.interpretefiguras.view.GrapherPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         reportPanel1 = new usac.cunoc.interpretefiguras.view.ReportPanel();
         compiler1 = new usac.cunoc.interpretefiguras.view.Compiler();
@@ -59,23 +59,12 @@ public class ViewsMenu extends javax.swing.JFrame {
         jButtonAnimation = new javax.swing.JButton();
         jButtonExportPDF = new javax.swing.JButton();
         jButtonExportPNG = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        grapherPanel1 = new usac.cunoc.interpretefiguras.view.GrapherPanel();
+        scale = new javax.swing.JSpinner();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jScrollPane1.setBackground(new java.awt.Color(255, 153, 153));
-
-        javax.swing.GroupLayout grapherPanel1Layout = new javax.swing.GroupLayout(grapherPanel1);
-        grapherPanel1.setLayout(grapherPanel1Layout);
-        grapherPanel1Layout.setHorizontalGroup(
-            grapherPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 382, Short.MAX_VALUE)
-        );
-        grapherPanel1Layout.setVerticalGroup(
-            grapherPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 481, Short.MAX_VALUE)
-        );
-
-        jScrollPane1.setViewportView(grapherPanel1);
 
         jScrollPane2.setBackground(new java.awt.Color(0, 204, 255));
 
@@ -87,7 +76,7 @@ public class ViewsMenu extends javax.swing.JFrame {
         );
         reportPanel1Layout.setVerticalGroup(
             reportPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 481, Short.MAX_VALUE)
+            .addGap(0, 689, Short.MAX_VALUE)
         );
 
         jScrollPane2.setViewportView(reportPanel1);
@@ -141,6 +130,26 @@ public class ViewsMenu extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        javax.swing.GroupLayout grapherPanel1Layout = new javax.swing.GroupLayout(grapherPanel1);
+        grapherPanel1.setLayout(grapherPanel1Layout);
+        grapherPanel1Layout.setHorizontalGroup(
+            grapherPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 590, Short.MAX_VALUE)
+        );
+        grapherPanel1Layout.setVerticalGroup(
+            grapherPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jScrollPane1.setViewportView(grapherPanel1);
+
+        scale.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
+
+        jLabel1.setText("Escala de PX");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -155,21 +164,23 @@ public class ViewsMenu extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButtonSave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonCopile))
-                    .addComponent(compiler1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+                        .addComponent(jButtonCopile)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonAnimation, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonExportPDF)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonExportPNG)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel1)
+                        .addGap(35, 35, 35)
+                        .addComponent(scale, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(compiler1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -183,16 +194,19 @@ public class ViewsMenu extends javax.swing.JFrame {
                     .addComponent(jButtonCopile)
                     .addComponent(jButtonAnimation)
                     .addComponent(jButtonExportPDF)
-                    .addComponent(jButtonExportPNG))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jButtonExportPNG)
+                    .addComponent(scale, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(compiler1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGap(22, 22, 22))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         pack();
@@ -201,7 +215,8 @@ public class ViewsMenu extends javax.swing.JFrame {
     private void jButtonCopileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCopileActionPerformed
         // Ejecutar el analisis
         if (this.compiler1.getTextArea().getText() != null && !(this.compiler1.getTextArea().getText().isBlank())) {
-            Analyzer analyzer = new Analyzer(this.compiler1.getTextArea().getText());
+            int valorEntero = ((SpinnerNumberModel) this.scale.getModel()).getNumber().intValue();
+            Analyzer analyzer = new Analyzer(this.compiler1.getTextArea().getText(),valorEntero);
             analyzer.Anilisar();
             if (analyzer.isErrorsAnalyzing()) {
                 //ERROR 
@@ -344,8 +359,10 @@ public class ViewsMenu extends javax.swing.JFrame {
     private javax.swing.JButton jButtonLoad;
     private javax.swing.JButton jButtonNewFile;
     private javax.swing.JButton jButtonSave;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private usac.cunoc.interpretefiguras.view.ReportPanel reportPanel1;
+    private javax.swing.JSpinner scale;
     // End of variables declaration//GEN-END:variables
 }

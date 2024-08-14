@@ -4,6 +4,7 @@
  */
 package usac.cunoc.interpretefiguras.view;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
@@ -24,8 +25,6 @@ import usac.cunoc.interpretefiguras.logic.geometry.SquareGeometric;
 public class GrapherPanel extends javax.swing.JPanel {
 
     private ArrayList<BasicGeometricObject> lisGeometricObject;
-    private int heightMax = 50;
-    private int widthtMax = 50;
     private AffineTransform affineTransform = new AffineTransform();
     private AffineTransform affineTransformNormal = new AffineTransform();
     private String nameAnimation = "";
@@ -50,11 +49,11 @@ public class GrapherPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1136, Short.MAX_VALUE)
+            .addGap(0, 216, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 615, Short.MAX_VALUE)
+            .addGap(0, 145, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -75,7 +74,6 @@ public class GrapherPanel extends javax.swing.JPanel {
                 } else {
                     g2d.setTransform(this.affineTransformNormal);
                 }
-
                 g2d.setColor(element.getColor().getColor());
                 if (element instanceof CircleGeometric) {
                     CircleGeometric elem = (CircleGeometric) element;
@@ -111,15 +109,11 @@ public class GrapherPanel extends javax.swing.JPanel {
                     SquareGeometric elem = (SquareGeometric) element;
                     g2d.fillRect(elem.getPosx(), elem.getPoxy(), elem.getSquare(), elem.getSquare());
                 }
-                // Tamaño de la pantalla
+                if (this.getWidth() < element.getPosx() ) {
+                    this.setSize(new Dimension(element.getPosx(), this.getHeight()));
+                }
                 if (this.getHeight() < element.getPoxy()) {
-                    this.heightMax = element.getPoxy();
-                }
-                if (this.getWidth() < element.getPosx()) {
-                    this.widthtMax = element.getPoxy();
-                }
-                if ((this.getWidth() < element.getPosx()) || (this.getHeight() < element.getPoxy())) {
-                    this.setSize(this.widthtMax, this.heightMax);
+                    this.setSize(new Dimension(this.getWidth(), element.getPoxy()));
                 }
             }
         }
