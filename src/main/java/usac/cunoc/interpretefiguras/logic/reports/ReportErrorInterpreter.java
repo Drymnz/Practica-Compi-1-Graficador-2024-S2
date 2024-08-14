@@ -33,5 +33,8 @@ public class ReportErrorInterpreter {
         return description;
     }
       
-      
+      @Override
+      public String toString() {
+          return "-type:"+type.toString()+"-toke"+toke.toString()+"description"+description.toString();
+      }
 }

@@ -29,17 +29,18 @@ private int scale = 1;
     public void setScale(int scale){
         this.scale = scale;
     }
-    // Agregar el error de elctura
-    private void addError(){
-        this.getInfoPrint();
-        System.out.println("ERORR");
-        TypeIntreprete type = TypeIntreprete.SYNTACTIC;
-        String description = ListErrorAnalyzer.LEXEMA_ONE.getDescription();
-        this.listError.add(new ReportErrorInterpreter(type, this.getTokePresent(), description));
-    }
     //erorr
     public void syntax_error(Symbol cur_token) {
-        addError();
+        String nameTerminal = symbl_name_from_id(this.cur_token.sym);
+        int numberTerminal = this.cur_token.sym;
+        String lexema = this.cur_token.value.toString();
+        int line = cur_token.left+1;
+        int columna = cur_token.right +1;
+        //System.err.println("Numero del teminal->"+this.cur_token.sym);
+        ///codigo para el objeto
+        TypeIntreprete type = TypeIntreprete.SYNTACTIC;
+        String description = ListErrorAnalyzer.LEXEMA_ONE.getDescription();
+        this.listError.add(new ReportErrorInterpreter(type, this.getTokePresent(), (new InterpretSyntaticError(stack, nameTerminal, numberTerminal, lexema, line, columna)).description() ));
     }
     // mostrar la infomacion actual que posee el analisador
     private void getInfoPrint(){
@@ -121,7 +122,6 @@ terminal SUMAR,RESTAR,DIVIDIR,MULTIPLICAR,COMA;
 terminal String ID,REAL_NUMEBERS;
 /*AGRUPACION*/
 terminal PARENTESIS_A,PARENTESIS_C;
-
 /*COLOR*/
 terminal BLUE,RED,YELLOW,GREEN,BLACK;
 terminal CYAN,FUCHSIA,LAVENDER,MAROON;
@@ -138,7 +138,7 @@ nonterminal operacion;
 /*para el uso de operaciones aritmeticas*/
 nonterminal inico_opereacion;
 nonterminal acciones,animtion;
-nonterminal grafica,tipo_grafica,tipo_color,tipo_animation;
+nonterminal grafica,tipo_grafica,tipo_color,tipo_animation,parente;
 /*************************************PRECEDENCIA******************************************************/
 precedence left SUMAR, RESTAR;
 precedence left MULTIPLICAR, DIVIDIR;
@@ -146,7 +146,7 @@ precedence left MULTIPLICAR, DIVIDIR;
 start with inicio;
 /******operaciones matematicas*****/
 inicio ::= acciones 
-    |
+    | error 
     ;
 
 acciones
@@ -190,7 +190,9 @@ tipo_grafica
     reportUser.incrementObjectCounter(ListObjectGeometric.POLYGON);
     addPolygon(id.toString(),px.toString(),py.toString(),l.toString(),w.toString(),h.toString());
     :}
+    | error  
     ;
+
 
 animtion
     //  animar objeto anterior (        <tipoanimacion>,           <destinox>,              <destinoy>,             <orden>              )
@@ -198,11 +200,13 @@ animtion
     {:
         addAnimation(dx.toString(),dy.toString(),o.toString());
     :}
+    |error
     ;
 
 tipo_animation
     ::= LINE {:reportUser.incrementAnimationCounter(ListAnimation.LINE);:}
     |CURVE {:reportUser.incrementAnimationCounter(ListAnimation.CURVE);:}
+    |error
     ;
 
 tipo_color
@@ -216,56 +220,131 @@ tipo_color
     |FUCHSIA {:reportUser.incrementColorCounter(ListColor.FUCHSIA);:}
     |LAVENDER {:reportUser.incrementColorCounter(ListColor.LAVENDER);:}
     |MAROON {:reportUser.incrementColorCounter(ListColor.MAROON);:}
+    |error
     ;
     
 /******operaciones matematicas*****/
-inico_opereacion ::= operacion:a {:
-    Double aDouble =   Double.valueOf(a.toString());
-    double result = aDouble * scale;
-		 RESULT = result;
-:} /*A QUI ESTA EL TOTAL DE LA OPERACION*/
+/*A QUI ESTA EL TOTAL DE LA OPERACION*/
+inico_opereacion ::= operacion:a 
+    {:
+    //////////////////////////////////////////
+		Double aDouble = 0.0;
+    if (a!=null) {
+      aDouble =   Double.valueOf(a.toString());
+      double result = aDouble * scale;
+       RESULT = result;
+    }
+    RESULT = aDouble;
+    //////////////////////////////////////////
+    :} 
     ;
 /******operaciones matematicas*****/
 operacion 
+/**SUMA**/
 ::= operacion:a SUMAR operacion:b 
-{:
-setTextToken(a +" + "+ b);
-addReportMathOperation(ListMathOperation.ADDITION);
-Double bDouble =   Double.valueOf(b.toString());
-Double aDouble =   Double.valueOf(a.toString());
-Double resultDouble = aDouble + bDouble;
-RESULT = resultDouble;
-:}
+    {:
+    /////////////////////////////////////////////
+    Double aDouble = 0.0;		
+    Double bDouble = 0.0;
+    if(a != null){
+      aDouble =   Double.valueOf(a.toString());
+    }
+    if (b!=null) {
+      bDouble =   Double.valueOf(b.toString());
+    }
+    if (b!=null & a != null ) {
+      setTextToken(a +" + "+ b);
+      addReportMathOperation(ListMathOperation.ADDITION);
+      Double resultDouble = aDouble + bDouble;
+      RESULT = resultDouble;
+    }else{
+      System.out.println(getTokePresent().toString());
+      RESULT = aDouble;
+    }
+    /////////////////////////////////////////////
+    :}
+
+/**RESTA**/
 |  operacion:a RESTAR operacion:b 
-{:
-setTextToken(a +" - "+ b);
-addReportMathOperation(ListMathOperation.SUBTRACTION);
-Double bDouble =   Double.valueOf(b.toString());
-Double aDouble =   Double.valueOf(a.toString());
-Double resultDouble = aDouble - bDouble;
-RESULT = resultDouble;
-:}
+    {:
+    /////////////////////////////////////////////
+    Double aDouble = 0.0;		
+    Double bDouble = 0.0;
+    if(a != null){
+      aDouble =   Double.valueOf(a.toString());
+    }
+    if (b!=null) {
+      bDouble =   Double.valueOf(b.toString());
+    }
+    if (b!=null & a != null ) {
+      setTextToken(a +" - "+ b);
+      addReportMathOperation(ListMathOperation.SUBTRACTION);
+      Double resultDouble = aDouble - bDouble;
+      RESULT = resultDouble;
+    }else{
+      System.out.println(getTokePresent().toString());
+      RESULT = aDouble;
+    }
+    /////////////////////////////////////////////
+
+    :}
+/**DIVISION**/
 |  operacion:a DIVIDIR operacion:b 
-{:
-setTextToken(a +" / "+ b);
-addReportMathOperation(ListMathOperation.DIVISION);
-Double bDouble =   Double.valueOf(b.toString());
-if (bDouble>0) {
-  Double aDouble = Double.valueOf(a.toString());
-  Double result = ( bDouble/ bDouble);
-   RESULT = result;
-}else{
-  /// manejar un error de sintasis
-RESULT = b;// si es 15/0
-}
-:}
+    {:
+    /////////////////////////////////////////////
+    Double aDouble = 0.0;		
+    Double bDouble = 0.0;
+    if(a != null){
+      aDouble =   Double.valueOf(a.toString());
+    }
+    if (b!=null) {
+      bDouble =   Double.valueOf(b.toString());
+    }
+    if (b!=null & a != null ) {
+      if (bDouble>0) {
+        setTextToken(a +" / "+ b);
+        addReportMathOperation(ListMathOperation.DIVISION);
+        Double result = ( bDouble/ bDouble);
+        RESULT = result;
+      }else{
+        /// manejar un error de sintasis
+        RESULT = aDouble;// si es 15/0
+      }
+    }else{
+      System.out.println(getTokePresent().toString());
+      RESULT = aDouble;
+    }
+    /////////////////////////////////////////////
+
+    :}
+
+/**MULTIPLICACION**/
 |  operacion:a MULTIPLICAR operacion:b 
-{:
-setTextToken(a +" * "+ b);
-addReportMathOperation(ListMathOperation.MULTIPLICATION);
-Double result = Double.valueOf(a.toString()) * Double.valueOf(b.toString());
-RESULT = result;
-:}
+    {:
+    /////////////////////////////////////////////
+    Double aDouble = 0.0;		
+    Double bDouble = 0.0;
+    if(a != null){
+      aDouble =   Double.valueOf(a.toString());
+    }
+    if (b!=null) {
+      bDouble =   Double.valueOf(b.toString());
+    }
+    if (b!=null & a != null ) {
+      setTextToken(a +" * "+ b);
+      addReportMathOperation(ListMathOperation.MULTIPLICATION);
+      Double result = aDouble * bDouble;
+      RESULT = result;
+    }else{
+      System.out.println(getTokePresent().toString());
+      RESULT = aDouble;
+    }
+    /////////////////////////////////////////////
+
+    :}
+/****solo retornar*****/
 | PARENTESIS_A operacion:a {:RESULT = a;:} PARENTESIS_C 
 | REAL_NUMEBERS:a {:RESULT = a;:}
+/***manejar el error***/
+| error
 ;

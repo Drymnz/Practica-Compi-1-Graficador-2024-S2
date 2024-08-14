@@ -56,6 +56,6 @@ public class BasicGeometricObject  {
 
     @Override
     public String toString() {
-        return "-posx:"+posx+"-poxy:"+poxy+"-id:"+id+"-color:"+color.toString();
+        return "-posx:"+posx+"-poxy:"+poxy+"-id:"+id+"-color:"+color.getNameColor();
     }
 }
