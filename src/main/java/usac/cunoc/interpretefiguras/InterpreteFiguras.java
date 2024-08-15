@@ -3,8 +3,6 @@
  */
 package usac.cunoc.interpretefiguras;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import javax.swing.SwingUtilities;
 import usac.cunoc.interpretefiguras.view.modifiedview.ViewMenuOne;
 

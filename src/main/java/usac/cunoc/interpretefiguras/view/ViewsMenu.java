@@ -10,7 +10,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SpinnerNumberModel;
-import usac.cunoc.interpretefiguras.InterpreteFiguras;
 import usac.cunoc.interpretefiguras.logic.analyzer.Analyzer;
 import usac.cunoc.interpretefiguras.logic.animition.AnimateObjectGeometry;
 import usac.cunoc.interpretefiguras.logic.animition.Animation;
@@ -214,12 +213,11 @@ public class ViewsMenu extends javax.swing.JFrame {
         // Ejecutar el analisis
         if (this.compiler1.getTextArea().getText() != null && !(this.compiler1.getTextArea().getText().isBlank())) {
             int valorEntero = ((SpinnerNumberModel) this.scale.getModel()).getNumber().intValue();
-            System.out.println(valorEntero);
             Analyzer analyzer = new Analyzer(this.compiler1.getTextArea().getText(),valorEntero);
             analyzer.Anilisar();
             if (analyzer.isErrorsAnalyzing()) {
                 //ERROR 
-                loadReportsError(analyzer, reportPanel1);
+                this.loadReportsError(analyzer, reportPanel1);
             } else {
                 //GRAFICAR 
                 this.loadGraphAndReports(analyzer, this.reportPanel1);
@@ -227,20 +225,30 @@ public class ViewsMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonCopileActionPerformed
 
-    private void loadReportsError(Analyzer analyzer, ReportPanel view){
+    //CARGAR LOS REPORTES ERROR
+    private void loadReportsError(Analyzer analyzer, ReportPanel view) {
+        //REMUEVE LAS TABLAS DE REPORT
         this.reportPanel1.removeAll();
+        //QUITA SI HAY GRAFICAS
         this.grapherPanel1.Graficar(null);
+        //CONTRUYE LOS REPORTES
         ReprotsToView loadReport = new ReprotsToView(analyzer, view);
         loadReport.loadReporError();
         this.reportPanel1.repaint();
     }
+
+    //CARGAR LOS GRAFICOS
     private void loadGraphAndReports(Analyzer analyzer, ReportPanel view) {
+        //ENVIA EL LISTADO DE OBJETOS A GRAFICAR
         this.grapherPanel1.Graficar(analyzer.getParse().getLisGeometricObject());
+        //ENVIA EL LISTADO DE ANIMACIONES
         this.listAnimation = analyzer.getListAnimation();
+        //ACTIVA LOS BOTONES
         this.enableJButonLastGraphe(true);
         this.grapherPanel1.repaint();
 
         this.reportPanel1.removeAll();
+        //CONTRUYE LOS REPORTES
         ReprotsToView loadReport = new ReprotsToView(analyzer, view);
         loadReport.loadReportMathOperation();
         loadReport.loadReportUserColor();
