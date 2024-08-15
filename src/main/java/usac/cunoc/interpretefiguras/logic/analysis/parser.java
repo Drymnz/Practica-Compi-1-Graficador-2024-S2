@@ -258,7 +258,7 @@ private int scale = 1;
         ///codigo para el objeto
         TypeIntreprete type = TypeIntreprete.SYNTACTIC;
         String description = ListErrorAnalyzer.LEXEMA_ONE.getDescription();
-        this.listError.add(new ReportErrorInterpreter(type, this.getTokePresent(), (new InterpretSyntaticError(stack, nameTerminal, numberTerminal, lexema, line, columna)).description() ));
+        this.listError.add(new ReportErrorInterpreter(type, new Token(line, columna, lexema), (new InterpretSyntaticError(stack, nameTerminal, numberTerminal, lexema, line, columna)).description() ));
     }
     // mostrar la infomacion actual que posee el analisador
     private void getInfoPrint(){

@@ -220,6 +220,7 @@ public class ViewsMenu extends javax.swing.JFrame {
             analyzer.Anilisar();
             if (analyzer.isErrorsAnalyzing()) {
                 //ERROR 
+                loadReportsError(analyzer, reportPanel1);
             } else {
                 //GRAFICAR 
                 this.loadGraphAndReports(analyzer, this.reportPanel1);
@@ -227,6 +228,13 @@ public class ViewsMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonCopileActionPerformed
 
+    private void loadReportsError(Analyzer analyzer, ReportPanel view){
+        this.reportPanel1.removeAll();
+        this.grapherPanel1.Graficar(null);
+        ReprotsToView loadReport = new ReprotsToView(analyzer, view);
+        loadReport.loadReporError();
+        this.reportPanel1.repaint();
+    }
     private void loadGraphAndReports(Analyzer analyzer, ReportPanel view) {
         this.grapherPanel1.Graficar(analyzer.getParse().getLisGeometricObject());
         this.listAnimation = analyzer.getListAnimation();
@@ -234,15 +242,12 @@ public class ViewsMenu extends javax.swing.JFrame {
         this.grapherPanel1.repaint();
 
         this.reportPanel1.removeAll();
-
         ReprotsToView loadReport = new ReprotsToView(analyzer, view);
         loadReport.loadReportMathOperation();
         loadReport.loadReportUserColor();
         loadReport.loadReportUserObject();
         loadReport.loadReportUserAnimation();
         this.reportPanel1.repaint();
-
-        //this.pack();
     }
 
     private void jButtonLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoadActionPerformed

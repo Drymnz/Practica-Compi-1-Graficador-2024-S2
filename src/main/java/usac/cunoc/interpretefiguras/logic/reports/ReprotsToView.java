@@ -6,6 +6,7 @@ package usac.cunoc.interpretefiguras.logic.reports;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import usac.cunoc.interpretefiguras.logic.analyzer.Analyzer;
@@ -121,6 +122,31 @@ public class ReprotsToView {
                         String.valueOf(this.analyzer.getParse().getReportUserObjectGeometry().countAnimation(typeAnimation))
                 )));
             }
+        }
+        //Agregar pestañas al JTabbedPane
+        tabbedPane.addTab(this.REPORT_USER_ANIMATION, null, instructionsTableModelToPanel(columnNames, data), "UserObject");
+        this.view.add(tabbedPane);
+    }
+    
+    public void loadReporError() {
+        Vector<String> columnNames = new Vector<>();
+        Vector<Vector<String>> data = new Vector<>();
+        // definiendo la columnas 
+        columnNames.add("Lexema");
+        columnNames.add("Linea");
+        columnNames.add("Columna");
+        columnNames.add("Tipo");
+        columnNames.add("Descripcion");
+        ArrayList<ReportErrorInterpreter> list = analyzer.getListError();
+        for (ReportErrorInterpreter reportError : list) {
+            String lexema = reportError.getToke().getLexeme();//00000
+            String line = reportError.getToke().getLine()+"";
+            String columa = reportError.getToke().getColumna() + "";
+            String tipo = reportError.getType().toString();
+            String decrip = reportError.getDescription();
+                data.add(new Vector<>(Arrays.asList(
+                      lexema,line,columa,tipo,decrip
+                )));
         }
         //Agregar pestañas al JTabbedPane
         tabbedPane.addTab(this.REPORT_USER_ANIMATION, null, instructionsTableModelToPanel(columnNames, data), "UserObject");

@@ -15,8 +15,6 @@ import usac.cunoc.interpretefiguras.logic.analysis.parser;
 import usac.cunoc.interpretefiguras.logic.geometry.BasicGeometricObject;
 import usac.cunoc.interpretefiguras.logic.reports.ReportErrorInterpreter;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.Reader;
 import java.io.StringReader;
 
