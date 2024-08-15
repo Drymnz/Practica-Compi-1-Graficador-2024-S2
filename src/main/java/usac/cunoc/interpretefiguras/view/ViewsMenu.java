@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.SpinnerNumberModel;
 import usac.cunoc.interpretefiguras.InterpreteFiguras;
 import usac.cunoc.interpretefiguras.logic.analyzer.Analyzer;
@@ -216,6 +215,7 @@ public class ViewsMenu extends javax.swing.JFrame {
         // Ejecutar el analisis
         if (this.compiler1.getTextArea().getText() != null && !(this.compiler1.getTextArea().getText().isBlank())) {
             int valorEntero = ((SpinnerNumberModel) this.scale.getModel()).getNumber().intValue();
+            System.out.println(valorEntero);
             Analyzer analyzer = new Analyzer(this.compiler1.getTextArea().getText(),valorEntero);
             analyzer.Anilisar();
             if (analyzer.isErrorsAnalyzing()) {

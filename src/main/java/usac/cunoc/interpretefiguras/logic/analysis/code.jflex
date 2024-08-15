@@ -143,7 +143,7 @@ espacio =[\n|\r|\t|\f|\b|\s| ]+
                     }
 
 /*ERROR LEXICO*/
-[^]                   {
+.                   {
                     //MANEJAR EL ERROR LEXICO
                         print();
                         addError();

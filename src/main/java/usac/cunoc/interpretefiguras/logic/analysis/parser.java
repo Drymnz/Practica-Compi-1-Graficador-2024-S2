@@ -245,7 +245,7 @@ private int scale = 1;
     }
     // modificar scala
     public void setScale(int scale){
-        this.scale = scale;
+      this.scale = (scale>0)? scale : 1;
     }
     //erorr
     public void syntax_error(Symbol cur_token) {
@@ -727,8 +727,9 @@ class CUP$parser$actions {
       aDouble =   Double.valueOf(a.toString());
       double result = aDouble * scale;
        RESULT = result;
+    }else{
+      RESULT = aDouble;
     }
-    RESULT = aDouble;
     //////////////////////////////////////////
     
               CUP$parser$result = parser.getSymbolFactory().newSymbol("inico_opereacion",2, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);

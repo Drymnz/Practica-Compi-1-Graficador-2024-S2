@@ -56,7 +56,7 @@ public class NewEmptyJUnitTest {
         try {
             this.parse.parse();
         } catch (Exception e) {
-            Assertions.assertTrue(this.lexeman.getListError().size() == 0);
+            Assertions.assertTrue(this.lexeman.getListError().size() == 1);
         }
         Assertions.assertTrue(this.lexeman.getListError().size() == 1);
     }

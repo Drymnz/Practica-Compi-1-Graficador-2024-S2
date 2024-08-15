@@ -27,7 +27,7 @@ private int scale = 1;
     }
     // modificar scala
     public void setScale(int scale){
-        this.scale = scale;
+      this.scale = (scale>0)? scale : 1;
     }
     //erorr
     public void syntax_error(Symbol cur_token) {
@@ -233,8 +233,9 @@ inico_opereacion ::= operacion:a
       aDouble =   Double.valueOf(a.toString());
       double result = aDouble * scale;
        RESULT = result;
+    }else{
+      RESULT = aDouble;
     }
-    RESULT = aDouble;
     //////////////////////////////////////////
     :} 
     ;

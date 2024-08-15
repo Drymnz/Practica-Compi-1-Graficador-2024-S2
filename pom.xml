@@ -13,13 +13,6 @@
             <version>5.10.0</version>
             <scope>test</scope>
         </dependency>
-        <!-- Dependencia de JFlex -->
-        <!-- https://mvnrepository.com/artifact/de.jflex/jflex -->
-        <dependency>
-            <groupId>de.jflex</groupId>
-            <artifactId>jflex</artifactId>
-            <version>1.9.1</version>
-        </dependency>
         <!-- Dependencia de CUP -->
         <!-- https://mvnrepository.com/artifact/com.github.vbmacher/java-cup -->
         <dependency>
