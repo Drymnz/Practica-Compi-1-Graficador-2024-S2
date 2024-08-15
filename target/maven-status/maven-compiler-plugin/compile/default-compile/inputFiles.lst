@@ -7,10 +7,10 @@
 /home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/logic/reports/ListMathOperation.java
 /home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/logic/fileManager/FileOutput.java
 /home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/logic/analyzer/Analyzer.java
-/home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/view/ViewMenuOne.java
 /home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/logic/geometry/RectangleGeometric.java
 /home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/logic/analysis/ListErrorAnalyzer.java
 /home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/logic/analysis/Lexema.java
+/home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/view/modifiedview/ViewMenuOne.java
 /home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/logic/reports/TypeIntreprete.java
 /home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/logic/geometry/PolygonGeometric.java
 /home/drymnz/NetBeansProjects/InterpreteFiguras/src/main/java/usac/cunoc/interpretefiguras/view/ViewsMenu.java

@@ -18,10 +18,10 @@ usac/cunoc/interpretefiguras/logic/geometry/ListObjectGeometric.class
 usac/cunoc/interpretefiguras/InterpreteFiguras.class
 usac/cunoc/interpretefiguras/logic/objectAnalysis/Token.class
 usac/cunoc/interpretefiguras/logic/animition/ListAnimation.class
+usac/cunoc/interpretefiguras/view/modifiedview/ViewMenuOne$2.class
 usac/cunoc/interpretefiguras/logic/geometry/LineGeometric.class
 usac/cunoc/interpretefiguras/view/ViewsMenu$3.class
 usac/cunoc/interpretefiguras/logic/reports/ReportErrorInterpreter.class
-usac/cunoc/interpretefiguras/view/ViewMenuOne.class
 usac/cunoc/interpretefiguras/view/ViewsMenu$5.class
 usac/cunoc/interpretefiguras/logic/geometry/ListGeometric.class
 usac/cunoc/interpretefiguras/logic/analysis/sym.class
@@ -34,9 +34,10 @@ usac/cunoc/interpretefiguras/logic/reports/ListMathOperation.class
 usac/cunoc/interpretefiguras/view/ViewsMenu$7.class
 usac/cunoc/interpretefiguras/view/ViewsMenu$1.class
 usac/cunoc/interpretefiguras/view/GrapherPanel.class
-usac/cunoc/interpretefiguras/view/ViewsMenu.class
 usac/cunoc/interpretefiguras/logic/fileManager/FileInput.class
+usac/cunoc/interpretefiguras/view/modifiedview/ViewMenuOne$1.class
 usac/cunoc/interpretefiguras/view/ReportPanel.class
+usac/cunoc/interpretefiguras/view/modifiedview/ViewMenuOne.class
 usac/cunoc/interpretefiguras/logic/animition/Animation.class
 usac/cunoc/interpretefiguras/logic/fileManager/FileOutput.class
 usac/cunoc/interpretefiguras/logic/geometry/ListColor.class

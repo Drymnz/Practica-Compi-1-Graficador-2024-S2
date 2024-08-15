@@ -58,7 +58,7 @@ public class AnimateObjectGeometry extends Thread {
         }
     }
 
-    // alculos de animacion
+    // calculos de animacion
     private void calculaAnimation(Animation animation) {
         double b2 = -1;
         int distanci = 0;
@@ -92,6 +92,7 @@ public class AnimateObjectGeometry extends Thread {
         this.xStar = animation.getObjetToAnimate().getPosx();
         this.yStar = animation.getObjetToAnimate().getPoxy();
         this.b = -(this.slope * this.xStar) + this.yStar;
+        ///
     }
 
     private void pause(int time) {

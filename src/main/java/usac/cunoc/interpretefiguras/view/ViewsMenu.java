@@ -35,7 +35,6 @@ public class ViewsMenu extends javax.swing.JFrame {
      */
     public ViewsMenu() {
         initComponents();
-        this.setSize(InterpreteFiguras.HIGH, InterpreteFiguras.WIDTH);
         this.enableJButonLastGraphe(false);
     }
 
