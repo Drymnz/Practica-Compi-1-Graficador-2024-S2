@@ -40,4 +40,19 @@
         <maven.compiler.target>21</maven.compiler.target>
         <exec.mainClass>usac.cunoc.interpretefiguras.InterpreteFiguras</exec.mainClass>
     </properties>
+    <build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <mainClass>usac.cunoc.interpretefiguras.InterpreteFiguras</mainClass>
+                    </manifest>
+                </archive>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 </project>

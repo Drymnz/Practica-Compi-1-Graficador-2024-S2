@@ -22,6 +22,7 @@ usac/cunoc/interpretefiguras/view/modifiedview/ViewMenuOne.class
 usac/cunoc/interpretefiguras/logic/animition/Animation.class
 usac/cunoc/interpretefiguras/logic/fileManager/FileOutput.class
 usac/cunoc/interpretefiguras/view/ViewsMenu$4.class
+usac/cunoc/interpretefiguras/view/modifiedview/ViewMenuOne$8.class
 usac/cunoc/interpretefiguras/logic/reports/ReportUserObjectGeometry.class
 usac/cunoc/interpretefiguras/logic/reports/InterpretSyntaticError.class
 usac/cunoc/interpretefiguras/InterpreteFiguras$1.class
