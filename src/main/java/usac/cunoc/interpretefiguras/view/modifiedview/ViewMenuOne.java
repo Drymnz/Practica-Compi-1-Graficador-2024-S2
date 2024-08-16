@@ -6,6 +6,9 @@ package usac.cunoc.interpretefiguras.view.modifiedview;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -15,6 +18,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
+import javax.swing.text.BadLocationException;
 
 import usac.cunoc.interpretefiguras.logic.analyzer.Analyzer;
 import usac.cunoc.interpretefiguras.logic.animition.AnimateObjectGeometry;
@@ -45,6 +51,33 @@ public class ViewMenuOne extends javax.swing.JFrame {
         this.enableJButonLastGraphe(false);
         //ESTILOS DE LOS BOTONES
         this.stalyJButton();
+        //CAARGAR POSICON
+        this.loadTextPosition();
+    }
+
+    private void positionText() {
+        try {
+            // Convertir la posición del caret a coordenadas (x, y)
+            int pos = compiler1.getCaretPosition();
+            int line = compiler1.getLineOfOffset(pos);
+            int column = pos - compiler1.getLineStartOffset(line);
+            // Mostrar las coordenadas en el JLabel
+            positionLabel.setText("Line:" + (line + 1) + "Columna:" + (column + 1));
+        } catch (BadLocationException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    //MOSTRAR LA POSICION
+    private void loadTextPosition() {
+        this.compiler1.setLineWrap(true);  // Habilitar ajuste de línea
+        this.compiler1.setWrapStyleWord(true);  // Ajuste de palabra
+        this.compiler1.addCaretListener(new CaretListener() {
+            @Override
+            public void caretUpdate(CaretEvent e) {
+                positionText();
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -60,6 +93,7 @@ public class ViewMenuOne extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         compiler1 = new javax.swing.JTextArea();
         jButtonCopiReport = new javax.swing.JButton();
+        positionLabel = new javax.swing.JLabel();
         jPanelCardLayout = new javax.swing.JPanel();
         jScrollPanelGraphics = new javax.swing.JScrollPane();
         jPanelGraphics = new javax.swing.JPanel();
@@ -119,6 +153,10 @@ public class ViewMenuOne extends javax.swing.JFrame {
             }
         });
 
+        positionLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        positionLabel.setForeground(new java.awt.Color(0, 0, 0));
+        positionLabel.setText("Line: 0  Columna: 0");
+
         javax.swing.GroupLayout jPanelCopiladorLayout = new javax.swing.GroupLayout(jPanelCopilador);
         jPanelCopilador.setLayout(jPanelCopiladorLayout);
         jPanelCopiladorLayout.setHorizontalGroup(
@@ -129,7 +167,9 @@ public class ViewMenuOne extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCopiladorLayout.createSequentialGroup()
                         .addComponent(jButtonCopiReport, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(positionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(jButtonCopile, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCopiladorLayout.createSequentialGroup()
                         .addComponent(jButtonLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -148,11 +188,12 @@ public class ViewMenuOne extends javax.swing.JFrame {
                     .addComponent(jButtonLoad)
                     .addComponent(jButtonNewFile))
                 .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelCopiladorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCopile)
-                    .addComponent(jButtonCopiReport))
+                    .addComponent(jButtonCopiReport)
+                    .addComponent(positionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -305,9 +346,8 @@ public class ViewMenuOne extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void stalyJButton(){
+    private void stalyJButton() {
         ArrayList<JButton> list = new ArrayList<>();
-        Color colorJButton = new Color(168,167,167);
         list.add(this.jButtonCopile);
         list.add(this.jButtonSave);
         list.add(this.jButtonLoad);
@@ -404,13 +444,13 @@ public class ViewMenuOne extends javax.swing.JFrame {
 
     private void jButtonAnimationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnimationActionPerformed
         //boton de animar
-        AnimateObjectGeometry a = new AnimateObjectGeometry( this.grapherPanel1, this.listAnimation, this.jButtonAnimation,this.jButtonCopile);
+        AnimateObjectGeometry a = new AnimateObjectGeometry(this.grapherPanel1, this.listAnimation, this.jButtonAnimation, this.jButtonCopile);
         Thread thread = new Thread(a);
         thread.start();
     }//GEN-LAST:event_jButtonAnimationActionPerformed
 
     private void jButtonExportPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportPDFActionPerformed
-         // Exportar en PDF
+        // Exportar en PDF
         File filePDF = this.selectFile("Guardar");
         JPanelToPDF converter = new JPanelToPDF();
         JPanel uno = this.grapherPanel1;
@@ -422,7 +462,7 @@ public class ViewMenuOne extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonExportPDFActionPerformed
 
     private void jButtonExportPNGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportPNGActionPerformed
-         // Exportar en PNG
+        // Exportar en PNG
         File filePNG = this.selectFile("Guardar");
         JPanelToPNG converter = new JPanelToPNG();
         JPanel uno = this.grapherPanel1;
@@ -511,6 +551,7 @@ public class ViewMenuOne extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPanelGraphics;
     private javax.swing.JScrollPane jScrollPanelReport;
+    private javax.swing.JLabel positionLabel;
     private usac.cunoc.interpretefiguras.view.ReportPanel reportPanel1;
     private javax.swing.JSpinner scale;
     // End of variables declaration//GEN-END:variables
