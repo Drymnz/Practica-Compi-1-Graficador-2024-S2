@@ -1,9 +1,9 @@
 # GrammarGeomCalc 
-## Practica de Compi - 2024 S2
+## Práctica de Compi - 2024 S2
 
 <img src='/recursos-git/Screenshot_Proyect.png'>
 
-**GrammarGeomCalc** Es una aplicacion gráficas personalizadas con nuestro framework basado en Java Swing. La herramienta te permite definir un figuras geometricas basica mediante el lenguaje formal ya programado.
+**GrammarGeomCalc** Es una aplicación gráficas personalizadas con nuestro framework basado en Java Swing. La herramienta te permite definir un figuras geometricas básica mediante el lenguaje formal ya programado.
 
 ## Características
 
@@ -15,12 +15,12 @@
 ## Requisitos
 
 - **Java 8 o superior**: Asegúrate de tener instalada la versión 8 o superior del JDK.
-- **Biblioteca Swing**: Swing está incluido en el JDK, por lo que no necesitas instalaciones adicionales.
+- **Biblioteca Swing**Swing está incluido en el JDK, por lo que no necesitas instalaciones adicionales.
 
 
 ### Requerimientos del sistema:
 - **Sistemas Operativos Compatibles**: 
-    * Linux : Cual quier sistema que soporte JAVA.
+    * Linux : Cualquier sistema que soporte JAVA.
     * Microsoft Windows: Windows 7, Windows XP, Windows Vista (Windows XP Professional SP3/Vista SP1/Windows 7 Professional).
 
 * Procesador: Intel Pentium III 800 MHz o superior.
@@ -33,16 +33,16 @@
 * ### git
     Se requiere instalar git para poder clonar el repo.
 
-    La siguiten instruccion es unicamentes para instalar en arch linux o derivadas.
+    La siguiente instrucción es únicamente para instalar en arch linux o derivadas.
 
     ```bash
     sudo pacman -Syu git
     ```
 
 * #### JAVA
-    Se requiere instalar java para su ejecucion.
+    Se requiere instalar java para su ejecución.
 
-    La siguiten instruccion es unicamentes para instalar en arch linux o derivadas.
+    La siguiente instrucción es únicamente para instalar en arch linux o derivadas.
 
     ```bash
     sudo pacman -Syu jdk21-openjdk
@@ -51,7 +51,7 @@
 * #### MAVEN
     Se requiere instalar maven para su ejecucion.
 
-    La siguiten instruccion es unicamentes para instalar en arch linux o derivadas.
+    La siguiente instrucción es únicamente para instalar en arch linux o derivadas.
 
     ```bash
     sudo pacman -Syu maven
@@ -60,7 +60,7 @@
     * #### Copilar
         Se requiere instalar maven para su ejecucion.
 
-        La siguiten instruccion es unicamentes para instalar en arch linux o derivadas.
+        La siguiente instrucción es únicamente para instalar en linux o derivadas.
 
         ```bash
         cd InterpreteFiguras
@@ -84,7 +84,7 @@
 
 2. Introduce las expresiones aritméticas y elige la figura geométrica que deseas graficar.
 
-3. Haz clic en "Copilar" para visualizar la figura en el área de dibujo.
+3. Haz clic en "Compilar" para visualizar la figura en el área de dibujo.
 
 ## Círculo
 Para graficar un círculo se usa la instrucción:
@@ -131,11 +131,11 @@ Para graficar un linea se usa la instrucción:
 Ejemplo :
 
 ```bash
-    graficar linea (linea_Amarillo, 12 * 3 + 2, 15, 4 / 4, 50 * 1, amarillo)
+    graficar línea (linea_Amarillo, 12 * 3 + 2, 15, 4 / 4, 50 * 1, amarillo)
 ```
 
 ## Polígono
-Para graficar un poligono de n lados se usa la instrucción:
+Para graficar un polígono de n lados se usa la instrucción:
 
 ```bash
     graficar poligono (<nombre>, <posx>, <posy>, <cantidad lados>, <ancho>, <alto>,<color>)
@@ -169,12 +169,12 @@ Con el botón animar puede decidir si ejecuta las animaciones detectadas.
 | Nombre | Descipcion |
 | --------- | --------- |
 | \<nombre> |Es el identificador del objeto a graficar el cual puede contener todo el alfabeto \[a-zA-Z] mayúsculas y minúsculas, así como también números y guiones bajos. |
-| \<posx> \<posy> \<radio> \<ancho> \<alto> \<posx2> \<posy2>\<destinox> \<destinoy> \<cantidad lados>|Es cualquier caracter que lleve una serie de digitos numericos como ENTEROS o DECIMALES. Tambien cual quier produccion de operacion aritmetica basica | 
+| \<posx> \<posy> \<radio> \<ancho> \<alto> \<posx2> \<posy2>\<destinox> \<destinoy> \<cantidad lados>|Es cualquier carácter que lleve una serie de dígitos numéricos como ENTEROS o DECIMALES. También cualquier producción de operacion aritmetica basica | 
 | \<color> | Permite el siguiente listado de colores:   azul , rojo , amarillo , verde , negro , celeste , fucsia , lavanda , corinto  |
-|\<tipoanimacion>| Es el tipo de animacion. Linea: Sera una trayectoria de translacion linea. Curva: Sera una trayectoria de translacion linea y de rotacion. |
+|\<tipoanimacion>| Es el tipo de animación. Línea: Será una trayectoria de traslación línea. Curva: Será una trayectoria de traslación en línea y de rotación. |
 
 ## Operadores aritméticos
-
+Las operaciones aritméticos que el sistema reconoce y su precedencia.
 
 | Símbolo | Descripción |   Precedencia  |
 | --------- | --------- |--------- |
@@ -184,3 +184,4 @@ Con el botón animar puede decidir si ejecuta las animaciones detectadas.
 |/| División| 2|
 |( ) |Paréntesis| 3|
   
+
