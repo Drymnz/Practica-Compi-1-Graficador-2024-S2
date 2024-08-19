@@ -1,0 +1,848 @@
+```
+classDiagram
+    class parser {
+        -ArrayList<ReportErrorInterpreter> listError
+        -ArrayList<MathOperation> listMathOperation
+        -ArrayList<BasicGeometricObject> listGeometricObject
+        -ArrayList<Animation> listAnimation
+        -ReportUserObjectGeometry reportUser
+        -int scale
+        +parser(Lexema lexer)
+        +setScale(int scale)
+        +syntax_error(Symbol cur_token)
+        -getInfoPrint()
+        +getReportUserObjectGeometry() ReportUserObjectGeometry
+        -getTokePresent() Token
+        -setTextToken(String modification)
+        +getListAnimation() ArrayList<Animation>
+        +getListError() ArrayList<ReportErrorInterpreter>
+        +getListMathOperation() ArrayList<MathOperation>
+        +getLisGeometricObject() ArrayList<BasicGeometricObject>
+        -addReportMathOperation(ListMathOperation type)
+        -addCircle(String id, String px, String py, String r)
+        -addSquare(String id, String px, String py, String l)
+        -addRectangle(String id, String px, String py, String w, String h)
+        -addLine(String id, String px, String py, String px2, String py2)
+        -addPolygon(String id, String px, String py, String l, String w, String h)
+        -addAnimation(String dx, String dy, String o)
+        -stringToIntCrew(String tx) int
+    }
+
+    class CUP_parser_actions {
+        -parser parser
+        +CUP_parser_actions(parser parser)
+        +CUP_parser_do_action(int act_num, lr_parser parser, Stack stack, int top) Symbol
+    }
+
+    class Lexema {
+        -ArrayList<ReportErrorInterpreter> listError
+        -java.io.Reader zzReader
+        -int zzState
+        -int zzLexicalState
+        -char[] zzBuffer
+        -int zzMarkedPos
+        -int zzCurrentPos
+        -int zzStartRead
+        -int zzEndRead
+        -boolean zzAtEOF
+        -int zzFinalHighSurrogate
+        -int yyline
+        -int yycolumn
+        -long yychar
+        -boolean zzAtBOL
+        -boolean zzEOFDone
+        +Lexema(java.io.Reader in)
+        +next_token() java_cup.runtime.Symbol
+        -print() void
+        -addError() void
+        +getListError() ArrayList<ReportErrorInterpreter>
+        +yyclose() void
+        +yyreset(java.io.Reader reader) void
+        +yystate() int
+        +yybegin(int newState) void
+        +yytext() String
+        +yycharat(int position) char
+        +yylength() int
+        +yypushback(int number) void
+    }
+
+    class java_cup_runtime_Scanner {
+        <<interface>>
+    }
+
+    class ListErrorAnalyzer {
+        -String description
+        +ListErrorAnalyzer(String description)
+        +String getDescription()
+    }
+
+    class sym {
+        +int MULTIPLICAR
+        +int GREEN
+        +int DIVIDIR
+        +int SQUARE
+        +int CURVE
+        +int BLACK
+        +int REAL_NUMEBERS
+        +int CIRCLE
+        +int BLUE
+        +int RED
+        +int ID
+        +int GRAFICAR
+        +int OBJECT
+        +int COMA
+        +int POLYGON
+        +int MAROON
+        +int ANIMATION
+        +int EOF
+        +int RECTANGLE
+        +int CYAN
+        +int RESTAR
+        +int FUCHSIA
+        +int PARENTESIS_C
+        +int error
+        +int PREVIOUS
+        +int LAVENDER
+        +int PARENTESIS_A
+        +int LINE
+        +int YELLOW
+        +int SUMAR
+        +String[] terminalNames
+    }
+
+    sym : MULTIPLICAR = 5
+    sym : GREEN = 14
+    sym : DIVIDIR = 4
+    sym : SQUARE = 24
+    sym : CURVE = 29
+    sym : BLACK = 15
+    sym : REAL_NUMEBERS = 8
+    sym : CIRCLE = 20
+    sym : BLUE = 11
+    sym : RED = 12
+    sym : ID = 7
+    sym : GRAFICAR = 25
+    sym : OBJECT = 28
+    sym : COMA = 6
+    sym : POLYGON = 22
+    sym : MAROON = 19
+    sym : ANIMATION = 26
+    sym : EOF = 0
+    sym : RECTANGLE = 23
+    sym : CYAN = 16
+    sym : RESTAR = 3
+    sym : FUCHSIA = 17
+    sym : PARENTESIS_C = 10
+    sym : error = 1
+    sym : PREVIOUS = 27
+    sym : LAVENDER = 18
+    sym : PARENTESIS_A = 9
+    sym : LINE = 21
+    sym : YELLOW = 13
+    sym : SUMAR = 2
+
+    class Analyzer {
+        -Lexema lexeman
+        -parser parse
+        +Analyzer(String text, int scale)
+        +Anilisar() void
+        +isErrorsAnalyzing() boolean
+        +getListError() ArrayList<ReportErrorInterpreter>
+        +getParse() parser
+        +getListAnimation() ArrayList<Animation>
+    }
+
+    class AnimateObjectGeometry {
+        -ArrayList<Animation> listAnimation
+        -JButton jButton
+        -JButton jButtonOne
+        -GrapherPanel grapherPanel
+        -double angulo
+        -double slope
+        -double xStar
+        -double yStar
+        -double b
+        -final int FPS
+        -final int MS
+
+        +AnimateObjectGeometry(GrapherPanel grapherPanel, ArrayList<Animation> listAnimation, JButton jButton, JButton jButtonOne)
+        +void run()
+        -void animateObjects()
+        -void calculaAnimation(Animation animation)
+        -void calculationsFistPositionLine(Animation animation)
+        -void pause(int time)
+        -int incrementFormula(double m, int x, double b)
+        -double calculateSope(BasicGeometricObject objet, int dPosX, int dPosY)
+        -int increaseOrDecreaseBalance(int intIncreaseOrDecrease, int intTwo)
+        -void rotation(BasicGeometricObject objet)
+    }
+
+    class Animation {
+        -ListAnimation tipy
+        -int destinationPosX
+        -int destinationPosY
+        -int order
+        -BasicGeometricObject objetToAnimate
+
+        +Animation(ListAnimation tipy, int destinationPosX, int destinationPosY, int order, BasicGeometricObject objetToAnimate)
+        +ListAnimation getTipy()
+        +int getDestinationPosX()
+        +int getDestinationPosY()
+        +int getOrder()
+        +BasicGeometricObject getObjetToAnimate()
+        +String toString()
+        +int compareTo(Animation otro)
+    }
+
+    class BasicGeometricObject {
+        -int posx
+        -int poxy
+        -String id
+        -ListColor color
+
+        +BasicGeometricObject(int posx, int poxy, String id, ListColor color)
+        +int getPosx()
+        +void setPosx(int posx)
+        +int getPoxy()
+        +void setPoxy(int poxy)
+        +String getId()
+        +void setId(String id)
+        +ListColor getColor()
+        +void setColor(ListColor color)
+        +String toString()
+    }
+
+    class CircleGeometric {
+        -int radio
+
+        +CircleGeometric(int posx, int poxy, String id, ListColor color, int radio)
+        +int getRadio()
+    }
+
+    class RectangleGeometric {
+        -int high
+        -int width
+
+        +RectangleGeometric(int posx, int poxy, String id, ListColor color, int high, int width)
+        +int getHigh()
+        +int getWidth()
+    }
+
+    class LineGeometric {
+        -int posXF
+        -int posYF
+
+        +LineGeometric(int posx, int poxy, String id, ListColor color, int posXF, int posYF)
+        +int getPosXF()
+        +void setPosXF(int posXF)
+        +int getPosYF()
+        +void setPosYF(int posYF)
+    }
+    
+    class PolygonGeometric {
+        -int numberSides
+        -int high
+        -int width
+
+        +PolygonGeometric(int posx, int poxy, String id, ListColor color, int numberSides, int high, int width)
+        +int getNumberSides()
+        +int getHigh()
+        +int getWidth()
+    }
+
+    class SquareGeometric {
+        -int square
+
+        +SquareGeometric(int posx, int poxy, String id, ListColor color, int square)
+        +int getSquare()
+    }
+
+    class ListColor {
+        BLUE
+        RED
+        YELLOW
+        GREEN
+        BLACK
+        CYAN
+        FUCHSIA
+        LAVENDER
+        MAROON
+    }
+
+    class ListGeometric {
+        CIRCLE
+        LINE
+        POLYGON
+        RECTANGLE
+        SQUARE
+    }
+
+    class ListObjectGeometric {
+        CIRCLE
+        LINE
+        POLYGON
+        RECTANGLE
+        SQUARE
+    }
+
+    class ListAnimation {
+        CURVE
+        LINE
+    }
+
+    class JPanelToPNG {
+        - File archivoHilo
+        - JPanel jPanelHilo
+        - FileOutputStream salida
+        + JPanelToPNG()
+        + JPanelToPNG(File archivoHilo, JPanel jPanelHilo)
+        + boolean savePNG(File archivo, JPanel jPanle)
+        + void run()
+        +savePNG(File archivo, JPanel jPanle)
+        +run()
+        -archivoHilo : File
+        -jPanelHilo : JPanel
+        -salida : FileOutputStream
+    }
+
+    class JPanel {
+        + void setLayout(LayoutManager layout)
+        + void add(Component comp)
+        + void setSize(int width, int height)
+    }
+
+    class JPanelToPDF {
+        - Document document
+        - JPanel panel
+        - File file
+        - String tilePDF
+        + JPanelToPDF()
+        + JPanelToPDF(JPanel panel, File file, String tilePDF)
+        + boolean jPanelToPDF(JPanel panel, File file, String tilePDF)
+        + void jPanelToPDF()
+        + void run()
+        -document : Document
+        -panel : JPanel
+        -file : File
+        -tilePDF : String
+        +jPanelToPDF(JPanel panel, File file, String tilePDF) : boolean
+        +jPanelToPDF() : void
+        +run() : void
+    }
+
+    class Document {
+        + static getInstance(Document doc, FileOutputStream os) : PdfWriter
+        + open() : void
+        + close() : void
+        + add(Element element) : void
+    }
+
+    class PdfWriter {
+        + static getInstance(Document doc, FileOutputStream os) : PdfWriter
+    }
+
+    class BufferedImage {
+        + BufferedImage(int width, int height, int imageType) : BufferedImage
+        + createGraphics() : Graphics2D
+    }
+
+    class Graphics2D {
+        + dispose() : void
+    }
+
+    class Image {
+        +static write(BufferedImage im, String formatName, File output) : boolean
+        + static getInstance(BufferedImage image, Object object) : Image
+        + scaleToFit(float width, float height) : void
+        + setAlignment(int alignment) : void
+    }
+
+    class Paragraph {
+        + Paragraph(String text, Font font) : Paragraph
+        + setAlignment(int alignment) : void
+    }
+
+    class FontFactory {
+        + static getFont(String fontName, int size, int style) : Font
+    }
+
+    class Font {
+    }
+
+    class Element {
+        + static ALIGN_CENTER : int
+    }
+
+    class IOException {
+    }
+
+    class FileOutput {
+        - FileOutputStream salida
+        - File archivoHilo
+        - String contenidoHilo
+        + FileOutput()
+        + FileOutput(File archivo, String contenido)
+        + boolean aguardarTexto(File archivo, String contenido)
+        + void run()
+        + void setArchivoHilo(File archivoHilo)
+        + void setContenidoHilo(String contenidoHilo)
+        -salida : FileOutputStream
+        -archivoHilo : File
+        -contenidoHilo : String
+        +aguardarTexto(File archivo, String contenido) : boolean
+        +run() : void
+        +setArchivoHilo(File archivoHilo) : void
+        +setContenidoHilo(String contenidoHilo) : void
+    }
+
+    class Logger {
+        + static getLogger(String name) : Logger
+        + log(Level level, String msg, Throwable thrown) : void
+    }
+
+    class Level {
+        + static SEVERE : Level
+    }
+
+    class FileInput {
+        - FileInputStream entrada
+        + String cargarArchivoTexto(File carchivo)
+        + File exiteDireccion(File verificar)
+        -entrada : FileInputStream
+        +cargarArchivoTexto(File carchivo) : String
+        +exiteDireccion(File verificar) : File
+    }
+ 
+    class FileInputStream {
+        + FileInputStream(File file) : FileInputStream
+        + int read() : int
+        + void close() : void
+    }
+
+    class File {
+        + getAbsoluteFile() : File
+        + boolean exists() : boolean
+        + boolean mkdirs() : boolean
+        + String getName() : String
+    }
+
+    class String {
+        + String() : String
+        + String += (char c) : String
+    }
+
+    class FileNotFoundException {
+    }
+
+    class JOptionPane {
+        + static int showConfirmDialog(Component parentComponent, Object message, String title, int optionType)
+        + static void showMessageDialog(Component parentComponent, Object message)
+        + static void showMessageDialog(Component parentComponent, Object message) : void
+    }
+
+    class Token {
+        - int line
+        - int columna
+        - String lexeme
+        + Token(int line, int columna, String lexeme)
+        + int getLine()
+        + int getColumna()
+        + String getLexeme()
+        + String toString()
+        -line : int
+        -columna : int
+        -lexeme : String
+        +Token(line, columna, lexeme) : Token
+        +getLine() : int
+        +getColumna() : int
+        +getLexeme() : String
+        +toString() : String
+    }
+
+    class ReprotsToView {
+        - Analyzer analyzer
+        - ReportPanel view
+        - JTabbedPane tabbedPane
+        - final String REPORT_USER_ANIMATION
+        - final String REPORT_USER_COLOR
+        - final String REPORT_USER_OBJECT
+        - final String REPORT_USER_OPERATION_MATH
+        + ReprotsToView(Analyzer analyzer, ReportPanel view)
+        + void loadReportMathOperation()
+        + void loadReportUserColor()
+        + void loadReportUserObject()
+        + void loadReportUserAnimation()
+        + void loadReporError()
+        - JComponent instructionsTableModelToPanel(Vector<String> columnNames, Vector<Vector<String>> data)
+    }
+
+    class ReportPanel {
+        + ReportPanel()
+        - void initComponents()
+        + int getWidth()
+        + int getHeight()
+        + void add(JComponent component)
+        +void removeAll()
+        +void repaint()
+    }
+
+    class JTabbedPane {
+        + void addTab(String title, Image icon, JComponent component, String tooltip)
+        + void setSize(int width, int height)
+    }
+
+    class Vector {
+        <<class>>
+    }
+
+    class DefaultTableModel {
+        <<class>>
+        + DefaultTableModel(Vector<Vector<String>> data, Vector<String> columnNames)
+    }
+
+    class JTable {
+        <<class>>
+        + JTable(DefaultTableModel model)
+    }
+
+    class JScrollPane {
+        <<class>>
+        + JScrollPane(JTable table)
+    }
+
+    class ReportUserObjectGeometry {
+        - int circleCount
+        - int lineCount
+        - int polygonCount
+        - int rectangleCount
+        - int squareCount
+        - int blueCount
+        - int redCount
+        - int yellowCount
+        - int greenCount
+        - int blackCount
+        - int cyanCount
+        - int fuchsiaCount
+        - int lavenderCount
+        - int maroonCount
+        - int lineCountAnimation
+        - int curveCount
+        - ListColor typeColor
+        - ListAnimation typeAnimation
+        + ReportUserObjectGeometry()
+        + void incrementAnimationCounter(ListAnimation type)
+        + int countAnimation(ListAnimation type)
+        + void incrementColorCounter(ListColor type)
+        + int countColor(ListColor type)
+        + void incrementObjectCounter(ListObjectGeometric type)
+        + int countUserObject(ListObjectGeometric type)
+        + ListColor getTypeColor()
+        + int getCircleCount()
+        + int getLineCount()
+        + int getPolygonCount()
+        + int getRectangleCount()
+        + int getSquareCount()
+        + int getBlueCount()
+        + int getRedCount()
+        + int getYellowCount()
+        + int getGreenCount()
+        + int getBlackCount()
+        + int getCyanCount()
+        + int getFuchsiaCount()
+        + int getLavenderCount()
+        + int getMaroonCount()
+        + int getLineCountAnimation()
+        + int getCurveCount()
+        + ListAnimation getTypeAnimation()
+    }
+
+    class ReportErrorInterpreter {
+        - TypeIntreprete type
+        - Token toke
+        - String description
+        + ReportErrorInterpreter(TypeIntreprete type, Token toke, String description)
+        + TypeIntreprete getType()
+        + Token getToke()
+        + String getDescription()
+        + String toString()
+    }
+
+    class TypeIntreprete {
+        LEXICON
+        SYNTACTIC
+        SEMANTIC
+    }
+
+    class MathOperation {
+        - Token token
+        - ListMathOperation type
+        + MathOperation(Token token, ListMathOperation type)
+        + Token getToken()
+        + ListMathOperation getType()
+        + String toString()
+    }
+
+    class ListMathOperation {
+        ADDITION
+        SUBTRACTION
+        MULTIPLICATION
+        DIVISION
+    }
+    
+    class InterpretSyntaticError {
+        - Stack stack
+        - String nameTerminal
+        - int numberTerminal
+        - String lexema
+        - int line
+        - int columna
+        + InterpretSyntaticError(Stack stack, String nameTerminal, int numberTerminal, String lexema, int line, int columna)
+        + String description()
+        - String previousToken(int id)
+        - String nombreSYM(int id)
+        - int convertir(String str)
+    }
+
+    class ViewsMenu {
+        - File userFile
+        - ArrayList<Animation> listAnimation
+        + ViewsMenu()
+        + void jButtonCopileActionPerformed(java.awt.event.ActionEvent evt)
+        + void loadReportsError(Analyzer analyzer, ReportPanel view)
+        + void loadGraphAndReports(Analyzer analyzer, ReportPanel view)
+        + void jButtonLoadActionPerformed(java.awt.event.ActionEvent evt)
+        + void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt)
+        + void jButtonNewFileActionPerformed(java.awt.event.ActionEvent evt)
+        + void jButtonExportPNGActionPerformed(java.awt.event.ActionEvent evt)
+        + void jButtonExportPDFActionPerformed(java.awt.event.ActionEvent evt)
+        + void jButtonAnimationActionPerformed(java.awt.event.ActionEvent evt)
+        - void verify()
+        - void saven()
+        - File selectFile(String botonText)
+        - void enableJButonLastGraphe(boolean station)
+    }
+
+    class JFileChooser {
+        + File getSelectedFile()
+        + int showDialog(Component parent, String approveButtonText)
+    }
+
+    class GrapherPanel {
+        - ArrayList<BasicGeometricObject> lisGeometricObject
+        - AffineTransform affineTransform
+        - AffineTransform affineTransformNormal
+        - String nameAnimation
+        + GrapherPanel()
+        + void Graficar(ArrayList<BasicGeometricObject> lisGeometricObject)
+        + void setAffineTransform(AffineTransform affineTransform)
+        + void setNameAnimation(String nameAnimation)
+        - void paintComponent(Graphics g)
+        - void initComponents()
+        +void repaint()
+    }
+
+    class Compiler {
+        + Compiler()
+        + javax.swing.JTextArea getTextArea()
+        - void initComponents()
+    }
+   
+    class ViewMenuOne {
+        -File userFile
+        -ArrayList~Animation~ listAnimation
+        -final String NAME_PANEL_GRAPHICS
+        -final String NAME_PANEL_REPORT
+        -final String NAME_PROYECT
+        +ViewMenuOne()
+        -void positionText()
+        -void loadTextPosition()
+        -void stalyJButton()
+        -void verify()
+        -void saven()
+        -File selectFile(String botonText)
+        -void jButtonCopileActionPerformed(java.awt.event.ActionEvent evt)
+        -void jButtonLoadActionPerformed(java.awt.event.ActionEvent evt)
+        -void jButtonNewFileActionPerformed(java.awt.event.ActionEvent evt)
+        -void jButtonAnimationActionPerformed(java.awt.event.ActionEvent evt)
+        -void jButtonExportPDFActionPerformed(java.awt.event.ActionEvent evt)
+        -void jButtonExportPNGActionPerformed(java.awt.event.ActionEvent evt)
+        -void jButtonCopiReportActionPerformed(java.awt.event.ActionEvent evt)
+        -void loadReportsError(Analyzer analyzer, ReportPanel view)
+        -void loadGraphAndReports(Analyzer analyzer, ReportPanel view)
+        -void enableJButonLastGraphe(boolean station)
+        -void showJPanel(String name)
+    }
+    
+    class InterpreteFiguras {
+        +main(String[] args)
+    }
+
+
+    class JButton
+
+    Analyzer --> Lexema
+    Analyzer --> parser
+    Analyzer --> ReportErrorInterpreter : uses
+    Analyzer --> Animation : uses
+    parser --> Animation : uses
+    parser --> ReportErrorInterpreter : uses
+    Lexema --> ReportErrorInterpreter : uses
+
+    class Symbol
+
+    ListErrorAnalyzer : LEXEMA_ONE = "Simbolo no existe en el lenguaje"
+    Lexema ..|> java_cup_runtime_Scanner
+    Lexema --> "0..*" ReportErrorInterpreter : contains
+    ReportErrorInterpreter --> Token : uses
+    parser -- CUP_parser_actions
+    parser --> "0..*" ReportErrorInterpreter : contains
+    parser --> "0..*" MathOperation : contains
+    parser --> "0..*" BasicGeometricObject : contains
+    parser --> "0..*" Animation : contains
+    parser --> "1" ReportUserObjectGeometry : contains
+
+    AnimateObjectGeometry --> Animation
+    AnimateObjectGeometry --> JButton
+    AnimateObjectGeometry --> GrapherPanel
+    AnimateObjectGeometry --> BasicGeometricObject
+    AnimateObjectGeometry --> AffineTransform
+    AnimateObjectGeometry --> RectangleGeometric : uses
+    AnimateObjectGeometry --> CircleGeometric : uses
+    AnimateObjectGeometry --> LineGeometric : uses
+    AnimateObjectGeometry --> PolygonGeometric : uses
+    AnimateObjectGeometry --> SquareGeometric : uses
+    GrapherPanel --> AffineTransform
+    GrapherPanel --> Graphics : uses
+
+    Animation --> ListAnimation
+    Animation --> BasicGeometricObject
+    BasicGeometricObject --> ListColor
+
+    CircleGeometric --> BasicGeometricObject
+    BasicGeometricObject --> ListColor
+
+    ListColor : +String getNameColor()
+    ListColor : +Color getColor()
+
+    BasicGeometricObject --> ListColor
+
+    parser ..> Lexema
+    parser ..> CUP_parser_actions
+    parser ..> Animation
+    parser ..|> Token
+    parser ..|> ListErrorAnalyzer
+
+    CircleGeometric --|> BasicGeometricObject
+    RectangleGeometric --|> BasicGeometricObject
+    LineGeometric --|> BasicGeometricObject
+    PolygonGeometric --|> BasicGeometricObject
+    SquareGeometric --|> BasicGeometricObject
+    
+    <<Enumeration>> ListColor
+    <<Enumeration>> ListGeometric
+    <<Enumeration>> ListObjectGeometric
+    <<Enumeration>> ListAnimation
+    <<Enumeration>> ListMathOperation
+    <<Enumeration>> TypeIntreprete
+    <<Enumeration>> ListErrorAnalyzer
+    <<Enumeration>> TypeIntreprete
+
+
+    Lexema ..> java_cup_runtime_Scanner
+    Lexema ..|> sym
+
+    Analyzer --* parser
+
+    JPanelToPNG --|> JPanel
+    JPanelToPNG --|> File
+    JPanelToPNG --|> FileOutputStream
+    JPanelToPNG --|> BufferedImage
+    JPanelToPNG --|> Graphics2D
+    JPanelToPNG --|> ImageIO
+
+    JPanelToPDF --|> Document
+    JPanelToPDF --|> JPanel
+    JPanelToPDF --|> File
+    JPanelToPDF --|> String
+    JPanelToPDF --|> BufferedImage
+    JPanelToPDF --|> Graphics2D
+    JPanelToPDF --|> Image
+    JPanelToPDF --|> Paragraph
+    JPanelToPDF --|> FontFactory
+    JPanelToPDF --|> Font
+    JPanelToPDF --|> Element
+    Document --|> PdfWriter
+    Image --|> BufferedImage
+    FontFactory --|> Font
+    DocumentException --|> Document
+    IOException --|> Document
+    FileNotFoundException --|> Document
+
+    FileOutput --|> FileOutputStream
+    FileOutput --|> File
+    FileOutput --|> String
+    FileOutput --|> Logger
+    FileOutput --|> Level
+    FileOutput --|> FileNotFoundException
+    FileOutput --|> IOException
+
+    FileInput --|> FileInputStream
+    FileInput --|> File
+    FileInput --|> String
+    FileInput --|> IOException
+    FileInput --|> FileNot
+
+    ReprotsToView --> Analyzer : uses
+    ReprotsToView --> ReportPanel : uses
+    ReprotsToView --> JTabbedPane : uses
+    ReprotsToView --> Vector : uses
+    ReprotsToView --> DefaultTableModel : creates
+    ReprotsToView --> JTable : creates
+    ReprotsToView --> JScrollPane : creates
+    ReprotsToView --> JPanel : creates
+
+    ReportUserObjectGeometry --> ListColor : uses
+    ReportUserObjectGeometry --> ListAnimation : uses
+    ReportUserObjectGeometry --> ListObjectGeometric : uses
+
+    MathOperation --> Token : uses
+    MathOperation --> ListMathOperation : uses
+    ReportErrorInterpreter --> TypeIntreprete : uses
+    ReportErrorInterpreter --> Token : uses
+
+    ViewsMenu --> Analyzer : uses
+    ViewsMenu --> ReportPanel : uses
+    ViewsMenu --> GrapherPanel : uses
+    ViewsMenu --> JFileChooser : uses
+    ViewsMenu --> JOptionPane : uses
+    ViewsMenu --> JPanelToPNG : uses
+    ViewsMenu --> JPanelToPDF : uses
+    ViewsMenu --> AnimateObjectGeometry : uses
+
+    ReportPanel --> JTabbedPane : uses
+
+    GrapherPanel --> BasicGeometricObject : uses
+    BasicGeometricObject <|-- CircleGeometric
+    BasicGeometricObject <|-- LineGeometric
+    BasicGeometricObject <|-- PolygonGeometric
+    BasicGeometricObject <|-- RectangleGeometric
+    BasicGeometricObject <|-- SquareGeometric
+
+    Compiler --> Analyzer : uses
+
+    Compiler : - javax.swing.JTextArea TextArea
+    Compiler : - javax.swing.JScrollPane jScrollPane1
+
+    ViewMenuOne --> Analyzer
+    ViewMenuOne --> ReportPanel
+    ViewMenuOne --> ReprotsToView
+    ViewMenuOne --> AnimateObjectGeometry
+    ViewMenuOne --> JPanelToPDF
+    ViewMenuOne --> JPanelToPNG
+    ViewMenuOne --> GrapherPanel
+    Analyzer --> Parse
+    GrapherPanel --> GeometricObject
+
+    InterpreteFiguras "1" --> "1" ViewMenuOne : creates
+
+```
