@@ -1,1 +1,54 @@
 /nbproject/
+# Bytecode generado
+*.class
+
+# Directorios de compilación
+Code/bin/
+Code/build/
+
+# Archivos de configuración del IDE
+/.idea/
+/*.iml
+/.project
+/.classpath
+/.settings/
+/.vscode/
+/*.launch
+
+# Archivos generados por Maven
+Code/target
+Code/pom.xml.tag
+Code/pom.xml.releaseBackup
+Code/pom.xml.versionsBackup
+Code/logging.properties
+Code/release.properties
+Code/mvnw
+Code/mvnw.cmd
+
+# Archivos generados por Gradle
+Code/.gradle/
+Code/build/
+Code/out/
+Code/gradle-app.setting
+gradlew
+gradlew.bat
+.gradle
+!gradle-wrapper.jar
+
+# Archivos generados por otras herramientas de construcción
+Code/dist/
+Code/tmp/
+Code/*.log
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de configuración específicos del entorno
+*.env
+.env.local
+.env.*.local
+.envrc
+venv/
+.idea_modules/
+.idea/*
