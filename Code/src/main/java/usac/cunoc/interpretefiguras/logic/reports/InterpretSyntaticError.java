@@ -21,18 +21,63 @@ public class InterpretSyntaticError {
     }
 
     public String description() {
-        //System.out.println("this.stack->" + this.stack);
-        //System.err.println("this.stack->" + this.stack.get(this.stack.size() - 1).toString().replace("#", ""));
-        //System.out.println("this.nameTerminal->" + this.nameTerminal);
-        //System.out.println("this.numberTerminal->" + this.numberTerminal);
-        //System.out.println("this.lexema->" + this.lexema);
-        //System.out.println("this.line->" + this.line);
-        //System.out.println("this.columna->" + this.columna);
-        return "Se esperaba un <" + previousToken(this.numberTerminal)+ "> y vino un <"+nombreSYM(this.numberTerminal)+ "> que es \""+this.lexema+"\"";
+        // System.err.println("this.stack->" + this.stack.get(this.stack.size() -
+        // 1).toString().replace("#", ""));
+        // System.out.println("this.nameTerminal->" + this.nameTerminal);
+        // System.out.println("this.numberTerminal->" + this.numberTerminal);
+        // System.out.println("this.lexema->" + this.lexema);
+        // System.out.println("this.line->" + this.line);
+        // System.out.println("this.columna->" + this.columna);
+        return this.descriptionToStack(stack);
+    }
 
-        // return "Se esperaba un " +
-        // previousToken(convertir(this.stack.get(this.stack.size()-1).toString().replace("#",
-        // "")));
+    private String descriptionToStack(Stack stack) {
+        System.out.println("this.stack->" + this.stack);
+        if (stack.size() == 1) {
+            return "Se esperaba un <" + previousToken(this.numberTerminal) + "> y vino un <"
+                    + nombreSYM(this.numberTerminal) + "> que es \"" + this.lexema + "\"";
+        }
+        if (stack.size() > 1) {
+            String ultimaPosicion = stack.get(stack.size() - 1).toString();
+            String antePenultimoPosicion = stack.get(stack.size() - 2).toString();
+            int posSynOne = delSigno(ultimaPosicion, "#");
+            int posSynTwo = delSigno(antePenultimoPosicion, "#");
+            //color
+            if (this.lexema.equalsIgnoreCase(")") & posSynOne >= 6) {
+                return "Se esperaba una tipo de grafica \"azul,rojo,amarillo,verde,negro,celeste,fusia,lila o corinto\"";
+            }
+            // error si falta (
+            if (posSynOne == 9 & posSynTwo == 20) {
+                return "Se esperaba un < ID > y vino un <" + nombreSYM(this.numberTerminal) + "> que es \""
+                        + this.lexema + "\"";
+            }
+            // es un error en las operaciones
+            if ((posSynOne >= 2 & posSynOne <= 6) || (posSynOne == 9 | posSynOne == 10 | posSynOne == 8)) {
+                return "Hay un error en las operaciones por causa de <" + nombreSYM(this.numberTerminal) + "> que es \""
+                        + this.lexema + "\"";
+            }
+            //graficar
+            if (posSynOne >= 25) {
+                return "Se esperaba una tipo de grafica \"rectangulo,circulo,linea,poligono o cuadrado\"";
+            }
+        }
+        return "Se esperaba un <" + previousToken(this.numberTerminal) + "> y vino un <"
+                + nombreSYM(this.numberTerminal) + "> que es \"" + this.lexema + "\"";
+    }
+
+    private int delSigno(String str, String delSig) {
+        str = str.replace(delSig, "");
+        return this.convertir(str);
+    }
+
+    private int convertir(String str) {
+        int val = 0;
+        try {
+            val = Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            System.out.println("Chaîne invalide");
+        }
+        return val;
     }
 
     private String previousToken(int id) {
@@ -164,13 +209,4 @@ public class InterpretSyntaticError {
         }
     }
 
-    private int convertir(String str) {
-        int val = 0;
-        try {
-            val = Integer.parseInt(str);
-        } catch (NumberFormatException e) {
-            System.out.println("Chaîne invalide");
-        }
-        return val;
-    }
 }

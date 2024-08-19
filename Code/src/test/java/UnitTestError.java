@@ -30,10 +30,9 @@ public class UnitTestError {
     public UnitTestError() {
     }
 
-
     @Test
     public void TestErrorUno() {
-        Reader reader = new StringReader("graficar circulo  circulo_6, (50 + 5), (150 + 25),15 , lila) \n"
+        Reader reader = new StringReader("graficar circulo ( circulo_6, (1 + 5), (150 + 25),15 , lila) \n"
         +"graficar circulo (circulo_7, (50 + 25), (150 + 25), (10 + 12), lila)");
         this.lexeman = new Lexema(reader);
         this.parse = new parser(this.lexeman);

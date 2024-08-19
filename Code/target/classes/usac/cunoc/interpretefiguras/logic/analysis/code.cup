@@ -81,23 +81,33 @@ private int scale = 1;
     }
     //agregar circulo
     private void addCircle(String id, String px, String py, String r){
+      if (reportUser.getTypeColor()!=null) {
         this.listGeometricObject.add(new CircleGeometric( this.stringToIntCrew(px), this.stringToIntCrew(py),id, reportUser.getTypeColor(), this.stringToIntCrew(r)));
+      }
     }
     //agregar cuadrado
     private void addSquare(String id, String px, String py, String l){
+      if (reportUser.getTypeColor()!=null) {
         this.listGeometricObject.add(new SquareGeometric( this.stringToIntCrew(px), this.stringToIntCrew(py),id, reportUser.getTypeColor(), this.stringToIntCrew(l)));
+      }
     }
     //agregar rectangulo
     private void addRectangle(String id, String px, String py, String w, String h){
+      if (reportUser.getTypeColor()!=null) {
         this.listGeometricObject.add(new RectangleGeometric( this.stringToIntCrew(px), this.stringToIntCrew(py),id, reportUser.getTypeColor(), this.stringToIntCrew(w), this.stringToIntCrew(h)));
+      }
     }
     //agregar linea
     private void addLine(String id, String px, String py, String px2, String py2){
+      if (reportUser.getTypeColor()!=null) {
         this.listGeometricObject.add(new LineGeometric( this.stringToIntCrew(px), this.stringToIntCrew(py),id, reportUser.getTypeColor(), this.stringToIntCrew(px2),this.stringToIntCrew(py2)));
+      }
     }
     //agregar poligono
     private void addPolygon(String id, String px, String py, String l, String w, String h){
+      if (reportUser.getTypeColor()!=null) {
         this.listGeometricObject.add(new PolygonGeometric( this.stringToIntCrew(px), this.stringToIntCrew(py),id, reportUser.getTypeColor(),this.stringToIntCrew(l),this.stringToIntCrew(w),this.stringToIntCrew(h)));
+      }
     }
     //Agregapar la animacion
     private void addAnimation(String dx,String dy, String o ){
@@ -152,6 +162,7 @@ inicio ::= acciones
 acciones
     ::= acciones grafica
     |grafica
+
     ;
 
 grafica
@@ -344,8 +355,13 @@ operacion
 
     :}
 /****solo retornar*****/
-| PARENTESIS_A operacion:a {:RESULT = a;:} PARENTESIS_C 
+| PARENTESIS_A operacion:a {:RESULT = a;:} parente 
 | REAL_NUMEBERS:a {:RESULT = a;:}
 /***manejar el error***/
 | error
 ;
+
+parente
+  ::=PARENTESIS_C
+  | error
+  ;
