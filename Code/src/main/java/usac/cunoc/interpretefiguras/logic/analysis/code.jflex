@@ -37,7 +37,7 @@ import usac.cunoc.interpretefiguras.logic.reports.TypeIntreprete;
 /*CODE*/
 %}
 
-ALPHABET = [a-zA-Z]
+ALPHABET = [a-zA-Z]|"ñ"|"Ñ"
 DIGIT = [0-9]
 WHOLE = {DIGIT}+
 DECIMAL = {WHOLE}[.]{WHOLE}
