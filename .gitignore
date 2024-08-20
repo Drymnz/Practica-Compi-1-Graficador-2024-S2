@@ -1,54 +1,61 @@
-/nbproject/
-# Bytecode generado
+# Compiled class files
 *.class
 
-# Directorios de compilación
-Code/bin/
-Code/build/
+# Package Files #
+*.jar
+*.war
+*.ear
 
-# Archivos de configuración del IDE
-/.idea/
-/*.iml
-/.project
-/.classpath
-/.settings/
-/.vscode/
-/*.launch
-
-# Archivos generados por Maven
-Code/target
+# Maven specific files
+Code/target/
 Code/pom.xml.tag
 Code/pom.xml.releaseBackup
 Code/pom.xml.versionsBackup
 Code/logging.properties
 Code/release.properties
-Code/mvnw
-Code/mvnw.cmd
 
-# Archivos generados por Gradle
-Code/.gradle/
-Code/build/
-Code/out/
-Code/gradle-app.setting
-gradlew
-gradlew.bat
-.gradle
-!gradle-wrapper.jar
-
-# Archivos generados por otras herramientas de construcción
+# NetBeans specific files
+Code/nbproject/private/
+Code/nbbuild/
 Code/dist/
-Code/tmp/
-Code/*.log
+Code/nbdist/
+Code/.nb-gradle/
+Code/build/
+Code/nb-configuration.xml
 
-# Archivos del sistema operativo
+# VS Code specific files
+.vscode/
+/*.code-workspace
+
+# Logs
+*.log
+
+# OS generated files
 .DS_Store
 Thumbs.db
 
-# Archivos de configuración específicos del entorno
+# Eclipse specific files (if applicable)
+.project
+.classpath
+.settings/
+*.launch
+
+# IntelliJ specific files
+.idea/
+*.iml
+
+# Other files and directories to ignore
+Code/out/
+Code/tmp/
+Code/bin/
+Code/.buildpath
+Code/.metadata/
+Code/recommenders/
+Code/.remote-sync.json
+Code/target/
+
+# Environment variables and config files
 *.env
 .env.local
 .env.*.local
 .envrc
-venv/
-.idea_modules/
-.idea/*
