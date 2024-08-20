@@ -193,7 +193,7 @@
                       <Color blue="0" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="rows" type="int" value="5"/>
-                    <Property name="text" type="java.lang.String" value="Ingrese el texto aqui"/>
+                    <Property name="text" type="java.lang.String" value="Ingrese las instrucciones aqui"/>
                   </Properties>
                 </Component>
               </SubComponents>

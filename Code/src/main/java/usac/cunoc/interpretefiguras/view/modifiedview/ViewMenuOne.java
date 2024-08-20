@@ -45,6 +45,7 @@ public class ViewMenuOne extends javax.swing.JFrame {
     private final String NAME_PANEL_REPORT = "report";
     
     private final String NAME_PROYECT = "GrammarGeomCalc";
+    private final String TEXT_DEFAULT = "Ingrese las instrucciones aqui";
 
     public ViewMenuOne() {
         this.setTitle(NAME_PROYECT);
@@ -113,7 +114,6 @@ public class ViewMenuOne extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         setLocation(new java.awt.Point(0, 0));
-        setMaximumSize(new java.awt.Dimension(1280, 720));
         setMinimumSize(new java.awt.Dimension(1280, 720));
         setSize(new java.awt.Dimension(0, 0));
 
@@ -149,7 +149,7 @@ public class ViewMenuOne extends javax.swing.JFrame {
         compiler1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         compiler1.setForeground(new java.awt.Color(0, 0, 0));
         compiler1.setRows(5);
-        compiler1.setText("Ingrese el texto aqui");
+        compiler1.setText("Ingrese las instrucciones aqui");
         jScrollPane1.setViewportView(compiler1);
 
         jButtonCopiReport.setText("Ver REPORTES");
@@ -390,7 +390,7 @@ public class ViewMenuOne extends javax.swing.JFrame {
     private void verify() {
         boolean fileLoad = (this.userFile != null);
         //true tienes un archivo cargado
-        boolean areaTextIsBlank = this.compiler1.getText().isEmpty();
+        boolean areaTextIsBlank = this.compiler1.getText().isEmpty() | (this.compiler1.getText().equalsIgnoreCase(this.TEXT_DEFAULT));
         //true el texto esta vacio
         String text = fileLoad ? "Tienes un archivo cargado" : areaTextIsBlank ? "" : "Tienes un texto que puedes perder";
         if (fileLoad || !areaTextIsBlank) {
