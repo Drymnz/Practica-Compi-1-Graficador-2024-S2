@@ -292,7 +292,7 @@ operacion-> error
 ## Diagrama de clases
 La siguiente imagen representa el UML del programa.
 
-<img src='https://github.com/Drymnz/Practica-Compi-1-Graficador-2024-S2/blob/master/recursos-git/UML%20practica%20compi%201%202024%20s2.drawio.png'>
+<img src='https://github.com/Drymnz/Practica-Compi-1-Graficador-2024-S2/blob/main/recursos-git/UML%20practica%20compi%201%202024%20s2.drawio.png?raw=true'>
 
 Tambien puede usar el siguiente enlace para ver mas detenidamente el UML.
 
