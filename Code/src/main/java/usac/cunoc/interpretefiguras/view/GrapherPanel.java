@@ -29,6 +29,9 @@ public class GrapherPanel extends javax.swing.JPanel {
     private AffineTransform affineTransformNormal = new AffineTransform();
     private String nameAnimation = "";
 
+    private int ancho = 100;
+    private int alto = 100;
+
     /**
      * Creates new form GrapherPanel
      */
@@ -58,6 +61,8 @@ public class GrapherPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     public void Graficar(ArrayList<BasicGeometricObject> lisGeometricObject) {
+        this.ancho = 100;
+        this.alto = 100;
         this.lisGeometricObject = lisGeometricObject;
     }
 
@@ -110,10 +115,12 @@ public class GrapherPanel extends javax.swing.JPanel {
                     g2d.fillRect(elem.getPosx(), elem.getPoxy(), elem.getSquare(), elem.getSquare());
                 }
                 if (this.getWidth() < element.getPosx() ) {
-                    this.setSize(new Dimension(element.getPosx(), this.getHeight()));
+                    //this.setSize(new Dimension(element.getPosx(), this.getHeight()));
+                    this.ancho = element.getPosx();
                 }
                 if (this.getHeight() < element.getPoxy()) {
                     this.setSize(new Dimension(this.getWidth(), element.getPoxy()));
+                    this.alto = this.getWidth();
                 }
             }
         }
@@ -125,6 +132,12 @@ public class GrapherPanel extends javax.swing.JPanel {
 
     public void setNameAnimation(String nameAnimation) {
         this.nameAnimation = nameAnimation;
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        // TODO Auto-generated method stub
+        return new Dimension(this.ancho, this.ancho);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
