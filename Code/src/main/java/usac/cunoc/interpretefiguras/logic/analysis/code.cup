@@ -148,10 +148,11 @@ nonterminal operacion;
 /*para el uso de operaciones aritmeticas*/
 nonterminal inico_opereacion;
 nonterminal acciones,animtion;
-nonterminal grafica,tipo_grafica,tipo_color,tipo_animation,parente;
+nonterminal grafica,tipo_grafica,tipo_color,tipo_animation,parente,numero_operar;
 /*************************************PRECEDENCIA******************************************************/
 precedence left SUMAR, RESTAR;
 precedence left MULTIPLICAR, DIVIDIR;
+precedence left PARENTESIS_A, PARENTESIS_C;
 /*************************************GRAMATICA******************************************************/
 start with inicio;
 /******operaciones matematicas*****/
@@ -270,7 +271,7 @@ operacion
       Double resultDouble = aDouble + bDouble;
       RESULT = resultDouble;
     }else{
-      System.out.println(getTokePresent().toString());
+      //System.out.println(getTokePresent().toString());
       RESULT = aDouble;
     }
     /////////////////////////////////////////////
@@ -294,7 +295,7 @@ operacion
       Double resultDouble = aDouble - bDouble;
       RESULT = resultDouble;
     }else{
-      System.out.println(getTokePresent().toString());
+      //System.out.println(getTokePresent().toString());
       RESULT = aDouble;
     }
     /////////////////////////////////////////////
@@ -323,7 +324,7 @@ operacion
         RESULT = aDouble;// si es 15/0
       }
     }else{
-      System.out.println(getTokePresent().toString());
+      //System.out.println(getTokePresent().toString());
       RESULT = aDouble;
     }
     /////////////////////////////////////////////
@@ -348,20 +349,64 @@ operacion
       Double result = aDouble * bDouble;
       RESULT = result;
     }else{
-      System.out.println(getTokePresent().toString());
+      //System.out.println(getTokePresent().toString());
       RESULT = aDouble;
     }
     /////////////////////////////////////////////
 
     :}
 /****solo retornar*****/
-| PARENTESIS_A operacion:a {:RESULT = a;:} parente 
+| PARENTESIS_A operacion:a  parente:b
+    {:
+    /////////////////////////////////////////////
+    Double aDouble = 0.0;		
+    Double bDouble = 0.0;
+    if(a != null){
+      aDouble =   Double.valueOf(a.toString());
+    }
+    if (b!=null) {
+      bDouble =   Double.valueOf(b.toString());
+    }
+    if (b!=null & a != null ) {
+      setTextToken(a +" ) "+ b);
+      addReportMathOperation(ListMathOperation.MULTIPLICATION);
+      Double result = aDouble * bDouble;
+      RESULT = result;
+    }else{
+      //System.out.println(getTokePresent().toString());
+      RESULT = a;
+    }
+    /////////////////////////////////////////////
+    :}
 | REAL_NUMEBERS:a {:RESULT = a;:}
+| REAL_NUMEBERS:a PARENTESIS_A  operacion:b  PARENTESIS_C
+    {:
+    /////////////////////////////////////////////
+    Double aDouble = 0.0;		
+    Double bDouble = 0.0;
+    if(a != null){
+      aDouble =   Double.valueOf(a.toString());
+    }
+    if (b!=null) {
+      bDouble =   Double.valueOf(b.toString());
+    }
+    if (b!=null & a != null ) {
+      setTextToken(a +" ( "+ b);
+      addReportMathOperation(ListMathOperation.MULTIPLICATION);
+      Double result = aDouble * bDouble;
+      RESULT = result;
+    }else{
+      //System.out.println(getTokePresent().toString());
+      RESULT = a;
+    }
+    /////////////////////////////////////////////
+    :}
 /***manejar el error***/
 | error
 ;
 
 parente
-  ::=PARENTESIS_C
+  ::= PARENTESIS_C
+  | PARENTESIS_C operacion:a {:RESULT = a;:}
   | error
   ;
