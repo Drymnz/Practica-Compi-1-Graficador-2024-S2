@@ -30,14 +30,6 @@
 * Espacio en Disco: 10 MB.
 
 ### Instalación y configuración:
-* ### git
-    Se requiere instalar git para poder clonar el repo.
-
-    La siguiente instrucción es únicamente para instalar en arch linux o derivadas.
-
-    ```bash
-    sudo pacman -Syu git
-    ```
 
 * #### JAVA
     Se requiere instalar java para su ejecución.
@@ -46,6 +38,22 @@
 
     ```bash
     sudo pacman -Syu jdk21-openjdk
+    ```
+
+    * #### Ejecutar JAR
+    1. A la derecha de la lista de archivos, haz clic en Releases.
+    2. En la parte superior de la página, selecciona Etiquetas.
+    3. Para descargar el código fuente en formato JAR.
+    4. En la ubicacion de la descargar de JAR abras una terminal.
+    5. Ejecute java -jar InterpreteFiguras-1.0-SNAPSHOT-jar-with-dependencies.jar
+
+* ### git
+    Se requiere instalar git para poder clonar el repo.
+
+    La siguiente instrucción es únicamente para instalar en arch linux o derivadas.
+
+    ```bash
+    sudo pacman -Syu git
     ```
 
 * #### MAVEN
@@ -71,11 +79,11 @@
         ```
 
         ```bash
-        mvn compile
+        mvn clean package 
         ```
 
         ```bash
-        java -jar target/InterpreteFiguras-1.0-SNAPSHOT.jar
+        java -jar target/InterpreteFiguras-1.0-SNAPSHOT-jar-with-dependencies.jar
         ```
 
 # Instalación De Uso
