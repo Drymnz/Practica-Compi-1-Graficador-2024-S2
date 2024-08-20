@@ -157,8 +157,8 @@ public class AnimateObjectGeometry extends Thread {
         //rotacon para los PolygonGeometric
         if (objet instanceof PolygonGeometric) {
             PolygonGeometric elem = (PolygonGeometric) objet;
-            posX = objet.getPosx() + (elem.getWidth()/ 2);
-            posY = objet.getPoxy() + (elem.getHigh() / 2);
+            posX = objet.getPosx();
+            posY = objet.getPoxy();
         }
         //rotacon para los SquareGeometric
         if (objet instanceof SquareGeometric) {
